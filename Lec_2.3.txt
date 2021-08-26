@@ -1,0 +1,26 @@
+Containers
+
+runtime instance of image
+
+can have more than one container from same image
+
+container vs VM
+containers are lightweight, faster
+
+docker container run -it mcr.microsoft.com/powershell
+
+run and exec command
+1. run container
+docker container run -it ubuntu
+
+2. docker container ls
+if it is listed you can use exec
+
+3. docker exec with conatiner id
+
+docker container exec -it 9c0ac4357d52 bash
+
+stopping container might still take some time so its still avialble when we do docker ps -a but docker container rm removes it entirly
+
+Container Lifcycle
+1. image --> run --> created --> run --> pause --> stop --> delete/rm

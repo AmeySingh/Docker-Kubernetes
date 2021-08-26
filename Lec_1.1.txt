@@ -1,0 +1,23 @@
+Server
+
+Client-Server
+
+Data Center - Big H/w server --> VM's (different OS based servers)
+
+challanges - slow performance, migrating, arrange workloads
+
+Containers - just set of processses seperating from entire system - different container -different application
+
+OS kernel - different container OS kernel
+
+dynamic resource allocation VM entire box migration
+container few commands increase
+
+Docker company gave Docker software
+
+Docker - sofwatre which helps to create,manage and orchestrate containers
+
+docker - 1. runtime- responsible for starting and stopping container
+	2. daemon- responsible for higher level task API,manage images and volumes and network
+	3. orchestretor- automated configuration and mangement of systems,service and application.
+		-manager - Swarm

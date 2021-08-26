@@ -1,0 +1,80 @@
+Docker Images and Engine
+
+1. what is image?
+ans: create containers --> for running appplication --> whateveer application needs to execute --> we package that together and we call it IMAGE
+
+IMage - unit of packagin everything our application needs to execute.
+
+Image vs Container?
+Settings during build time  ---> During runtime
+(Image)				(Container)
+
+Images are small
+ and don't contain anything related to OS/Kernal
+but all containers share Host Kernel.
+
+Docker Image namimg
+Docker Registries - store our images into centralised place --> repositories --> images(official/Unoffical)
+
+Image Tag
+docker image pull <repository>:<tag>
+for exa- 
+docker image pull redis:latest
+only one image at a time
+latest tag is default
+
+yes we can pull multiple images from repository
+docker image pull -a mysql
+
+Filtering images
+below means this perticular image has no tag
+C:\Users\ameyc>docker image ls --filter dangling=true
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+<none>       <none>    52b72f8d1035   23 hours ago   79.6MB
+
+docker image ls --filter=reference="*:latest"
+docker search fedora seareches official and unofficial images from hub
+
+docker search fedora --filter "is-official=true"
+
+
+different ways of pulin
+1. using tag - latest is default
+2. using digest - hash to differentiate because tag can be duplicates
+
+docker image pull mysql@sha256:d067220262882057881adc38a8b6df837a196304e0cbbb9591bf5385940bf9ea
+
+C:\Users\ameyc>docker container run --rm golang go version
+Unable to find image 'golang:latest' locally
+latest: Pulling from library/golang
+4c25b3090c26: Already exists
+1acf565088aa: Already exists
+b95c0dd0dc0d: Already exists
+5cf06daf6561: Already exists
+4541a887d2a0: Pull complete
+dcac0686adef: Pull complete
+9717d2820c6a: Pull complete
+Digest: sha256:634cda4edda00e59167e944cdef546e2d62da71ef1809387093a377ae3404df0
+Status: Downloaded newer image for golang:latest
+go version go1.17 linux/amd64
+
+
+to check different architeure
+docker manifest inspect golang
+
+building images based on required architure
+docker buildx build --platform=linux/arm/v7 .
+docker buildx build --platform=linux/arm/v7,arm64 -t test:arm-v7 . //not supported as of now with current driver
+
+
+
+
+
+
+
+
+
+
+
+
+

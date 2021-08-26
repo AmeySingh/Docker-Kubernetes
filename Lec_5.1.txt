@@ -1,0 +1,19 @@
+Docker Network
+
+CNM(Container Network Model) -->libnetwork
+
+libnetwork will provide
+1. Service Discovery
+2. Load Balancing
+
+CNM -->
+1. Sandboxes --> islolated network stack - Ethernet interfaces ,port, routing table, and DNS config
+2. Endpoints --> virtual network interfaces - making connections, will connect to sandboxes and networks
+3. Networks --> implentation of switch/ virtual switch
+
+how are you going to provide networking to a container
+
+Docker Host --> multiple container(C1,C2 etc) --> every container will have sandbox --> EP --> over network
+
+
+

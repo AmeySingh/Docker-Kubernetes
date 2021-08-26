@@ -1,0 +1,46 @@
+Docker Swarm
+cluster  - collection of servers those are performing similar tasks
+scaling --> adding/removing all resources on demand as per requirement
+1. Horizontal/scale-out --> by adding more nodes
+2. Vertical Scaling --> adding extra resources in existing node
+
+Its a manager, orchestrator
+
+1. enterprise grade secured cluster of Docker hosts
+2. engine for orchestrating microservices apps
+
+either use Swarm or Kubernetes
+
+1. what is primer?
+2. build our cluster
+3. deploye our services
+
+cluser --> collection of nodes
+
+nodes --> real physical machines, VM's ,Raspberry Pi, cloud instances
+
+nodes should have docker installed and networked together
+
+node configure - either manager or worker
+workers will accept their task from managers
+TLS(Transport Layer Security) --> can we build our swarm without TLS?
+No, its integral part and required.
+it will ecrypty.
+
+service --> atomic unit of schedule is called as service -- modified container
+
+
+Steps for swarm
+docker  swarm init --> it creates master node and initialises it
+
+$ docker swarm init
+Swarm initialized: current node (i61273zo0jfygab9he8z92srx) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-50nzp3jzjechkxe6fytvnd1kap3bjcekjbvyg0g6wx4vy9hfqm-0b9o0teu44odza1a5p33zsds2 192.168.65.3:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+add worker node
+docker swarm join --token SWMTKN-1-50nzp3jzjechkxe6fytvnd1kap3bjcekjbvyg0g6wx4vy9hfqm-0b9o0teu44odza1a5p33zsds2 192.168.65.3:2377

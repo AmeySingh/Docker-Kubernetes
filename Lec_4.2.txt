@@ -1,0 +1,47 @@
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker swarm init
+Swarm initialized: current node (i61273zo0jfygab9he8z92srx) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-50nzp3jzjechkxe6fytvnd1kap3bjcekjbvyg0g6wx4vy9hfqm-0b9o0teu44odza1a5p33zsds2 192.168.65.3:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker nodes ls
+docker: 'nodes' is not a docker command.
+See 'docker --help'
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker node ls
+ID                            HOSTNAME         STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+i61273zo0jfygab9he8z92srx *   docker-desktop   Ready     Active         Leader           20.10.8
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker node ls
+ID                            HOSTNAME         STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+i61273zo0jfygab9he8z92srx *   docker-desktop   Ready     Active         Leader           20.10.8
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker swarm join --token SWMTKN-1-50nzp3jzjechkxe6fytvnd1kap3bjcekjbvyg0g6wx4vy9hfqm-0b9o0teu44odza1a5p33zsds2 192.168.65.3:2377
+Error response from daemon: This node is already part of a swarm. Use "docker swarm leave" to leave this swarm and join another one.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker node ls
+ID                            HOSTNAME         STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+i61273zo0jfygab9he8z92srx *   docker-desktop   Ready     Active         Leader           20.10.8
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker node ls
+ID                            HOSTNAME         STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+i61273zo0jfygab9he8z92srx *   docker-desktop   Ready     Active         Leader           20.10.8
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker swarm join --token SWMTKN-1-50nzp3jzjechkxe6fytvnd1kap3bjcekjbvyg0g6wx4vy9hfqm-0b9o0teu44odza1a5p33zsds2 192.168.65.3:2377
+Error response from daemon: This node is already part of a swarm. Use "docker swarm leave" to leave this swarm and join another one.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$

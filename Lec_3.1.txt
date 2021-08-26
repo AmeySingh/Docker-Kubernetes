@@ -1,0 +1,42 @@
+Containerising app using docker
+
+containerizing - this process of our app runiing it as container 
+
+1. clone
+2. check for "Dockerfile" - starting point for your container using image creation
+3. containerizing
+
+container -- will be based on multiple layers of images
+
+i)From alpine --> single layer of image
+ii)RUN apk add --update nodejs npm curl --> second layer
+
+4. run app
+5. test
+
+commands
+git clone https://github.com/nigelpoulton/psweb.git
+cd psweb
+docker image build -t web:latest .
+docker image ls
+docker container run -d --name c5 -p 80:8080 web:latest
+
+--name conatiner name
+-d --> it means running in background
+-p 80:8080 host port 80 is mapped to container port 8080 
+
+Image History
+docker image history web:latest
+
+docker image consists of multiple layers --> containers
+
+size non zero byte is considered as layer
+in layers tag
+docker image inspect web:latest
+
+
+Tips to understand size and performance
+git clone https://github.com/nigelpoulton/atsea-sample-shop-app.git
+
+squashing is usefull for non shared images
+--squash

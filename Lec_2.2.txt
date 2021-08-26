@@ -1,0 +1,725 @@
+Microsoft Windows [Version 10.0.19042.1165]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\ameyc>docker image ls
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+test         latest    0945eb7d7a5b   22 hours ago   79.6MB
+<none>       <none>    52b72f8d1035   22 hours ago   79.6MB
+python       latest    1e76b28bfd4e   6 days ago     911MB
+ubuntu       latest    1318b700e415   4 weeks ago    72.8MB
+
+C:\Users\ameyc>docker image pull redis:update
+Error response from daemon: manifest for redis:update not found: manifest unknown: manifest unknown
+
+C:\Users\ameyc>docker image pull centos:update
+Error response from daemon: manifest for centos:update not found: manifest unknown: manifest unknown
+
+C:\Users\ameyc>docker image pull fedora:update
+Error response from daemon: manifest for fedora:update not found: manifest unknown: manifest unknown
+
+C:\Users\ameyc>docker image pull redis:latest
+latest: Pulling from library/redis
+e1acddbe380c: Pull complete
+a31098369fcc: Pull complete
+4a49b0eba86d: Pull complete
+fddf1399efac: Pull complete
+5c6658b59b72: Pull complete
+0b88638a5b77: Pull complete
+Digest: sha256:66ce9bc742609650afc3de7009658473ed601db4e926a5b16d239303383bacad
+Status: Downloaded newer image for redis:latest
+docker.io/library/redis:latest
+
+C:\Users\ameyc>docker image ls
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+test         latest    0945eb7d7a5b   22 hours ago   79.6MB
+<none>       <none>    52b72f8d1035   22 hours ago   79.6MB
+python       latest    1e76b28bfd4e   6 days ago     911MB
+redis        latest    ddcca4b8a6f0   6 days ago     105MB
+ubuntu       latest    1318b700e415   4 weeks ago    72.8MB
+
+C:\Users\ameyc>docker image pull mcr.microsoft.com/powershell:latest
+latest: Pulling from powershell
+16ec32c2132b: Already exists
+e4819a4a3335: Pull complete
+d2783166c423: Pull complete
+77d419ef4e4f: Pull complete
+Digest: sha256:953b137b51ebe4bea1f9a118b4ae5d56dfb104127fd91ab25cf935b72ba2058a
+Status: Downloaded newer image for mcr.microsoft.com/powershell:latest
+mcr.microsoft.com/powershell:latest
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED        SIZE
+test                           latest    0945eb7d7a5b   22 hours ago   79.6MB
+<none>                         <none>    52b72f8d1035   22 hours ago   79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago     327MB
+python                         latest    1e76b28bfd4e   6 days ago     911MB
+redis                          latest    ddcca4b8a6f0   6 days ago     105MB
+ubuntu                         latest    1318b700e415   4 weeks ago    72.8MB
+
+C:\Users\ameyc>docker info
+Client:
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Build with BuildKit (Docker Inc., v0.6.1-docker)
+  compose: Docker Compose (Docker Inc., v2.0.0-rc.1)
+  scan: Docker Scan (Docker Inc., v0.8.0)
+
+Server:
+ Containers: 25
+  Running: 1
+  Paused: 0
+  Stopped: 24
+ Images: 6
+ Server Version: 20.10.8
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: cgroupfs
+ Cgroup Version: 1
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 io.containerd.runtime.v1.linux runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: e25210fe30a0a703442421b0f60afac609f950a3
+ runc version: v1.0.1-0-g4144b63
+ init version: de40ad0
+ Security Options:
+  seccomp
+   Profile: default
+ Kernel Version: 5.10.16.3-microsoft-standard-WSL2
+ Operating System: Docker Desktop
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 4
+ Total Memory: 6.105GiB
+ Name: docker-desktop
+ ID: VBBA:BZRG:LCN6:2Y76:3E45:YASD:VJHJ:K3Q6:UW5L:QJOC:R3YO:A2SV
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Registry: https://index.docker.io/v1/
+ Labels:
+ Experimental: false
+ Insecure Registries:
+  127.0.0.0/8
+ Live Restore Enabled: false
+
+WARNING: No blkio throttle.read_bps_device support
+WARNING: No blkio throttle.write_bps_device support
+WARNING: No blkio throttle.read_iops_device support
+WARNING: No blkio throttle.write_iops_device support
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED        SIZE
+test                           latest    0945eb7d7a5b   22 hours ago   79.6MB
+<none>                         <none>    52b72f8d1035   22 hours ago   79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago     327MB
+python                         latest    1e76b28bfd4e   6 days ago     911MB
+redis                          latest    ddcca4b8a6f0   6 days ago     105MB
+ubuntu                         latest    1318b700e415   4 weeks ago    72.8MB
+
+C:\Users\ameyc>docker image pull mysql:latest and docker image pull alpine:latest
+"docker image pull" requires exactly 1 argument.
+See 'docker image pull --help'.
+
+Usage:  docker image pull [OPTIONS] NAME[:TAG|@DIGEST]
+
+Pull an image or a repository from a registry
+
+C:\Users\ameyc>docker image pull alpine:latest
+latest: Pulling from library/alpine
+29291e31a76a: Already exists
+Digest: sha256:eb3e4e175ba6d212ba1d6e04fc0782916c08e1c9d7b45892e9796141b1d379ae
+Status: Downloaded newer image for alpine:latest
+docker.io/library/alpine:latest
+
+C:\Users\ameyc>docker image pull mongo:latest
+latest: Pulling from library/mongo
+16ec32c2132b: Already exists
+6335cf672677: Pull complete
+cbc70ccc8ebe: Pull complete
+0d1a3c6bd417: Pull complete
+960f3b9b27d3: Pull complete
+aff995a136b4: Pull complete
+4249be7550a8: Pull complete
+cc105ff5aa3c: Pull complete
+82819807d07a: Pull complete
+81447d2c233f: Pull complete
+Digest: sha256:54d24682d00278f64bf21ff62b7ee62b59dae50f65139831a884b345922b0f8a
+Status: Downloaded newer image for mongo:latest
+docker.io/library/mongo:latest
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED        SIZE
+test                           latest    0945eb7d7a5b   22 hours ago   79.6MB
+<none>                         <none>    52b72f8d1035   22 hours ago   79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago     327MB
+python                         latest    1e76b28bfd4e   6 days ago     911MB
+redis                          latest    ddcca4b8a6f0   6 days ago     105MB
+alpine                         latest    021b3423115f   2 weeks ago    5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago    682MB
+ubuntu                         latest    1318b700e415   4 weeks ago    72.8MB
+
+C:\Users\ameyc>docker image pull mongo:4.2.6
+4.2.6: Pulling from library/mongo
+23884877105a: Pull complete
+bc38caa0f5b9: Pull complete
+2910811b6c42: Pull complete
+36505266dcc6: Pull complete
+a4d269900d94: Pull complete
+5e2526abb80a: Pull complete
+d3eece1f39ec: Pull complete
+358ed78d3204: Pull complete
+1a878b8604ae: Pull complete
+dde03a2883d0: Pull complete
+4ffe534daa34: Pull complete
+f164ba21e17c: Pull complete
+6494c387442c: Pull complete
+Digest: sha256:c880f6b56f443bb4d01baa759883228cd84fa8d78fa1a36001d1c0a0712b5a07
+Status: Downloaded newer image for mongo:4.2.6
+docker.io/library/mongo:4.2.6
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED         SIZE
+test                           latest    0945eb7d7a5b   22 hours ago    79.6MB
+<none>                         <none>    52b72f8d1035   22 hours ago    79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago      327MB
+python                         latest    1e76b28bfd4e   6 days ago      911MB
+redis                          latest    ddcca4b8a6f0   6 days ago      105MB
+alpine                         latest    021b3423115f   2 weeks ago     5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago     682MB
+ubuntu                         latest    1318b700e415   4 weeks ago     72.8MB
+mongo                          4.2.6     3f3daf863757   16 months ago   388MB
+
+C:\Users\ameyc>docker image pull -a sqllight
+Error response from daemon: pull access denied for sqllight, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+
+C:\Users\ameyc>docker image pull -a mysql
+5.5.40: Pulling from library/mysql
+Image docker.io/library/mysql:5.5.40 uses outdated schema1 manifest format. Please upgrade to a schema2 image for better future compatibility. More information at https://docs.docker.com/registry/spec/deprecated-schema-v1/
+a3ed95caeb02: Pull complete
+7feb61e057c6: Pull complete
+6a524bd0f649: Pull complete
+12eda72b5b30: Pull complete
+2d4df0c62f5f: Pull complete
+28e47d11842e: Pull complete
+0c994306166a: Pull complete
+8067a5052ee9: Pull complete
+Digest: sha256:d067220262882057881adc38a8b6df837a196304e0cbbb9591bf5385940bf9ea
+5.5.41: Pulling from library/mysql
+Image docker.io/library/mysql:5.5.41 uses outdated schema1 manifest format. Please upgrade to a schema2 image for better future compatibility. More information at https://docs.docker.com/registry/spec/deprecated-schema-v1/
+a3ed95caeb02: Pull complete
+6f5424ebd796: Pull complete
+9c3934deb06d: Pull complete
+98621cbad563: Pull complete
+c22b2a00a732: Pull complete
+8e33da30de0a: Pull complete
+a8a685c21a13: Pull complete
+69e7a92b990a: Pull complete
+a500ac2ea36b: Pull complete
+Digest: sha256:39627435dde39f8a4d01496baa154d9f644627d8e7b9aab15bde2f3e7885ca7b
+5.5.42: Pulling from library/mysql
+Image docker.io/library/mysql:5.5.42 uses outdated schema1 manifest format. Please upgrade to a schema2 image for better future compatibility. More information at https://docs.docker.com/registry/spec/deprecated-schema-v1/
+a3ed95caeb02: Download complete
+9374bfd4d273: Extracting [===================================>               ]  26.35MB/37.22MB
+b6c54764414d: Download complete
+666144cb6556: Download complete
+a746006a1299: Download complete
+3b425adab20c: Download complete
+756fe80ad448: Waiting
+970140c3f6fa: Waiting
+d49f1e0610ab: Waiting
+^C
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED         SIZE
+test                           latest    0945eb7d7a5b   22 hours ago    79.6MB
+<none>                         <none>    52b72f8d1035   23 hours ago    79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago      327MB
+python                         latest    1e76b28bfd4e   6 days ago      911MB
+redis                          latest    ddcca4b8a6f0   6 days ago      105MB
+alpine                         latest    021b3423115f   2 weeks ago     5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago     682MB
+ubuntu                         latest    1318b700e415   4 weeks ago     72.8MB
+mongo                          4.2.6     3f3daf863757   16 months ago   388MB
+mysql                          5.5.41    81ef0945fb33   6 years ago     214MB
+mysql                          5.5.40    663a514cfc40   6 years ago     215MB
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED         SIZE
+test                           latest    0945eb7d7a5b   22 hours ago    79.6MB
+<none>                         <none>    52b72f8d1035   23 hours ago    79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago      327MB
+python                         latest    1e76b28bfd4e   6 days ago      911MB
+redis                          latest    ddcca4b8a6f0   6 days ago      105MB
+alpine                         latest    021b3423115f   2 weeks ago     5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago     682MB
+ubuntu                         latest    1318b700e415   4 weeks ago     72.8MB
+mongo                          4.2.6     3f3daf863757   16 months ago   388MB
+mysql                          5.5.41    81ef0945fb33   6 years ago     214MB
+mysql                          5.5.40    663a514cfc40   6 years ago     215MB
+
+C:\Users\ameyc>docker image ls --filter dangling-true
+invalid argument "dangling-true" for "-f, --filter" flag: bad format of filter (expected name=value)
+See 'docker image ls --help'.
+
+C:\Users\ameyc>docker image ls --filter dangling=true
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+<none>       <none>    52b72f8d1035   23 hours ago   79.6MB
+
+C:\Users\ameyc>docker image ls --filter=reference="*:latest"
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+test         latest    0945eb7d7a5b   22 hours ago   79.6MB
+python       latest    1e76b28bfd4e   6 days ago     911MB
+redis        latest    ddcca4b8a6f0   6 days ago     105MB
+alpine       latest    021b3423115f   2 weeks ago    5.6MB
+mongo        latest    269b735e72cb   2 weeks ago    682MB
+ubuntu       latest    1318b700e415   4 weeks ago    72.8MB
+
+C:\Users\ameyc>docker search fedora
+NAME                               DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+fedora                             Official Docker builds of Fedora                993       [OK]
+fedora/apache                                                                      35                   [OK]
+arm32v7/fedora                     Official Docker builds of Fedora                6
+mattsch/fedora-nzbhydra            Fedora NZBHydra                                 5                    [OK]
+darksheer/fedora22                 Base Fedora 22 Image -- Updated hourly          3                    [OK]
+arm64v8/fedora                     Official Docker builds of Fedora                2
+vergissberlin/fedora-development   Docker fedora image to use for development, …   2                    [OK]
+ppc64le/fedora                     Official Docker builds of Fedora                1
+darksheer/fedora24                 Hourly update Fedora 24                         1                    [OK]
+ldoktor/fedora-avocado             Fedora-based image with avocado testing fram…   1                    [OK]
+darksheer/fedora                   Hourly update latest Fedora Image               1                    [OK]
+darksheer/fedora25                 Hourly updated Fedora 24 Docker Hub Image       1                    [OK]
+darksheer/fedora23                 Hourly updated Fedora 23                        1                    [OK]
+mattsch/fedora-nzbhydra2           Fedora NZBHydra2 (Java based)                   0                    [OK]
+dokken/fedora-latest               fedora-latest image for kitchen-dokken          0
+mattsch/fedora-sonarr              Fedora Sonarr                                   0                    [OK]
+amd64/fedora                       Official Docker builds of Fedora                0
+rhub/fedora-gcc-devel              R-devel on Fedora latest                        0
+smartentry/fedora                  fedora with smartentry                          0                    [OK]
+cunnie/fedora-golang-bosh          Used for deploying BOSH directors. Includes …   0                    [OK]
+rhub/fedora-clang-devel            R-devel on Fedora latest, with clang and gfo…   0
+langdon/fedora-mssqlserver         Microsoft SQL Server running on Fedora. You …   0                    [OK]
+s390x/fedora                       Official Docker builds of Fedora                0
+embreedocker/fedora                Automated build of Fedora Docker images for …   0                    [OK]
+ovirtguestagent/fedora-atomic      The oVirt Guest Agent for Fedora Atomic Host…   0
+
+C:\Users\ameyc>
+C:\Users\ameyc>
+C:\Users\ameyc>docker search fedora --filter "is-official=true"
+NAME      DESCRIPTION                        STARS     OFFICIAL   AUTOMATED
+fedora    Official Docker builds of Fedora   993       [OK]
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED         SIZE
+test                           latest    0945eb7d7a5b   23 hours ago    79.6MB
+<none>                         <none>    52b72f8d1035   23 hours ago    79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago      327MB
+python                         latest    1e76b28bfd4e   6 days ago      911MB
+redis                          latest    ddcca4b8a6f0   6 days ago      105MB
+alpine                         latest    021b3423115f   2 weeks ago     5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago     682MB
+ubuntu                         latest    1318b700e415   4 weeks ago     72.8MB
+mongo                          4.2.6     3f3daf863757   16 months ago   388MB
+mysql                          5.5.41    81ef0945fb33   6 years ago     214MB
+mysql                          5.5.40    663a514cfc40   6 years ago     215MB
+
+C:\Users\ameyc>docker image rm mysql
+Error: No such image: mysql
+
+C:\Users\ameyc>docker image rm mysql:latest
+Error: No such image: mysql:latest
+
+C:\Users\ameyc>docker image rm mysql:5.5.41
+Untagged: mysql:5.5.41
+Untagged: mysql@sha256:39627435dde39f8a4d01496baa154d9f644627d8e7b9aab15bde2f3e7885ca7b
+Deleted: sha256:81ef0945fb338ce374fad1ac92b538294e0cf8afe4ff010e998ff57eff94da39
+Deleted: sha256:86778578251b3a1eb5c6590933fa212a56707e8200e5560e0ecbb0415e86d4e7
+Deleted: sha256:5b55d7364619f30662cb886fb28b20007aa4ef900797f2e3a5fc86809160d1b8
+Deleted: sha256:cca7aa8cf2e5f0aa9f013312f7631975d13fd78b537723e1e6a185a0b49b4b72
+Deleted: sha256:8966174ec874763b78e3647100bb9462f0a3f07d12fdc6cea16270d090e43d03
+Deleted: sha256:5f54f9838193b74aafcfd301ab668cf2c0d419a55e42e046b8b3ba7ffbb501cf
+Deleted: sha256:37519092c3a9fa3bee6f4a162e7860f801750cc91161eeb112a106ef28ebb086
+Deleted: sha256:99c6751e2e2cb19169931dff41f7d421632bc06d89b8210ff5fc9265a370c913
+Deleted: sha256:14869dc03f39781359d8871ceda82920206fb2b7de67ec23c76b665f97861f25
+Deleted: sha256:fad56053a1edc2a027fba714b4c17b16335aa862b9b642e237da8fb16d46b108
+Deleted: sha256:85c5c8f3acf8989626560aca144743b27242198c8db9e465001d7383394aac13
+Deleted: sha256:9f708e05ee89e99681efdc9d514615360fd5b63678d426aff39cc19c6f047d36
+Deleted: sha256:5afe00c3160756215ddaacc7c5f663b88db0b5937900ed01f3ebf29caae35d56
+Deleted: sha256:4c0281e49302f732e14ed68b0d0e28ac60572941d40a3e4c76e02303951630be
+Deleted: sha256:856f11586fecb05735ce1be37675617710368337dd23564a8e369530831bc7c6
+Deleted: sha256:7e4ec45a1110399ad13faabf18a0b00c461563da1d8598273b8c2def8a13daf0
+Deleted: sha256:86a499023e872dce3634702c42802664f1e25011b8c48abfcdedf0f87ea33751
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED         SIZE
+test                           latest    0945eb7d7a5b   23 hours ago    79.6MB
+<none>                         <none>    52b72f8d1035   23 hours ago    79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago      327MB
+python                         latest    1e76b28bfd4e   6 days ago      911MB
+redis                          latest    ddcca4b8a6f0   6 days ago      105MB
+alpine                         latest    021b3423115f   2 weeks ago     5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago     682MB
+ubuntu                         latest    1318b700e415   4 weeks ago     72.8MB
+mongo                          4.2.6     3f3daf863757   16 months ago   388MB
+mysql                          5.5.40    663a514cfc40   6 years ago     215MB
+
+C:\Users\ameyc>docker image pull mysql sha256:86a499023e872dce3634702c42802664f1e25011b8c48abfcdedf0f87ea33751
+"docker image pull" requires exactly 1 argument.
+See 'docker image pull --help'.
+
+Usage:  docker image pull [OPTIONS] NAME[:TAG|@DIGEST]
+
+Pull an image or a repository from a registry
+
+C:\Users\ameyc>docker image pull mysql:sha256:86a499023e872dce3634702c42802664f1e25011b8c48abfcdedf0f87ea33751
+invalid reference format
+
+C:\Users\ameyc>docker image pull mysql:latest|sha256:86a499023e872dce3634702c42802664f1e25011b8c48abfcdedf0f87ea33751
+The filename, directory name, or volume label syntax is incorrect.
+
+C:\Users\ameyc>docker image pull mysql: sha256:86a499023e872dce3634702c42802664f1e25011b8c48abfcdedf0f87ea33751
+"docker image pull" requires exactly 1 argument.
+See 'docker image pull --help'.
+
+Usage:  docker image pull [OPTIONS] NAME[:TAG|@DIGEST]
+
+Pull an image or a repository from a registry
+
+C:\Users\ameyc>docker image pull mysql sha256:86a499023e872dce3634702c42802664f1e25011b8c48abfcdedf0f87ea33751
+"docker image pull" requires exactly 1 argument.
+See 'docker image pull --help'.
+
+Usage:  docker image pull [OPTIONS] NAME[:TAG|@DIGEST]
+
+Pull an image or a repository from a registry
+
+C:\Users\ameyc>docker image ls --digest mysql
+unknown flag: --digest
+See 'docker image ls --help'.
+
+C:\Users\ameyc>docker image ls --digests mysql
+REPOSITORY   TAG       DIGEST                                                                    IMAGE ID       CREATED       SIZE
+mysql        5.5.40    sha256:d067220262882057881adc38a8b6df837a196304e0cbbb9591bf5385940bf9ea   663a514cfc40   6 years ago   215MB
+
+C:\Users\ameyc>docker image rm mysql:5.5.40
+Untagged: mysql:5.5.40
+Untagged: mysql@sha256:d067220262882057881adc38a8b6df837a196304e0cbbb9591bf5385940bf9ea
+Deleted: sha256:663a514cfc40264d4aa94d51ab93a0e54bbfbc2c1daccb2e4f145bd15f03b7f2
+Deleted: sha256:5a1d7acceac0dd1aefaa4074e21240791201a8c4193380e15df5651a4354207d
+Deleted: sha256:29ed17ccc01f4c7ce5b24d19f96ed57d3ea4ecf77a5d4cce18e24e47dd2ec55e
+Deleted: sha256:8929a9964fe75d1b8ec8240c5233503d6b8b352d6d2a477fd511ad226ba4e3f8
+Deleted: sha256:e71cfffb360416ddb74d76c9797f99149b7c94cad2d78d00fbb4e286690542c3
+Deleted: sha256:cab32a3b1eefcb074bba1ce4232a886e09a33ef79934381ff56dc4ad7ed69a89
+Deleted: sha256:ffa412ce038b43aedb8d1a5e7229a2e776c6b4c04c69f2c7f6c1f0ec6a662525
+Deleted: sha256:602c138c778a235f3d2ee5ec0b8860e84c16439f458b132b9f62db929cfebb35
+Deleted: sha256:a8f97dede9e0f57c658453aff986b94827d57718031724e088e9901a8428839b
+Deleted: sha256:e78dc7fdc3b2ecc919412aaa2035b2695152d07553eb7ed97229a20a9eb3bb67
+Deleted: sha256:b8d8069586890a3b3d858dd2f7d0430c1afc2c02e5173471a0025a9a24e7d5ff
+Deleted: sha256:f17e492b213dd40b5c72a036c13398f51e652d2d30a77e8968867d8dd778935e
+Deleted: sha256:dc991dfc68f0bd2e03e7ed8ced4eb35e667b7c39a385801de1ec2241b68ab422
+Deleted: sha256:a8eaa5bfac2a12e437eec1ca8eed232c0bb512fb201a6d66594d9bec13a955a1
+Deleted: sha256:4bb5e862604c15b5b2198703e9016ee25324977ef197030cf1c57cb9a0abae37
+Deleted: sha256:f45e3c95eefc3a994bf64676e01aea69ee32e7f2a73ab4c97be17a90d46b1666
+Deleted: sha256:3a6a49f265a09cd6d85237a96c79dfb7464f9b959ed75a1fcc8347dc1f787f6b
+Deleted: sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED         SIZE
+test                           latest    0945eb7d7a5b   23 hours ago    79.6MB
+<none>                         <none>    52b72f8d1035   23 hours ago    79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago      327MB
+python                         latest    1e76b28bfd4e   6 days ago      911MB
+redis                          latest    ddcca4b8a6f0   6 days ago      105MB
+alpine                         latest    021b3423115f   2 weeks ago     5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago     682MB
+ubuntu                         latest    1318b700e415   4 weeks ago     72.8MB
+mongo                          4.2.6     3f3daf863757   16 months ago   388MB
+
+C:\Users\ameyc>docker image pull mysql@sha256:d067220262882057881adc38a8b6df837a196304e0cbbb9591bf5385940bf9ea
+docker.io/library/mysql@sha256:d067220262882057881adc38a8b6df837a196304e0cbbb9591bf5385940bf9ea: Pulling from library/mysql
+Image docker.io/library/mysql@sha256:d067220262882057881adc38a8b6df837a196304e0cbbb9591bf5385940bf9ea uses outdated schema1 manifest format. Please upgrade to a schema2 image for better future compatibility. More information at https://docs.docker.com/registry/spec/deprecated-schema-v1/
+a3ed95caeb02: Pull complete
+7feb61e057c6: Pull complete
+6a524bd0f649: Pull complete
+12eda72b5b30: Pull complete
+2d4df0c62f5f: Pull complete
+28e47d11842e: Pull complete
+0c994306166a: Pull complete
+8067a5052ee9: Pull complete
+Digest: sha256:d067220262882057881adc38a8b6df837a196304e0cbbb9591bf5385940bf9ea
+Status: Downloaded newer image for mysql@sha256:d067220262882057881adc38a8b6df837a196304e0cbbb9591bf5385940bf9ea
+docker.io/library/mysql@sha256:d067220262882057881adc38a8b6df837a196304e0cbbb9591bf5385940bf9ea
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED         SIZE
+test                           latest    0945eb7d7a5b   23 hours ago    79.6MB
+<none>                         <none>    52b72f8d1035   23 hours ago    79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago      327MB
+python                         latest    1e76b28bfd4e   6 days ago      911MB
+redis                          latest    ddcca4b8a6f0   6 days ago      105MB
+alpine                         latest    021b3423115f   2 weeks ago     5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago     682MB
+ubuntu                         latest    1318b700e415   4 weeks ago     72.8MB
+mongo                          4.2.6     3f3daf863757   16 months ago   388MB
+mysql                          <none>    663a514cfc40   6 years ago     215MB
+
+C:\Users\ameyc>docker container run --rm golang go version
+Unable to find image 'golang:latest' locally
+latest: Pulling from library/golang
+4c25b3090c26: Already exists
+1acf565088aa: Already exists
+b95c0dd0dc0d: Already exists
+5cf06daf6561: Already exists
+4541a887d2a0: Pull complete
+dcac0686adef: Pull complete
+9717d2820c6a: Pull complete
+Digest: sha256:634cda4edda00e59167e944cdef546e2d62da71ef1809387093a377ae3404df0
+Status: Downloaded newer image for golang:latest
+go version go1.17 linux/amd64
+
+C:\Users\ameyc>docker manifest inspect golang | grep 'architecture\|os'
+'grep' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\ameyc>docker manifest inspect golang
+{
+   "schemaVersion": 2,
+   "mediaType": "application/vnd.docker.distribution.manifest.list.v2+json",
+   "manifests": [
+      {
+         "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+         "size": 1796,
+         "digest": "sha256:c5d9a9078164b8255ff1833e59451d9ff59a5f9d30ac12d41aa4783e9d025643",
+         "platform": {
+            "architecture": "amd64",
+            "os": "linux"
+         }
+      },
+      {
+         "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+         "size": 1796,
+         "digest": "sha256:ea550192bb3006395a88da993ee21d999a439797d52a8dc2af109d521c38a92a",
+         "platform": {
+            "architecture": "arm",
+            "os": "linux",
+            "variant": "v5"
+         }
+      },
+      {
+         "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+         "size": 1796,
+         "digest": "sha256:310e6341873f1ae43aa8e17f7c226ee4818a120c71a1441e41e9eb1e63aa5e8e",
+         "platform": {
+            "architecture": "arm",
+            "os": "linux",
+            "variant": "v7"
+         }
+      },
+      {
+         "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+         "size": 1796,
+         "digest": "sha256:a80573f1b40f25c2f622b9ef6cd713d17ab5e88c9ecbb5b389b25540576252fd",
+         "platform": {
+            "architecture": "arm64",
+            "os": "linux",
+            "variant": "v8"
+         }
+      },
+      {
+         "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+         "size": 1796,
+         "digest": "sha256:e0e1f45142ab5bbfe02af1c32a4f130dfb6f6a69e9889dbe851b70e6bb0a6b0f",
+         "platform": {
+            "architecture": "386",
+            "os": "linux"
+         }
+      },
+      {
+         "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+         "size": 1796,
+         "digest": "sha256:735e589f3fe381a6365413f04d8100b6b4648abec7c85a57ad40f3b7dc7b7465",
+         "platform": {
+            "architecture": "mips64le",
+            "os": "linux"
+         }
+      },
+      {
+         "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+         "size": 1796,
+         "digest": "sha256:ce8ff04a08c6cf83d7a3bc9a20517a1433b15d4f44410c1f3819cf334a2d967f",
+         "platform": {
+            "architecture": "ppc64le",
+            "os": "linux"
+         }
+      },
+      {
+         "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+         "size": 1796,
+         "digest": "sha256:7e820f891c5e85b289f7a005f8c57eaf1d549fd8872aa365e953b8082bbfaf5a",
+         "platform": {
+            "architecture": "s390x",
+            "os": "linux"
+         }
+      },
+      {
+         "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+         "size": 3401,
+         "digest": "sha256:5a21c2ef29a88259c0bd4cab37c5fa8f0de407aacfd9b924b8913dbd7ce33381",
+         "platform": {
+            "architecture": "amd64",
+            "os": "windows",
+            "os.version": "10.0.17763.2114"
+         }
+      },
+      {
+         "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+         "size": 3323,
+         "digest": "sha256:b3d0829e6ae1b865b45f1cc9cd005821cda76b80bbe4fa617e514f843fbf21f3",
+         "platform": {
+            "architecture": "amd64",
+            "os": "windows",
+            "os.version": "10.0.14393.4583"
+         }
+      }
+   ]
+}
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED          SIZE
+<none>                         <none>    ce73ac92d4d6   34 seconds ago   71.2MB
+test                           latest    0945eb7d7a5b   23 hours ago     79.6MB
+<none>                         <none>    52b72f8d1035   23 hours ago     79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago       327MB
+golang                         latest    8735189b1527   6 days ago       941MB
+python                         latest    1e76b28bfd4e   6 days ago       911MB
+redis                          latest    ddcca4b8a6f0   6 days ago       105MB
+alpine                         latest    021b3423115f   2 weeks ago      5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago      682MB
+ubuntu                         latest    1318b700e415   4 weeks ago      72.8MB
+mongo                          4.2.6     3f3daf863757   16 months ago    388MB
+mysql                          <none>    663a514cfc40   6 years ago      215MB
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED         SIZE
+test                           arm-v7    ce73ac92d4d6   2 minutes ago   71.2MB
+test                           latest    0945eb7d7a5b   23 hours ago    79.6MB
+<none>                         <none>    52b72f8d1035   24 hours ago    79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago      327MB
+golang                         latest    8735189b1527   6 days ago      941MB
+python                         latest    1e76b28bfd4e   6 days ago      911MB
+redis                          latest    ddcca4b8a6f0   6 days ago      105MB
+alpine                         latest    021b3423115f   2 weeks ago     5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago     682MB
+ubuntu                         latest    1318b700e415   4 weeks ago     72.8MB
+mongo                          4.2.6     3f3daf863757   16 months ago   388MB
+mysql                          <none>    663a514cfc40   6 years ago     215MB
+
+C:\Users\ameyc>docker image ls -q
+ce73ac92d4d6
+0945eb7d7a5b
+52b72f8d1035
+6eee80913d43
+8735189b1527
+1e76b28bfd4e
+ddcca4b8a6f0
+021b3423115f
+269b735e72cb
+1318b700e415
+3f3daf863757
+663a514cfc40
+
+C:\Users\ameyc>docker image rm
+"docker image rm" requires at least 1 argument.
+See 'docker image rm --help'.
+
+Usage:  docker image rm [OPTIONS] IMAGE [IMAGE...]
+
+Remove one or more images
+
+C:\Users\ameyc>docker image rm $(docker image ls -q) -f
+unknown shorthand flag: 'q' in -q)
+See 'docker image rm --help'.
+
+C:\Users\ameyc>docker image rm --help
+
+Usage:  docker image rm [OPTIONS] IMAGE [IMAGE...]
+
+Remove one or more images
+
+Aliases:
+  rm, rmi, remove
+
+Options:
+  -f, --force      Force removal of the image
+      --no-prune   Do not delete untagged parents
+
+C:\Users\ameyc>docker image ls -q
+ce73ac92d4d6
+0945eb7d7a5b
+52b72f8d1035
+6eee80913d43
+8735189b1527
+1e76b28bfd4e
+ddcca4b8a6f0
+021b3423115f
+269b735e72cb
+1318b700e415
+3f3daf863757
+663a514cfc40
+
+C:\Users\ameyc>docker image rm $(docker image ls -q) -f
+unknown shorthand flag: 'q' in -q)
+See 'docker image rm --help'.
+
+C:\Users\ameyc>docker image rm $(docker image ls q) -f
+Error response from daemon: invalid reference format
+Error: No such image: image
+Error: No such image: ls
+Error response from daemon: invalid reference format
+
+C:\Users\ameyc>docker image rm $(docker image ls -q) -f
+unknown shorthand flag: 'q' in -q)
+See 'docker image rm --help'.
+
+C:\Users\ameyc>docker image rm 663a514cfc40
+Untagged: mysql@sha256:d067220262882057881adc38a8b6df837a196304e0cbbb9591bf5385940bf9ea
+Deleted: sha256:663a514cfc40264d4aa94d51ab93a0e54bbfbc2c1daccb2e4f145bd15f03b7f2
+Deleted: sha256:5a1d7acceac0dd1aefaa4074e21240791201a8c4193380e15df5651a4354207d
+Deleted: sha256:29ed17ccc01f4c7ce5b24d19f96ed57d3ea4ecf77a5d4cce18e24e47dd2ec55e
+Deleted: sha256:8929a9964fe75d1b8ec8240c5233503d6b8b352d6d2a477fd511ad226ba4e3f8
+Deleted: sha256:e71cfffb360416ddb74d76c9797f99149b7c94cad2d78d00fbb4e286690542c3
+Deleted: sha256:cab32a3b1eefcb074bba1ce4232a886e09a33ef79934381ff56dc4ad7ed69a89
+Deleted: sha256:ffa412ce038b43aedb8d1a5e7229a2e776c6b4c04c69f2c7f6c1f0ec6a662525
+Deleted: sha256:602c138c778a235f3d2ee5ec0b8860e84c16439f458b132b9f62db929cfebb35
+Deleted: sha256:a8f97dede9e0f57c658453aff986b94827d57718031724e088e9901a8428839b
+Deleted: sha256:e78dc7fdc3b2ecc919412aaa2035b2695152d07553eb7ed97229a20a9eb3bb67
+Deleted: sha256:b8d8069586890a3b3d858dd2f7d0430c1afc2c02e5173471a0025a9a24e7d5ff
+Deleted: sha256:f17e492b213dd40b5c72a036c13398f51e652d2d30a77e8968867d8dd778935e
+Deleted: sha256:dc991dfc68f0bd2e03e7ed8ced4eb35e667b7c39a385801de1ec2241b68ab422
+Deleted: sha256:a8eaa5bfac2a12e437eec1ca8eed232c0bb512fb201a6d66594d9bec13a955a1
+Deleted: sha256:4bb5e862604c15b5b2198703e9016ee25324977ef197030cf1c57cb9a0abae37
+Deleted: sha256:f45e3c95eefc3a994bf64676e01aea69ee32e7f2a73ab4c97be17a90d46b1666
+Deleted: sha256:3a6a49f265a09cd6d85237a96c79dfb7464f9b959ed75a1fcc8347dc1f787f6b
+Deleted: sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef
+
+C:\Users\ameyc>docker image ls -q
+ce73ac92d4d6
+0945eb7d7a5b
+52b72f8d1035
+6eee80913d43
+8735189b1527
+1e76b28bfd4e
+ddcca4b8a6f0
+021b3423115f
+269b735e72cb
+1318b700e415
+3f3daf863757
+
+C:\Users\ameyc>

@@ -1,0 +1,950 @@
+Microsoft Windows [Version 10.0.19042.1165]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED          SIZE
+test                           arm-v7    ce73ac92d4d6   17 minutes ago   71.2MB
+test                           latest    0945eb7d7a5b   23 hours ago     79.6MB
+<none>                         <none>    52b72f8d1035   24 hours ago     79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago       327MB
+golang                         latest    8735189b1527   6 days ago       941MB
+python                         latest    1e76b28bfd4e   6 days ago       911MB
+redis                          latest    ddcca4b8a6f0   6 days ago       105MB
+alpine                         latest    021b3423115f   2 weeks ago      5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago      682MB
+ubuntu                         latest    1318b700e415   4 weeks ago      72.8MB
+mongo                          4.2.6     3f3daf863757   16 months ago    388MB
+
+C:\Users\ameyc>docker container run -it ubuntu /bin/bash
+root@df21c84abd16:/# ls
+bin   dev  home  lib32  libx32  mnt  proc  run   srv  tmp  var
+boot  etc  lib   lib64  media   opt  root  sbin  sys  usr
+root@df21c84abd16:/# docker container run -it
+bash: docker: command not found
+root@df21c84abd16:/# exit
+exit
+
+C:\Users\ameyc>docker container run -it
+"docker container run" requires at least 1 argument.
+See 'docker container run --help'.
+
+Usage:  docker container run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+Run a command in a new container
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED          SIZE
+test                           arm-v7    ce73ac92d4d6   19 minutes ago   71.2MB
+test                           latest    0945eb7d7a5b   23 hours ago     79.6MB
+<none>                         <none>    52b72f8d1035   24 hours ago     79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago       327MB
+golang                         latest    8735189b1527   6 days ago       941MB
+python                         latest    1e76b28bfd4e   6 days ago       911MB
+redis                          latest    ddcca4b8a6f0   6 days ago       105MB
+alpine                         latest    021b3423115f   2 weeks ago      5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago      682MB
+ubuntu                         latest    1318b700e415   4 weeks ago      72.8MB
+mongo                          4.2.6     3f3daf863757   16 months ago    388MB
+
+C:\Users\ameyc>docker container run -it mcr.microsoft.com/powershell:nanoserver pwsh.exe
+Unable to find image 'mcr.microsoft.com/powershell:nanoserver' locally
+nanoserver: Pulling from powershell
+docker: no matching manifest for linux/amd64 in the manifest list entries.
+See 'docker run --help'.
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED          SIZE
+test                           arm-v7    ce73ac92d4d6   20 minutes ago   71.2MB
+test                           latest    0945eb7d7a5b   23 hours ago     79.6MB
+<none>                         <none>    52b72f8d1035   24 hours ago     79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago       327MB
+golang                         latest    8735189b1527   6 days ago       941MB
+python                         latest    1e76b28bfd4e   6 days ago       911MB
+redis                          latest    ddcca4b8a6f0   6 days ago       105MB
+alpine                         latest    021b3423115f   2 weeks ago      5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago      682MB
+ubuntu                         latest    1318b700e415   4 weeks ago      72.8MB
+mongo                          4.2.6     3f3daf863757   16 months ago    388MB
+
+C:\Users\ameyc>docker container run -it mcr.microsoft.com/powershell
+PowerShell 7.1.4
+Copyright (c) Microsoft Corporation.
+
+https://aka.ms/powershell
+Type 'help' to get help.
+
+PS /> echo hi
+hi
+PS /> exit
+
+C:\Users\ameyc>docker container run -it mcr.microsoft.com/powershell:nanoserver pwsh.exe
+Unable to find image 'mcr.microsoft.com/powershell:nanoserver' locally
+nanoserver: Pulling from powershell
+docker: no matching manifest for linux/amd64 in the manifest list entries.
+See 'docker run --help'.
+
+C:\Users\ameyc>docker container run -it microsoft/powershell:nanoserver pwsh.exe
+Unable to find image 'microsoft/powershell:nanoserver' locally
+docker: Error response from daemon: pull access denied for microsoft/powershell, repository does not exist or may require 'docker login': denied: requested access to the resource is denied.
+See 'docker run --help'.
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED          SIZE
+test                           arm-v7    ce73ac92d4d6   22 minutes ago   71.2MB
+test                           latest    0945eb7d7a5b   23 hours ago     79.6MB
+<none>                         <none>    52b72f8d1035   24 hours ago     79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago       327MB
+golang                         latest    8735189b1527   6 days ago       941MB
+python                         latest    1e76b28bfd4e   6 days ago       911MB
+redis                          latest    ddcca4b8a6f0   6 days ago       105MB
+alpine                         latest    021b3423115f   2 weeks ago      5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago      682MB
+ubuntu                         latest    1318b700e415   4 weeks ago      72.8MB
+mongo                          4.2.6     3f3daf863757   16 months ago    388MB
+
+C:\Users\ameyc>docker image pull microsoft/powershell
+Using default tag: latest
+Error response from daemon: pull access denied for microsoft/powershell, repository does not exist or may require 'docker login': denied: requested access to the resource is denied
+
+C:\Users\ameyc>docker container run -it mcr.microsoft.com/powershell nanoserver
+docker: Error response from daemon: OCI runtime create failed: container_linux.go:380: starting container process caused: exec: "nanoserver": executable file not found in $PATH: unknown.
+
+C:\Users\ameyc>docker container run -it mcr.microsoft.com/powershell nanoserver pwsh.exe
+docker: Error response from daemon: OCI runtime create failed: container_linux.go:380: starting container process caused: exec: "nanoserver": executable file not found in $PATH: unknown.
+
+C:\Users\ameyc>docker container run -it mcr.microsoft.com/powershell:nanoserver pwsh.exe .
+Unable to find image 'mcr.microsoft.com/powershell:nanoserver' locally
+nanoserver: Pulling from powershell
+docker: no matching manifest for linux/amd64 in the manifest list entries.
+See 'docker run --help'.
+
+C:\Users\ameyc>docker container run -it mcr.microsoft.com/powershell:latest nanoserver pwsh.exe .
+docker: Error response from daemon: OCI runtime create failed: container_linux.go:380: starting container process caused: exec: "nanoserver": executable file not found in $PATH: unknown.
+
+C:\Users\ameyc>docker container run -it mcr.microsoft.com/powershell:nanoserver pwsh.exe
+Unable to find image 'mcr.microsoft.com/powershell:nanoserver' locally
+nanoserver: Pulling from powershell
+docker: no matching manifest for linux/amd64 in the manifest list entries.
+See 'docker run --help'.
+
+C:\Users\ameyc>docker exec -it ubuntu bash
+Error: No such container: ubuntu
+
+C:\Users\ameyc>docker exec -it ubuntu bash
+Error: No such container: ubuntu
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED          SIZE
+test                           arm-v7    ce73ac92d4d6   27 minutes ago   71.2MB
+test                           latest    0945eb7d7a5b   24 hours ago     79.6MB
+<none>                         <none>    52b72f8d1035   24 hours ago     79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago       327MB
+golang                         latest    8735189b1527   6 days ago       941MB
+python                         latest    1e76b28bfd4e   6 days ago       911MB
+redis                          latest    ddcca4b8a6f0   6 days ago       105MB
+alpine                         latest    021b3423115f   2 weeks ago      5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago      682MB
+ubuntu                         latest    1318b700e415   4 weeks ago      72.8MB
+mongo                          4.2.6     3f3daf863757   16 months ago    388MB
+
+C:\Users\ameyc>docker exec -it 1318b700e415 bash
+Error: No such container: 1318b700e415
+
+C:\Users\ameyc>docker container exec -it 1318b700e415 bash
+Error: No such container: 1318b700e415
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED        STATUS        PORTS                                       NAMES
+cc68ecf83f84   test:latest   "node ./app.js"   23 hours ago   Up 23 hours   0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker conatiner run --it ubuntu
+unknown flag: --it
+See 'docker --help'.
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Options:
+      --config string      Location of client config files (default
+                           "C:\\Users\\ameyc\\.docker")
+  -c, --context string     Name of the context to use to connect to the
+                           daemon (overrides DOCKER_HOST env var and
+                           default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level
+                           ("debug"|"info"|"warn"|"error"|"fatal")
+                           (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default
+                           "C:\\Users\\ameyc\\.docker\\ca.pem")
+      --tlscert string     Path to TLS certificate file (default
+                           "C:\\Users\\ameyc\\.docker\\cert.pem")
+      --tlskey string      Path to TLS key file (default
+                           "C:\\Users\\ameyc\\.docker\\key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Management Commands:
+  builder     Manage builds
+  buildx*     Build with BuildKit (Docker Inc., v0.6.1-docker)
+  compose*    Docker Compose (Docker Inc., v2.0.0-rc.1)
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  image       Manage images
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  scan*       Docker Scan (Docker Inc., v0.8.0)
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  images      List images
+  import      Import the contents from a tarball to create a filesystem image
+  info        Display system-wide information
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  login       Log in to a Docker registry
+  logout      Log out from a Docker registry
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  ps          List containers
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  run         Run a command in a new container
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  search      Search the Docker Hub for images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  version     Show the Docker version information
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker COMMAND --help' for more information on a command.
+
+To get more help with docker, check out our guides at https://docs.docker.com/go/guides/
+
+
+C:\Users\ameyc>docker container run -it ubuntu bash
+root@05059b8770de:/# ls
+bin   dev  home  lib32  libx32  mnt  proc  run   srv  tmp  var
+boot  etc  lib   lib64  media   opt  root  sbin  sys  usr
+root@05059b8770de:/# exit
+exit
+
+C:\Users\ameyc>docker container exec -it ubuntu bash
+Error: No such container: ubuntu
+
+C:\Users\ameyc>docker container run -it ubuntu
+root@20040e4318e2:/# exit
+exit
+
+C:\Users\ameyc>docker container run -it ubuntu
+root@9c0ac4357d52:/# exit
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED          STATUS          PORTS                                       NAMES
+c9348b811f4c   ubuntu        "bash"            16 seconds ago   Up 16 seconds                                               c2
+cc68ecf83f84   test:latest   "node ./app.js"   24 hours ago     Up 24 hours     0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker pause c2
+c2
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED              STATUS                       PORTS                                       NAMES
+c9348b811f4c   ubuntu        "bash"            About a minute ago   Up About a minute (Paused)                                               c2
+cc68ecf83f84   test:latest   "node ./app.js"   24 hours ago         Up 24 hours                  0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker unpause c2
+c2
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED              STATUS              PORTS                                       NAMES
+c9348b811f4c   ubuntu        "bash"            About a minute ago   Up About a minute                                               c2
+cc68ecf83f84   test:latest   "node ./app.js"   24 hours ago         Up 24 hours         0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker stop c2
+c2
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED        STATUS        PORTS                                       NAMES
+cc68ecf83f84   test:latest   "node ./app.js"   24 hours ago   Up 24 hours   0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker rm c2
+c2
+
+C:\Users\ameyc>
+
+
+Microsoft Windows [Version 10.0.19042.1165]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\ameyc>docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED          SIZE
+test                           arm-v7    ce73ac92d4d6   27 minutes ago   71.2MB
+test                           latest    0945eb7d7a5b   24 hours ago     79.6MB
+<none>                         <none>    52b72f8d1035   24 hours ago     79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   4 days ago       327MB
+golang                         latest    8735189b1527   6 days ago       941MB
+python                         latest    1e76b28bfd4e   6 days ago       911MB
+redis                          latest    ddcca4b8a6f0   6 days ago       105MB
+alpine                         latest    021b3423115f   2 weeks ago      5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago      682MB
+ubuntu                         latest    1318b700e415   4 weeks ago      72.8MB
+mongo                          4.2.6     3f3daf863757   16 months ago    388MB
+
+C:\Users\ameyc>docker container run ubuntu
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED          STATUS          PORTS                                       NAMES
+05059b8770de   ubuntu        "bash"            20 seconds ago   Up 20 seconds                                               exciting_spence
+cc68ecf83f84   test:latest   "node ./app.js"   23 hours ago     Up 23 hours     0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker conatiner exec -it 05059b8770de bash
+unknown shorthand flag: 'i' in -it
+See 'docker --help'.
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Options:
+      --config string      Location of client config files (default
+                           "C:\\Users\\ameyc\\.docker")
+  -c, --context string     Name of the context to use to connect to the
+                           daemon (overrides DOCKER_HOST env var and
+                           default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level
+                           ("debug"|"info"|"warn"|"error"|"fatal")
+                           (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default
+                           "C:\\Users\\ameyc\\.docker\\ca.pem")
+      --tlscert string     Path to TLS certificate file (default
+                           "C:\\Users\\ameyc\\.docker\\cert.pem")
+      --tlskey string      Path to TLS key file (default
+                           "C:\\Users\\ameyc\\.docker\\key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Management Commands:
+  builder     Manage builds
+  buildx*     Build with BuildKit (Docker Inc., v0.6.1-docker)
+  compose*    Docker Compose (Docker Inc., v2.0.0-rc.1)
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  image       Manage images
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  scan*       Docker Scan (Docker Inc., v0.8.0)
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  images      List images
+  import      Import the contents from a tarball to create a filesystem image
+  info        Display system-wide information
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  login       Log in to a Docker registry
+  logout      Log out from a Docker registry
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  ps          List containers
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  run         Run a command in a new container
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  search      Search the Docker Hub for images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  version     Show the Docker version information
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker COMMAND --help' for more information on a command.
+
+To get more help with docker, check out our guides at https://docs.docker.com/go/guides/
+
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED         STATUS         PORTS                                       NAMES
+05059b8770de   ubuntu        "bash"            2 minutes ago   Up 2 minutes                                               exciting_spence
+cc68ecf83f84   test:latest   "node ./app.js"   23 hours ago    Up 23 hours    0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED        STATUS        PORTS                                       NAMES
+cc68ecf83f84   test:latest   "node ./app.js"   23 hours ago   Up 23 hours   0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED         STATUS         PORTS                                       NAMES
+20040e4318e2   ubuntu        "bash"            9 seconds ago   Up 8 seconds                                               blissful_ardinghelli
+cc68ecf83f84   test:latest   "node ./app.js"   23 hours ago    Up 23 hours    0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker conatiner exec -it ubuntu bash
+unknown shorthand flag: 'i' in -it
+See 'docker --help'.
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Options:
+      --config string      Location of client config files (default
+                           "C:\\Users\\ameyc\\.docker")
+  -c, --context string     Name of the context to use to connect to the
+                           daemon (overrides DOCKER_HOST env var and
+                           default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level
+                           ("debug"|"info"|"warn"|"error"|"fatal")
+                           (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default
+                           "C:\\Users\\ameyc\\.docker\\ca.pem")
+      --tlscert string     Path to TLS certificate file (default
+                           "C:\\Users\\ameyc\\.docker\\cert.pem")
+      --tlskey string      Path to TLS key file (default
+                           "C:\\Users\\ameyc\\.docker\\key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Management Commands:
+  builder     Manage builds
+  buildx*     Build with BuildKit (Docker Inc., v0.6.1-docker)
+  compose*    Docker Compose (Docker Inc., v2.0.0-rc.1)
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  image       Manage images
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  scan*       Docker Scan (Docker Inc., v0.8.0)
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  images      List images
+  import      Import the contents from a tarball to create a filesystem image
+  info        Display system-wide information
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  login       Log in to a Docker registry
+  logout      Log out from a Docker registry
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  ps          List containers
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  run         Run a command in a new container
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  search      Search the Docker Hub for images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  version     Show the Docker version information
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker COMMAND --help' for more information on a command.
+
+To get more help with docker, check out our guides at https://docs.docker.com/go/guides/
+
+
+C:\Users\ameyc>docker conatiner exec ubuntu bash
+docker: 'conatiner' is not a docker command.
+See 'docker --help'
+
+C:\Users\ameyc>docker container exec ubuntu bash
+Error: No such container: ubuntu
+
+C:\Users\ameyc>docker container exec -it ubuntu bash
+Error: No such container: ubuntu
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED         STATUS         PORTS                                       NAMES
+20040e4318e2   ubuntu        "bash"            2 minutes ago   Up 2 minutes                                               blissful_ardinghelli
+cc68ecf83f84   test:latest   "node ./app.js"   23 hours ago    Up 23 hours    0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker conatiner exec -it 20040e4318e2 bash
+unknown shorthand flag: 'i' in -it
+See 'docker --help'.
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Options:
+      --config string      Location of client config files (default
+                           "C:\\Users\\ameyc\\.docker")
+  -c, --context string     Name of the context to use to connect to the
+                           daemon (overrides DOCKER_HOST env var and
+                           default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level
+                           ("debug"|"info"|"warn"|"error"|"fatal")
+                           (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default
+                           "C:\\Users\\ameyc\\.docker\\ca.pem")
+      --tlscert string     Path to TLS certificate file (default
+                           "C:\\Users\\ameyc\\.docker\\cert.pem")
+      --tlskey string      Path to TLS key file (default
+                           "C:\\Users\\ameyc\\.docker\\key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Management Commands:
+  builder     Manage builds
+  buildx*     Build with BuildKit (Docker Inc., v0.6.1-docker)
+  compose*    Docker Compose (Docker Inc., v2.0.0-rc.1)
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  image       Manage images
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  scan*       Docker Scan (Docker Inc., v0.8.0)
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  images      List images
+  import      Import the contents from a tarball to create a filesystem image
+  info        Display system-wide information
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  login       Log in to a Docker registry
+  logout      Log out from a Docker registry
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  ps          List containers
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  run         Run a command in a new container
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  search      Search the Docker Hub for images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  version     Show the Docker version information
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker COMMAND --help' for more information on a command.
+
+To get more help with docker, check out our guides at https://docs.docker.com/go/guides/
+
+
+C:\Users\ameyc>docker conatiner exec 20040e4318e2 bash
+docker: 'conatiner' is not a docker command.
+See 'docker --help'
+
+C:\Users\ameyc>docker container exec -it 20040e4318e2 bash
+root@20040e4318e2:/# exit
+exit
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED         STATUS         PORTS                                       NAMES
+20040e4318e2   ubuntu        "bash"            3 minutes ago   Up 3 minutes                                               blissful_ardinghelli
+cc68ecf83f84   test:latest   "node ./app.js"   23 hours ago    Up 23 hours    0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED        STATUS        PORTS                                       NAMES
+cc68ecf83f84   test:latest   "node ./app.js"   23 hours ago   Up 23 hours   0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker container exec -it ubuntu bash
+Error: No such container: ubuntu
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED          STATUS          PORTS                                       NAMES
+9c0ac4357d52   ubuntu        "bash"            10 seconds ago   Up 10 seconds                                               recursing_chatterjee
+cc68ecf83f84   test:latest   "node ./app.js"   23 hours ago     Up 23 hours     0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker conatiner exec -it ubuntu bash
+unknown shorthand flag: 'i' in -it
+See 'docker --help'.
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Options:
+      --config string      Location of client config files (default
+                           "C:\\Users\\ameyc\\.docker")
+  -c, --context string     Name of the context to use to connect to the
+                           daemon (overrides DOCKER_HOST env var and
+                           default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level
+                           ("debug"|"info"|"warn"|"error"|"fatal")
+                           (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default
+                           "C:\\Users\\ameyc\\.docker\\ca.pem")
+      --tlscert string     Path to TLS certificate file (default
+                           "C:\\Users\\ameyc\\.docker\\cert.pem")
+      --tlskey string      Path to TLS key file (default
+                           "C:\\Users\\ameyc\\.docker\\key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Management Commands:
+  builder     Manage builds
+  buildx*     Build with BuildKit (Docker Inc., v0.6.1-docker)
+  compose*    Docker Compose (Docker Inc., v2.0.0-rc.1)
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  image       Manage images
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  scan*       Docker Scan (Docker Inc., v0.8.0)
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  images      List images
+  import      Import the contents from a tarball to create a filesystem image
+  info        Display system-wide information
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  login       Log in to a Docker registry
+  logout      Log out from a Docker registry
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  ps          List containers
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  run         Run a command in a new container
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  search      Search the Docker Hub for images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  version     Show the Docker version information
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker COMMAND --help' for more information on a command.
+
+To get more help with docker, check out our guides at https://docs.docker.com/go/guides/
+
+
+C:\Users\ameyc>docker container exec -it ubuntu bash
+Error: No such container: ubuntu
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED          STATUS          PORTS                                       NAMES
+9c0ac4357d52   ubuntu        "bash"            38 seconds ago   Up 38 seconds                                               recursing_chatterjee
+cc68ecf83f84   test:latest   "node ./app.js"   23 hours ago     Up 23 hours     0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker container exec -it ubuntu bash
+Error: No such container: ubuntu
+
+C:\Users\ameyc>docker container exec -it 9c0ac4357d52 bash
+root@9c0ac4357d52:/# exit
+exit
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED         STATUS         PORTS                                       NAMES
+9c0ac4357d52   ubuntu        "bash"            4 minutes ago   Up 4 minutes                                               recursing_chatterjee
+cc68ecf83f84   test:latest   "node ./app.js"   23 hours ago    Up 23 hours    0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker container stop 9c0ac4357d52
+9c0ac4357d52
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED        STATUS        PORTS                                       NAMES
+cc68ecf83f84   test:latest   "node ./app.js"   23 hours ago   Up 23 hours   0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker container stop 9c0ac4357d52
+9c0ac4357d52
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED        STATUS        PORTS                                       NAMES
+cc68ecf83f84   test:latest   "node ./app.js"   23 hours ago   Up 23 hours   0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker ps -a
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED          STATUS                        PORTS                                       NAMES
+9c0ac4357d52   ubuntu                                "bash"                   7 minutes ago    Exited (0) 2 minutes ago                                                  recursing_chatterjee
+20040e4318e2   ubuntu                                "bash"                   11 minutes ago   Exited (0) 7 minutes ago                                                  blissful_ardinghelli
+05059b8770de   ubuntu                                "bash"                   14 minutes ago   Exited (0) 12 minutes ago                                                 exciting_spence
+e3a0a396bc8c   ubuntu                                "bash"                   17 minutes ago   Exited (0) 17 minutes ago                                                 vibrant_bhaskara
+965c7e52af6e   mcr.microsoft.com/powershell:latest   "nanoserver pwsh.exe…"   20 minutes ago   Created                                                                   reverent_ishizaka
+b550bc3235ba   mcr.microsoft.com/powershell          "nanoserver pwsh.exe"    20 minutes ago   Created                                                                   objective_chaplygin
+3d5b76f4328b   mcr.microsoft.com/powershell          "nanoserver"             20 minutes ago   Created                                                                   suspicious_beaver
+9ec2ffb6e75b   mcr.microsoft.com/powershell          "pwsh"                   23 minutes ago   Exited (0) 22 minutes ago                                                 vigorous_mendel
+df21c84abd16   ubuntu                                "/bin/bash"              26 minutes ago   Exited (127) 26 minutes ago                                               bold_goldberg
+cc68ecf83f84   test:latest                           "node ./app.js"          23 hours ago     Up 23 hours                   0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+5e8cceb3a244   test:latest                           "node ./app.js"          24 hours ago     Exited (137) 23 hours ago                                                 web16
+43ae7137519f   test:latest                           "node ./app.js"          24 hours ago     Exited (137) 24 hours ago                                                 web15
+e482da1065d1   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web14
+6d9dce3a9be4   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web13
+c5c830b0f84a   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web12
+d914a0d6f223   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web11
+dca038feeebc   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web10
+2f477bfef654   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web9
+af24273f53b9   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web8
+ad025110a7e3   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web7
+62a5038cb68c   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web6
+4f47a9c24fc4   52b72f8d1035                          "node ./app.js"          24 hours ago     Exited (137) 24 hours ago                                                 web5
+83be37e43aaf   52b72f8d1035                          "node ./app.js"          24 hours ago     Exited (137) 24 hours ago                                                 web4
+f1ef6f0afe8c   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web3
+d99f1ccd2276   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web2
+18a31174e99f   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web1
+aa6f68cc6145   python                                "python3"                24 hours ago     Exited (137) 24 hours ago                                                 naughty_noether
+dbaa09479848   python                                "python3"                25 hours ago     Exited (0) 24 hours ago                                                   flamboyant_khayyam
+8ea8b94f76d3   python                                "python3"                25 hours ago     Exited (0) 25 hours ago                                                   festive_jang
+e3adf3e89538   ubuntu                                "bash"                   25 hours ago     Exited (127) 25 hours ago                                                 stupefied_villani
+0830ae92225f   ubuntu                                "bash"                   25 hours ago     Exited (0) 25 hours ago                                                   thirsty_chebyshev
+60715dcfd73a   ubuntu                                "bash"                   25 hours ago     Exited (0) 25 hours ago                                                   nice_banach
+f92dccc00176   ubuntu                                "bash"                   25 hours ago     Exited (0) 25 hours ago                                                   blissful_black
+18b1cff19957   ubuntu                                "bash"                   25 hours ago     Exited (0) 25 hours ago                                                   unruffled_wilbur
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED        STATUS        PORTS                                       NAMES
+cc68ecf83f84   test:latest   "node ./app.js"   23 hours ago   Up 23 hours   0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker ps -a
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED          STATUS                        PORTS                                       NAMES
+9c0ac4357d52   ubuntu                                "bash"                   9 minutes ago    Exited (0) 4 minutes ago                                                  recursing_chatterjee
+20040e4318e2   ubuntu                                "bash"                   13 minutes ago   Exited (0) 9 minutes ago                                                  blissful_ardinghelli
+05059b8770de   ubuntu                                "bash"                   17 minutes ago   Exited (0) 14 minutes ago                                                 exciting_spence
+e3a0a396bc8c   ubuntu                                "bash"                   19 minutes ago   Exited (0) 19 minutes ago                                                 vibrant_bhaskara
+965c7e52af6e   mcr.microsoft.com/powershell:latest   "nanoserver pwsh.exe…"   22 minutes ago   Created                                                                   reverent_ishizaka
+b550bc3235ba   mcr.microsoft.com/powershell          "nanoserver pwsh.exe"    23 minutes ago   Created                                                                   objective_chaplygin
+3d5b76f4328b   mcr.microsoft.com/powershell          "nanoserver"             23 minutes ago   Created                                                                   suspicious_beaver
+9ec2ffb6e75b   mcr.microsoft.com/powershell          "pwsh"                   26 minutes ago   Exited (0) 25 minutes ago                                                 vigorous_mendel
+df21c84abd16   ubuntu                                "/bin/bash"              29 minutes ago   Exited (127) 28 minutes ago                                               bold_goldberg
+cc68ecf83f84   test:latest                           "node ./app.js"          23 hours ago     Up 23 hours                   0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+5e8cceb3a244   test:latest                           "node ./app.js"          24 hours ago     Exited (137) 23 hours ago                                                 web16
+43ae7137519f   test:latest                           "node ./app.js"          24 hours ago     Exited (137) 24 hours ago                                                 web15
+e482da1065d1   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web14
+6d9dce3a9be4   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web13
+c5c830b0f84a   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web12
+d914a0d6f223   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web11
+dca038feeebc   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web10
+2f477bfef654   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web9
+af24273f53b9   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web8
+ad025110a7e3   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web7
+62a5038cb68c   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web6
+4f47a9c24fc4   52b72f8d1035                          "node ./app.js"          24 hours ago     Exited (137) 24 hours ago                                                 web5
+83be37e43aaf   52b72f8d1035                          "node ./app.js"          24 hours ago     Exited (137) 24 hours ago                                                 web4
+f1ef6f0afe8c   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web3
+d99f1ccd2276   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web2
+18a31174e99f   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web1
+aa6f68cc6145   python                                "python3"                24 hours ago     Exited (137) 24 hours ago                                                 naughty_noether
+dbaa09479848   python                                "python3"                25 hours ago     Exited (0) 24 hours ago                                                   flamboyant_khayyam
+8ea8b94f76d3   python                                "python3"                25 hours ago     Exited (0) 25 hours ago                                                   festive_jang
+e3adf3e89538   ubuntu                                "bash"                   25 hours ago     Exited (127) 25 hours ago                                                 stupefied_villani
+0830ae92225f   ubuntu                                "bash"                   25 hours ago     Exited (0) 25 hours ago                                                   thirsty_chebyshev
+60715dcfd73a   ubuntu                                "bash"                   25 hours ago     Exited (0) 25 hours ago                                                   nice_banach
+f92dccc00176   ubuntu                                "bash"                   25 hours ago     Exited (0) 25 hours ago                                                   blissful_black
+18b1cff19957   ubuntu                                "bash"                   25 hours ago     Exited (0) 25 hours ago                                                   unruffled_wilbur
+
+C:\Users\ameyc>docker container rm 9c0ac4357d52
+9c0ac4357d52
+
+C:\Users\ameyc>docker ps -a
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED          STATUS                        PORTS                                       NAMES
+20040e4318e2   ubuntu                                "bash"                   14 minutes ago   Exited (0) 10 minutes ago                                                 blissful_ardinghelli
+05059b8770de   ubuntu                                "bash"                   17 minutes ago   Exited (0) 15 minutes ago                                                 exciting_spence
+e3a0a396bc8c   ubuntu                                "bash"                   20 minutes ago   Exited (0) 20 minutes ago                                                 vibrant_bhaskara
+965c7e52af6e   mcr.microsoft.com/powershell:latest   "nanoserver pwsh.exe…"   23 minutes ago   Created                                                                   reverent_ishizaka
+b550bc3235ba   mcr.microsoft.com/powershell          "nanoserver pwsh.exe"    23 minutes ago   Created                                                                   objective_chaplygin
+3d5b76f4328b   mcr.microsoft.com/powershell          "nanoserver"             23 minutes ago   Created                                                                   suspicious_beaver
+9ec2ffb6e75b   mcr.microsoft.com/powershell          "pwsh"                   26 minutes ago   Exited (0) 25 minutes ago                                                 vigorous_mendel
+df21c84abd16   ubuntu                                "/bin/bash"              29 minutes ago   Exited (127) 29 minutes ago                                               bold_goldberg
+cc68ecf83f84   test:latest                           "node ./app.js"          23 hours ago     Up 23 hours                   0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+5e8cceb3a244   test:latest                           "node ./app.js"          24 hours ago     Exited (137) 24 hours ago                                                 web16
+43ae7137519f   test:latest                           "node ./app.js"          24 hours ago     Exited (137) 24 hours ago                                                 web15
+e482da1065d1   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web14
+6d9dce3a9be4   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web13
+c5c830b0f84a   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web12
+d914a0d6f223   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web11
+dca038feeebc   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web10
+2f477bfef654   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web9
+af24273f53b9   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web8
+ad025110a7e3   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web7
+62a5038cb68c   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web6
+4f47a9c24fc4   52b72f8d1035                          "node ./app.js"          24 hours ago     Exited (137) 24 hours ago                                                 web5
+83be37e43aaf   52b72f8d1035                          "node ./app.js"          24 hours ago     Exited (137) 24 hours ago                                                 web4
+f1ef6f0afe8c   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web3
+d99f1ccd2276   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web2
+18a31174e99f   52b72f8d1035                          "node ./app.js"          24 hours ago     Created                                                                   web1
+aa6f68cc6145   python                                "python3"                24 hours ago     Exited (137) 24 hours ago                                                 naughty_noether
+dbaa09479848   python                                "python3"                25 hours ago     Exited (0) 25 hours ago                                                   flamboyant_khayyam
+8ea8b94f76d3   python                                "python3"                25 hours ago     Exited (0) 25 hours ago                                                   festive_jang
+e3adf3e89538   ubuntu                                "bash"                   25 hours ago     Exited (127) 25 hours ago                                                 stupefied_villani
+0830ae92225f   ubuntu                                "bash"                   25 hours ago     Exited (0) 25 hours ago                                                   thirsty_chebyshev
+60715dcfd73a   ubuntu                                "bash"                   25 hours ago     Exited (0) 25 hours ago                                                   nice_banach
+f92dccc00176   ubuntu                                "bash"                   25 hours ago     Exited (0) 25 hours ago                                                   blissful_black
+18b1cff19957   ubuntu                                "bash"                   25 hours ago     Exited (0) 25 hours ago                                                   unruffled_wilbur
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED        STATUS        PORTS                                       NAMES
+cc68ecf83f84   test:latest   "node ./app.js"   24 hours ago   Up 24 hours   0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker create --name c1 ubuntu
+3ee88ba5af5e5ec6a0240abadcf5376efc6609650c186e988d2dc9e2ce81d3ee
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED        STATUS        PORTS                                       NAMES
+cc68ecf83f84   test:latest   "node ./app.js"   24 hours ago   Up 24 hours   0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker start c1
+c1
+
+C:\Users\ameyc>docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED        STATUS        PORTS                                       NAMES
+cc68ecf83f84   test:latest   "node ./app.js"   24 hours ago   Up 24 hours   0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+C:\Users\ameyc>docker run -it --name c1 ubuntu
+docker: Error response from daemon: Conflict. The container name "/c1" is already in use by container "3ee88ba5af5e5ec6a0240abadcf5376efc6609650c186e988d2dc9e2ce81d3ee". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+
+C:\Users\ameyc>docker run -it --name c2 ubuntu
+root@c9348b811f4c:/# exit
+
+C:\Users\ameyc>

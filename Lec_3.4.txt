@@ -1,0 +1,301 @@
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/atsea-sample-shop-app/app (master)
+$ docker-compose -version
+
+
+docker-compose version 1.29.2, build 5becea4c
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/atsea-sample-shop-app/app (master)
+$
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/atsea-sample-shop-app/app (master)
+$
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/atsea-sample-shop-app/app (master)
+$ cd ..
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/atsea-sample-shop-app (master)
+$ cd ..
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ ls
+Lec_1.1.txt  Lec_2.2.txt  Lec_2.4.txt  Lec_3.2.txt  atsea-sample-shop-app/  test.py
+Lec_2.1.txt  Lec_2.3.txt  Lec_3.1.txt  Lec_3.3.txt  psweb/
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ git clone https://github.com/nigelpoulton/counter-app.git
+Cloning into 'counter-app'...
+remote: Enumerating objects: 17, done.
+remote: Counting objects: 100% (1/1), done.
+remote: Total 17 (delta 0), reused 0 (delta 0), pack-reused 16
+Receiving objects: 100% (17/17), done.
+Resolving deltas: 100% (6/6), done.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ cd counter-app
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ ls
+Dockerfile  README.md  app.py  docker-compose.yml  requirements.txt
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker-compose up &
+[1] 1853
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ Creating network "counter-app_counter-net" with the default driver
+Creating volume "counter-app_counter-vol" with default driver
+Building web-fe
+#1 [internal] load build definition from Dockerfile
+#1 sha256:27aae73d953c9dfc93751d2d437941d7e3b61a78134f5168222544f54e3e09c4
+#1 transferring dockerfile: 152B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load .dockerignore
+#2 sha256:7ed66cbc0720030c058406581f7ced1329f26dfd37673a67c09b1df0bd33053f
+#2 transferring context: 2B done
+#2 DONE 0.1s
+
+#3 [internal] load metadata for docker.io/library/python:3.6-alpine
+#3 sha256:3133c004f44622a01879d32a6f3d42c60653cebe170be2791440752a42e41480
+#3 DONE 3.9s
+
+#4 [1/4] FROM docker.io/library/python:3.6-alpine@sha256:bee2fc0583def5de636ec0b547e2186461f13926b8077d67a58b0d953e062c93
+#4 sha256:249b73e09e8222cffe607f9d096ddea380fd978466ebb724d6addba3ef706542
+#4 resolve docker.io/library/python:3.6-alpine@sha256:bee2fc0583def5de636ec0b547e2186461f13926b8077d67a58b0d953e062c93 0.0s done
+#4 ...
+
+#5 [internal] load build context
+#5 sha256:44ea00e42098870cd5dc04916bc36662b614888e1740c6bde2351ae8d86828ca
+#5 transferring context: 33.83kB 0.1s done
+#5 DONE 0.2s
+
+#4 [1/4] FROM docker.io/library/python:3.6-alpine@sha256:bee2fc0583def5de636ec0b547e2186461f13926b8077d67a58b0d953e062c93
+#4 sha256:249b73e09e8222cffe607f9d096ddea380fd978466ebb724d6addba3ef706542
+#4 sha256:bee2fc0583def5de636ec0b547e2186461f13926b8077d67a58b0d953e062c93 1.65kB / 1.65kB done
+#4 sha256:5c4ee358161a9a6e364ea03ab5b6978f3dbedf1456698634d611ab45c18a06d3 1.37kB / 1.37kB done
+#4 sha256:5bdd2767f42ebfa66f4c3749d2829bf498185dd6c0913b2c922ad82a5d069b57 7.83kB / 7.83kB done
+#4 sha256:c6625ad8c0ff0a54d772b65229073373de275c2f7a16c71cbbf584ca1185d0ce 0B / 10.20MB 0.3s
+#4 sha256:5b904a152bb436e642d2db20578ff1b60d5f47481c2bc87ca9702c57cca61ba5 0B / 231B 0.3s
+#4 sha256:3626a090061d56f9d6eaa946c29f4a7600401e2bca3f7b517369d0da709bf6d3 0B / 281.50kB 0.3s
+#4 sha256:c6625ad8c0ff0a54d772b65229073373de275c2f7a16c71cbbf584ca1185d0ce 1.05MB / 10.20MB 0.7s
+#4 sha256:c6625ad8c0ff0a54d772b65229073373de275c2f7a16c71cbbf584ca1185d0ce 2.10MB / 10.20MB 0.9s
+#4 sha256:5b904a152bb436e642d2db20578ff1b60d5f47481c2bc87ca9702c57cca61ba5 231B / 231B 0.8s done
+#4 sha256:c6625ad8c0ff0a54d772b65229073373de275c2f7a16c71cbbf584ca1185d0ce 3.15MB / 10.20MB 1.0s
+#4 sha256:916e8b567dc502c85c84849d3d41273c3188ad6f7b66de7819de462b2a771772 0B / 2.21MB 1.0s
+#4 sha256:c6625ad8c0ff0a54d772b65229073373de275c2f7a16c71cbbf584ca1185d0ce 4.19MB / 10.20MB 1.1s
+#4 sha256:3626a090061d56f9d6eaa946c29f4a7600401e2bca3f7b517369d0da709bf6d3 281.50kB / 281.50kB 1.2s
+#4 sha256:c6625ad8c0ff0a54d772b65229073373de275c2f7a16c71cbbf584ca1185d0ce 5.24MB / 10.20MB 1.3s
+#4 sha256:3626a090061d56f9d6eaa946c29f4a7600401e2bca3f7b517369d0da709bf6d3 281.50kB / 281.50kB 1.2s done
+#4 extracting sha256:3626a090061d56f9d6eaa946c29f4a7600401e2bca3f7b517369d0da709bf6d3
+#4 sha256:c6625ad8c0ff0a54d772b65229073373de275c2f7a16c71cbbf584ca1185d0ce 6.29MB / 10.20MB 1.6s
+#4 sha256:916e8b567dc502c85c84849d3d41273c3188ad6f7b66de7819de462b2a771772 1.05MB / 2.21MB 1.6s
+#4 sha256:c6625ad8c0ff0a54d772b65229073373de275c2f7a16c71cbbf584ca1185d0ce 7.34MB / 10.20MB 1.8s
+#4 sha256:916e8b567dc502c85c84849d3d41273c3188ad6f7b66de7819de462b2a771772 2.10MB / 2.21MB 1.8s
+#4 sha256:c6625ad8c0ff0a54d772b65229073373de275c2f7a16c71cbbf584ca1185d0ce 9.44MB / 10.20MB 2.0s
+#4 sha256:916e8b567dc502c85c84849d3d41273c3188ad6f7b66de7819de462b2a771772 2.21MB / 2.21MB 1.8s done
+#4 sha256:c6625ad8c0ff0a54d772b65229073373de275c2f7a16c71cbbf584ca1185d0ce 10.20MB / 10.20MB 2.1s
+#4 sha256:c6625ad8c0ff0a54d772b65229073373de275c2f7a16c71cbbf584ca1185d0ce 10.20MB / 10.20MB 2.1s done
+#4 extracting sha256:3626a090061d56f9d6eaa946c29f4a7600401e2bca3f7b517369d0da709bf6d3 1.2s done
+#4 extracting sha256:c6625ad8c0ff0a54d772b65229073373de275c2f7a16c71cbbf584ca1185d0ce
+#4 extracting sha256:c6625ad8c0ff0a54d772b65229073373de275c2f7a16c71cbbf584ca1185d0ce 1.1s done
+#4 extracting sha256:5b904a152bb436e642d2db20578ff1b60d5f47481c2bc87ca9702c57cca61ba5
+#4 extracting sha256:5b904a152bb436e642d2db20578ff1b60d5f47481c2bc87ca9702c57cca61ba5 done
+#4 extracting sha256:916e8b567dc502c85c84849d3d41273c3188ad6f7b66de7819de462b2a771772
+#4 extracting sha256:916e8b567dc502c85c84849d3d41273c3188ad6f7b66de7819de462b2a771772 0.5s done
+#4 DONE 4.8s
+
+#6 [2/4] ADD . /code
+#6 sha256:4c3ef519eb7c552bf96fb674c374d6139d7de536a4fc2c73c05732433629e570
+#6 DONE 0.3s
+
+#7 [3/4] WORKDIR /code
+#7 sha256:cef71d024e3a8d2464a4d108a38931ae9a18fb809e9dd573a933a71b2d4e8329
+#7 DONE 0.1s
+
+#8 [4/4] RUN pip install -r requirements.txt
+#8 sha256:b2927248573255ca09f23af87cfc5ec37a84e069c7a8e701108139d3ab91939d
+#8 3.825 Collecting flask
+#8 3.997   Downloading Flask-2.0.1-py3-none-any.whl (94 kB)
+#8 4.204 Collecting redis
+#8 4.245   Downloading redis-3.5.3-py2.py3-none-any.whl (72 kB)
+#8 4.358 Collecting itsdangerous>=2.0
+#8 4.379   Downloading itsdangerous-2.0.1-py3-none-any.whl (18 kB)
+#8 4.539 Collecting Werkzeug>=2.0
+#8 4.581   Downloading Werkzeug-2.0.1-py3-none-any.whl (288 kB)
+#8 4.789 Collecting click>=7.1.2
+#8 4.821   Downloading click-8.0.1-py3-none-any.whl (97 kB)
+#8 4.949 Collecting Jinja2>=3.0
+#8 4.994   Downloading Jinja2-3.0.1-py3-none-any.whl (133 kB)
+#8 5.327 Collecting importlib-metadata
+#8 5.350   Downloading importlib_metadata-4.6.4-py3-none-any.whl (17 kB)
+#8 5.613 Collecting MarkupSafe>=2.0
+#8 5.631   Downloading MarkupSafe-2.0.1.tar.gz (18 kB)
+#8 6.606 Collecting dataclasses
+#8 6.628   Downloading dataclasses-0.8-py3-none-any.whl (19 kB)
+#8 6.746 Collecting typing-extensions>=3.6.4
+#8 6.771   Downloading typing_extensions-3.10.0.0-py3-none-any.whl (26 kB)
+#8 6.905 Collecting zipp>=0.5
+#8 6.925   Downloading zipp-3.5.0-py3-none-any.whl (5.7 kB)
+#8 7.006 Building wheels for collected packages: MarkupSafe
+#8 7.011   Building wheel for MarkupSafe (setup.py): started
+#8 7.891   Building wheel for MarkupSafe (setup.py): finished with status 'done'
+#8 7.892   Created wheel for MarkupSafe: filename=MarkupSafe-2.0.1-py3-none-any.whl size=9761 sha256=6c27706bf410971854a280ebbcd92c18eebe45bca8bd3ca5bbc92c26c9d98a0a
+#8 7.892   Stored in directory: /root/.cache/pip/wheels/05/46/9b/189d9acb1f643857fb8ad990ca04c02509c35d3ad6fac81794
+#8 7.897 Successfully built MarkupSafe
+#8 8.148 Installing collected packages: zipp, typing-extensions, MarkupSafe, importlib-metadata, dataclasses, Werkzeug, Jinja2, itsdangerous, click, redis, flask
+#8 9.164 Successfully installed Jinja2-3.0.1 MarkupSafe-2.0.1 Werkzeug-2.0.1 click-8.0.1 dataclasses-0.8 flask-2.0.1 importlib-metadata-4.6.4 itsdangerous-2.0.1 redis-3.5.3 typing-extensions-3.10.0.0 zipp-3.5.0
+#8 9.165 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#8 DONE 9.7s
+
+#9 exporting to image
+#9 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00
+#9 exporting layers
+#9 exporting layers 0.4s done
+#9 writing image sha256:8fd8eb2318dd8dbbdc42432e4de0e36237744149590b282009ebb0ee3c80850f
+#9 writing image sha256:8fd8eb2318dd8dbbdc42432e4de0e36237744149590b282009ebb0ee3c80850f 0.0s done
+#9 naming to docker.io/library/counter-app_web-fe done
+#9 DONE 0.4s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+Image for service web-fe was built because it did not already exist. To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
+Pulling redis (redis:alpine)...
+alpine: Pulling from library/redis
+Digest: sha256:b658aeb0824fa240bd04b5017de2379d9707a433cb7040332328996d63c265f6
+Status: Downloaded newer image for redis:alpine
+Creating counter-app_redis_1 ...
+Creating counter-app_web-fe_1 ...
+Creating counter-app_web-fe_1 ... done
+Creating counter-app_redis_1  ... done
+Attaching to counter-app_web-fe_1, counter-app_redis_1
+redis_1   | 1:C 25 Aug 2021 06:56:57.350 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+redis_1   | 1:C 25 Aug 2021 06:56:57.350 # Redis version=6.2.5, bits=64, commit=00000000, modified=0, pid=1, just started
+redis_1   | 1:C 25 Aug 2021 06:56:57.350 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+redis_1   | 1:M 25 Aug 2021 06:56:57.351 * monotonic clock: POSIX clock_gettime
+redis_1   | 1:M 25 Aug 2021 06:56:57.352 * Running mode=standalone, port=6379.
+redis_1   | 1:M 25 Aug 2021 06:56:57.353 # Server initialized
+redis_1   | 1:M 25 Aug 2021 06:56:57.353 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+redis_1   | 1:M 25 Aug 2021 06:56:57.353 * Ready to accept connections
+web-fe_1  |  * Serving Flask app 'app' (lazy loading)
+web-fe_1  |  * Environment: production
+web-fe_1  |    WARNING: This is a development server. Do not use it in a production deployment.
+web-fe_1  |    Use a production WSGI server instead.
+web-fe_1  |  * Debug mode: on
+web-fe_1  |  * Running on all addresses.
+web-fe_1  |    WARNING: This is a development server. Do not use it in a production deployment.
+web-fe_1  |  * Running on http://172.18.0.3:5000/ (Press CTRL+C to quit)
+web-fe_1  |  * Restarting with stat
+web-fe_1  |  * Debugger is active!
+web-fe_1  |  * Debugger PIN: 989-662-444
+web-fe_1  | 172.18.0.1 - - [25/Aug/2021 07:03:07] "GET / HTTP/1.1" 200 -
+web-fe_1  | 172.18.0.1 - - [25/Aug/2021 07:03:07] "GET /favicon.ico HTTP/1.1" 404 -
+web-fe_1  | 172.18.0.1 - - [25/Aug/2021 07:03:28] "GET / HTTP/1.1" 200 -
+web-fe_1  | 172.18.0.1 - - [25/Aug/2021 07:03:28] "GET / HTTP/1.1" 200 -
+web-fe_1  | 172.18.0.1 - - [25/Aug/2021 07:03:29] "GET / HTTP/1.1" 200 -
+web-fe_1  | 172.18.0.1 - - [25/Aug/2021 07:03:30] "GET / HTTP/1.1" 200 -
+web-fe_1  | 172.18.0.1 - - [25/Aug/2021 07:03:30] "GET / HTTP/1.1" 200 -
+web-fe_1  | 172.18.0.1 - - [25/Aug/2021 07:03:30] "GET / HTTP/1.1" 200 -
+web-fe_1  | 172.18.0.1 - - [25/Aug/2021 07:03:31] "GET / HTTP/1.1" 200 -
+web-fe_1  | 172.18.0.1 - - [25/Aug/2021 07:03:32] "GET / HTTP/1.1" 200 -
+web-fe_1  | 172.18.0.1 - - [25/Aug/2021 07:03:34] "GET / HTTP/1.1" 200 -
+web-fe_1  | 172.18.0.1 - - [25/Aug/2021 07:03:34] "GET / HTTP/1.1" 200 -
+redis_1   | 1:signal-handler (1629875172) Received SIGTERM scheduling shutdown...
+redis_1   | 1:M 25 Aug 2021 07:06:12.863 # User requested shutdown...
+redis_1   | 1:M 25 Aug 2021 07:06:12.863 * Saving the final RDB snapshot before exiting.
+redis_1   | 1:M 25 Aug 2021 07:06:12.878 * DB saved on disk
+redis_1   | 1:M 25 Aug 2021 07:06:12.879 # Redis is now ready to exit, bye bye...
+counter-app_redis_1 exited with code 0
+counter-app_web-fe_1 exited with code 0
+^C
+[1]+  Done                    docker-compose up
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker-compose up -d
+Creating network "counter-app_counter-net" with the default driver
+Creating counter-app_web-fe_1 ...
+Creating counter-app_redis_1  ...
+Creating counter-app_redis_1  ... done
+Creating counter-app_web-fe_1 ... done
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker-compose top
+counter-app_redis_1
+UID   PID    PPID   C   STIME   TTY     TIME             CMD
+--------------------------------------------------------------------
+999   6727   6705   0   07:08   ?     00:00:00   redis-server *:6379
+
+counter-app_web-fe_1
+UID    PID    PPID   C   STIME   TTY     TIME                    CMD
+------------------------------------------------------------------------------------
+root   6804   6774   1   07:08   ?     00:00:00   python app.py
+root   6889   6804   1   07:08   ?     00:00:01   /usr/local/bin/python /code/app.py
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker-compose ps
+        Name                      Command               State                    Ports             
+--------------------------------------------------------------------------------------------------------
+counter-app_redis_1    docker-entrypoint.sh redis ...   Up      6379/tcp                           
+counter-app_web-fe_1   python app.py                    Up      0.0.0.0:5000->5000/tcp,:::5000->5000/tcp
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker-compose stop
+Stopping counter-app_web-fe_1 ...
+Stopping counter-app_redis_1  ...
+Stopping counter-app_redis_1  ... done
+Stopping counter-app_web-fe_1 ... done
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker-compose ps
+        Name                      Command               State    Ports
+----------------------------------------------------------------------
+counter-app_redis_1    docker-entrypoint.sh redis ...   Exit 0
+counter-app_web-fe_1   python app.py                    Exit 0
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker volume
+
+Usage:  docker volume COMMAND
+
+Manage volumes
+
+Commands:
+  create      Create a volume
+  inspect     Display detailed information on one or more volumes
+  ls          List volumes
+  prune       Remove all unused local volumes
+  rm          Remove one or more volumes
+
+Run 'docker volume COMMAND --help' for more information on a command.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker volume ls
+DRIVER    VOLUME NAME
+local     1578ab6b179630d9463ea82d4c8b32f69875eb16d25bc64c96cc913b8b501db6
+local     c4abc076019a04152459890c55a0dc5f86aa61cfaff56e310247a5e7b6705f51
+local     counter-app_counter-vol
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker volume counter-app_counter-vol | grep Mount
+
+Usage:  docker volume COMMAND
+
+Manage volumes
+
+Commands:
+  create      Create a volume
+  inspect     Display detailed information on one or more volumes
+  ls          List volumes
+  prune       Remove all unused local volumes
+  rm          Remove one or more volumes
+
+Run 'docker volume COMMAND --help' for more information on a command.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker volume inspect counter-app_counter-vol | grep Mount
+        "Mountpoint": "/var/lib/docker/volumes/counter-app_counter-vol/_data",
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ ^C
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$

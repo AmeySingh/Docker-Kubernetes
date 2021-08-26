@@ -1,0 +1,78 @@
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker image ls
+REPOSITORY                     TAG       IMAGE ID       CREATED              SIZE
+counter-app_web-fe             latest    8fd8eb2318dd   About a minute ago   53.7MB
+multi                          stage     442feedeef24   41 minutes ago       211MB
+web                            latest    03ef5fb15270   2 hours ago          79.6MB
+test                           arm-v7    ce73ac92d4d6   25 hours ago         71.2MB
+test                           latest    0945eb7d7a5b   2 days ago           79.6MB
+<none>                         <none>    52b72f8d1035   2 days ago           79.6MB
+mcr.microsoft.com/powershell   latest    6eee80913d43   5 days ago           327MB
+golang                         latest    8735189b1527   7 days ago           941MB
+python                         latest    1e76b28bfd4e   7 days ago           911MB
+redis                          latest    ddcca4b8a6f0   7 days ago           105MB
+redis                          alpine    814803e951a7   2 weeks ago          32.3MB
+alpine                         latest    021b3423115f   2 weeks ago          5.6MB
+mongo                          latest    269b735e72cb   2 weeks ago          682MB
+ubuntu                         latest    1318b700e415   4 weeks ago          72.8MB
+mongo                          4.2.6     3f3daf863757   16 months ago        388MB
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker container ls
+CONTAINER ID   IMAGE                COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+8ba055513ff0   counter-app_web-fe   "python app.py"          3 minutes ago   Up 3 minutes   0.0.0.0:5000->5000/tcp, :::5000->5000/tcp   counter-app_web-fe_1
+0db7a2dd7a0e   redis:alpine         "docker-entrypoint.s…"   3 minutes ago   Up 3 minutes   6379/tcp                                    counter-app_redis_1
+8f68ca36d4f9   web:latest           "node ./app.js"          2 hours ago     Up 2 hours     0.0.0.0:80->8080/tcp, :::80->8080/tcp       c5
+cc68ecf83f84   test:latest          "node ./app.js"          47 hours ago    Up 47 hours    0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker network ls
+NETWORK ID     NAME                      DRIVER    SCOPE
+4800702a8525   bridge                    bridge    local
+14d06168daea   counter-app_counter-net   bridge    local
+2d1d56b3f53c   host                      host      local
+862ae6644814   none                      null      local
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker volume ls
+DRIVER    VOLUME NAME
+local     1578ab6b179630d9463ea82d4c8b32f69875eb16d25bc64c96cc913b8b501db6
+local     counter-app_counter-vol
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker container ls
+CONTAINER ID   IMAGE                COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+8ba055513ff0   counter-app_web-fe   "python app.py"          8 minutes ago   Up 8 minutes   0.0.0.0:5000->5000/tcp, :::5000->5000/tcp   counter-app_web-fe_1
+0db7a2dd7a0e   redis:alpine         "docker-entrypoint.s…"   8 minutes ago   Up 8 minutes   6379/tcp                                    counter-app_redis_1
+8f68ca36d4f9   web:latest           "node ./app.js"          2 hours ago     Up 2 hours     0.0.0.0:80->8080/tcp, :::80->8080/tcp       c5
+cc68ecf83f84   test:latest          "node ./app.js"          47 hours ago    Up 47 hours    0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker-compose down
+Stopping counter-app_web-fe_1 ...
+Stopping counter-app_redis_1  ...
+Stopping counter-app_redis_1  ... done
+Stopping counter-app_web-fe_1 ... done
+Removing counter-app_web-fe_1 ...
+Removing counter-app_redis_1  ...
+Removing counter-app_redis_1  ... done
+Removing counter-app_web-fe_1 ... done
+Removing network counter-app_counter-net
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED        STATUS        PORTS                                       NAMES
+8f68ca36d4f9   web:latest    "node ./app.js"   2 hours ago    Up 2 hours    0.0.0.0:80->8080/tcp, :::80->8080/tcp       c5
+cc68ecf83f84   test:latest   "node ./app.js"   47 hours ago   Up 47 hours   0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$ docker container ls
+CONTAINER ID   IMAGE                COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+a75ee4bfdadf   counter-app_web-fe   "python app.py"          28 seconds ago   Up 25 seconds   0.0.0.0:5000->5000/tcp, :::5000->5000/tcp   counter-app_web-fe_1
+b62bc77c265e   redis:alpine         "docker-entrypoint.s…"   28 seconds ago   Up 25 seconds   6379/tcp                                    counter-app_redis_1
+8f68ca36d4f9   web:latest           "node ./app.js"          2 hours ago      Up 2 hours      0.0.0.0:80->8080/tcp, :::80->8080/tcp       c5
+cc68ecf83f84   test:latest          "node ./app.js"          47 hours ago     Up 47 hours     0.0.0.0:8085->8085/tcp, :::8085->8085/tcp   web17
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/counter-app (master)
+$

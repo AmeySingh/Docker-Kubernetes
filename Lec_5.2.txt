@@ -1,0 +1,294 @@
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker network ls
+NETWORK ID     NAME                      DRIVER    SCOPE
+4800702a8525   bridge                    bridge    local
+7a0563533cc8   counter-app_counter-net   bridge    local
+de7361eda85b   docker_gwbridge           bridge    local
+2d1d56b3f53c   host                      host      local
+gnpj4n6bx1yf   ingress                   overlay   swarm
+862ae6644814   none                      null      local
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker network inspect bridge
+[
+    {
+        "Name": "bridge",
+        "Id": "4800702a85254a16165bbea2ec90615547ca4b1718f23a8ea4dc57e37feed
+        "Created": "2021-08-23T05:59:28.3370807Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.17.0.0/16"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "8f68ca36d4f909caaab012814f7704179236e8ff120bb1b9bf2c85e764275ba
+                "Name": "c5",
+                "EndpointID": "4db41fe034702eb5e5acb03a5bf2923ac6312cf1f1bdf",
+                "MacAddress": "02:42:ac:11:00:03",
+                "IPv4Address": "172.17.0.3/16",
+                "IPv6Address": ""
+            },
+            "cc68ecf83f842c19d7f6bf8ebf65b8507bd59854988a28da0223dd38271bd64
+                "Name": "web17",
+                "EndpointID": "f75cf2a11fbf5226e743888816d6fdd266412050a7a73",
+                "MacAddress": "02:42:ac:11:00:02",
+                "IPv4Address": "172.17.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker network create -d bridge localnet
+b2d7866c6f4aa748483a9e68c187412abe0abb8752eb6f5885516b210486d949
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker network ls
+NETWORK ID     NAME                      DRIVER    SCOPE
+4800702a8525   bridge                    bridge    local
+7a0563533cc8   counter-app_counter-net   bridge    local
+de7361eda85b   docker_gwbridge           bridge    local
+2d1d56b3f53c   host                      host      local
+gnpj4n6bx1yf   ingress                   overlay   swarm
+b2d7866c6f4a   localnet                  bridge    local
+862ae6644814   none                      null      local
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker network inspect localnet
+[
+    {
+        "Name": "localnet",
+        "Id": "b2d7866c6f4aa748483a9e68c187412abe0abb8752eb6f5885516b210486d
+        "Created": "2021-08-26T06:32:41.0532554Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.21.0.0/16",
+                    "Gateway": "172.21.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED        STATUS                                 NAMES
+8f68ca36d4f9   web:latest    "node ./app.js"   26 hours ago   Up 26 hours   p, :::80->8080/tcp       c5
+cc68ecf83f84   test:latest   "node ./app.js"   2 days ago     Up 2 days     tcp, :::8085->8085/tcp   web17
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ cd psweb/
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (ma
+$ docker container run -d --name c7 --network localnet web:latest
+5a4ca7259c100da3e235b16cc6bb9d7350d6e3ebacbe8f4200f0fe9f0aa053ed
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (ma
+$ docker container ls
+CONTAINER ID   IMAGE         COMMAND           CREATED         STATUS                                  NAMES
+5a4ca7259c10   web:latest    "node ./app.js"   8 seconds ago   Up 5 seconds                            c7
+8f68ca36d4f9   web:latest    "node ./app.js"   26 hours ago    Up 26 hours  tcp, :::80->8080/tcp       c5
+cc68ecf83f84   test:latest   "node ./app.js"   2 days ago      Up 2 days    5/tcp, :::8085->8085/tcp   web17
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (ma
+$ ping c7
+Ping request could not find host c7. Please check the name and try again.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (ma
+$ docker port web
+Error: No such container: web
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (ma
+$ docker port c7
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (ma
+$ docker port c5
+8080/tcp -> 0.0.0.0:80
+8080/tcp -> :::80
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (ma
+$ brctl show
+bash: brctl: command not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (ma
+$ docker network inspect localnet
+[
+    {
+        "Name": "localnet",
+        "Id": "b2d7866c6f4aa748483a9e68c187412abe0abb8752eb6f5885516b210486d
+        "Created": "2021-08-26T06:32:41.0532554Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.21.0.0/16",
+                    "Gateway": "172.21.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "5a4ca7259c100da3e235b16cc6bb9d7350d6e3ebacbe8f4200f0fe9f0aa053e
+                "Name": "c7",
+                "EndpointID": "1d9e0a69b9cdde7e5a27446d808cb3d9f96ae90950c52",
+                "MacAddress": "02:42:ac:15:00:02",
+                "IPv4Address": "172.21.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (ma
+$ docker network inspect localnet --format `{{json .containers}}`
+bash: {{json: command not found
+flag needs an argument: --format
+See 'docker network inspect --help'.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (master)
+$ docker network inspect localnet --format '{{json .containers}}'
+
+Template parsing error: template: :1:7: executing "" at <.containers>: map has no entry for key "containers"
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (master)
+$ docker network inspect localnet --format '{{json containers}}'
+Template parsing error: template: :1: function "containers" not defined
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (master)
+$ docker network inspect localnet --format '{{json.containers}}'
+
+Template parsing error: template: :1:2: executing "" at <json>: wrong number of args for json: want 1 got 0
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (master)
+$ docker network inspect localnet --format '{{json .Containers}}'
+{"5a4ca7259c100da3e235b16cc6bb9d7350d6e3ebacbe8f4200f0fe9f0aa053ed":{"Name":"c7","EndpointID":"1d9e0a69b9cdde7e5a27446d808cb3d9f96ae90950c5246ef3cd58c7b5649952","MacAddress":"02:42:ac:15:00:02","IPv4Address":"172.21.0.2/16","IPv6Address":""}}
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (master)
+$ ipconfig
+
+Windows IP Configuration
+
+
+Ethernet adapter Ethernet:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . :
+
+Ethernet adapter vEthernet (WSL):
+
+   Connection-specific DNS Suffix  . :
+   Link-local IPv6 Address . . . . . : fe80::681e:e25f:8c59:306e%51
+   IPv4 Address. . . . . . . . . . . : 172.25.160.1
+   Subnet Mask . . . . . . . . . . . : 255.255.240.0
+   Default Gateway . . . . . . . . . :
+
+Ethernet adapter VirtualBox Host-Only Network:
+
+   Connection-specific DNS Suffix  . :
+   Link-local IPv6 Address . . . . . : fe80::c8f3:1e6:f31d:5a6d%9
+   IPv4 Address. . . . . . . . . . . : 192.168.56.1
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . :
+
+Wireless LAN adapter Local Area Connection* 1:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . :
+
+Wireless LAN adapter Local Area Connection* 2:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . :
+
+Wireless LAN adapter Wi-Fi:
+
+   Connection-specific DNS Suffix  . :
+   Link-local IPv6 Address . . . . . : fe80::9843:24a5:89eb:504c%10
+   IPv4 Address. . . . . . . . . . . : 192.168.1.10
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . : fe80::1%10
+                                       192.168.1.1
+
+Ethernet adapter Bluetooth Network Connection:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . :
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (master)
+$ docker logs
+"docker logs" requires exactly 1 argument.
+See 'docker logs --help'.
+
+Usage:  docker logs [OPTIONS] CONTAINER
+
+Fetch the logs of a container
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (master)
+$ docker logs c7
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (master)
+$ docker logs c5
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (master)
+$ docker service logs c7
+no such task or service: c7
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (master)
+$ docker service logs c5
+no such task or service: c5
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/psweb (master)
+$
