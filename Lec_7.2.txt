@@ -1,0 +1,181 @@
+Kubernetes setup
+1. AWS
+eksctl
+2. Directly on Docker for desktop
+3. Minikube setup
+3.1) download from official site
+https://minikube.sigs.k8s.io/docs/start/
+3.2) install and start
+minikube start
+
+Note: take few miniutes depending on network and system speed.
+
+minikube stop
+minikube delete
+
+Kubernetes CLient- kubectl
+- command line tool for interacting with Kubernetes API
+- also used for managing object, pods, services replicas etc.
+
+important commands
+1. check version
+kubectl version
+
+Microsoft Windows [Version 10.0.19042.1165]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\ameyc>minikube start
+* minikube v1.22.0 on Microsoft Windows 10 Pro 10.0.19042 Build 19042
+* Using the docker driver based on existing profile
+* Starting control plane node minikube in cluster minikube
+* Pulling base image ...
+* Updating the running docker "minikube" container ...
+* Preparing Kubernetes v1.21.2 on Docker 20.10.7 ...
+* Verifying Kubernetes components...
+! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 2.7934359s
+* Restarting the docker service may improve performance.
+  - Using image gcr.io/k8s-minikube/storage-provisioner:v5
+* Enabled addons: default-storageclass, storage-provisioner
+* Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+
+C:\Users\ameyc>kubectl get componentsstatuses
+error: the server doesn't have a resource type "componentsstatuses"
+
+C:\Users\ameyc>kubectl get nodes
+NAME       STATUS   ROLES    AGE     VERSION
+minikube   Ready    <none>   8m45s   v1.21.2
+
+C:\Users\ameyc>kubectl describe nodes minikube
+Name:               minikube
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=minikube
+                    kubernetes.io/os=linux
+Annotations:        node.alpha.kubernetes.io/ttl: 0
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Mon, 30 Aug 2021 12:12:47 +0530
+Taints:             <none>
+Unschedulable:      false
+Lease:
+  HolderIdentity:  minikube
+  AcquireTime:     <unset>
+  RenewTime:       Mon, 30 Aug 2021 12:22:00 +0530
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  MemoryPressure   False   Mon, 30 Aug 2021 12:19:10 +0530   Mon, 30 Aug 2021 12:19:10 +0530   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Mon, 30 Aug 2021 12:19:10 +0530   Mon, 30 Aug 2021 12:19:10 +0530   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  PIDPressure      False   Mon, 30 Aug 2021 12:19:10 +0530   Mon, 30 Aug 2021 12:19:10 +0530   KubeletHasSufficientPID      kubelet has sufficient PID available
+  Ready            True    Mon, 30 Aug 2021 12:19:10 +0530   Mon, 30 Aug 2021 12:19:10 +0530   KubeletReady                 kubelet is posting ready status
+Addresses:
+  InternalIP:  192.168.49.2
+  Hostname:    minikube
+Capacity:
+  cpu:                4
+  ephemeral-storage:  263174212Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             6401336Ki
+  pods:               110
+Allocatable:
+  cpu:                4
+  ephemeral-storage:  263174212Ki
+  hugepages-1Gi:      0
+  hugepages-2Mi:      0
+  memory:             6401336Ki
+  pods:               110
+System Info:
+  Machine ID:                 760e67beb8554645829f2357c8eb4ae7
+  System UUID:                760e67beb8554645829f2357c8eb4ae7
+  Boot ID:                    0cae27f0-b334-4ff2-8782-acd87af72f20
+  Kernel Version:             5.10.16.3-microsoft-standard-WSL2
+  OS Image:                   Ubuntu 20.04.2 LTS
+  Operating System:           linux
+  Architecture:               amd64
+  Container Runtime Version:  docker://20.10.7
+  Kubelet Version:            v1.21.2
+  Kube-Proxy Version:         v1.21.2
+PodCIDR:                      10.244.0.0/24
+PodCIDRs:                     10.244.0.0/24
+Non-terminated Pods:          (7 in total)
+  Namespace                   Name                                CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age
+  ---------                   ----                                ------------  ----------  ---------------  -------------  ---
+  kube-system                 coredns-558bd4d5db-gsdgk            100m (2%)     0 (0%)      70Mi (1%)        170Mi (2%)     4m21s
+  kube-system                 etcd-minikube                       100m (2%)     0 (0%)      100Mi (1%)       0 (0%)         7m36s
+  kube-system                 kube-apiserver-minikube             250m (6%)     0 (0%)      0 (0%)           0 (0%)         9m5s
+  kube-system                 kube-controller-manager-minikube    200m (5%)     0 (0%)      0 (0%)           0 (0%)         8m54s
+  kube-system                 kube-proxy-rr9kg                    0 (0%)        0 (0%)      0 (0%)           0 (0%)         4m21s
+  kube-system                 kube-scheduler-minikube             100m (2%)     0 (0%)      0 (0%)           0 (0%)         5m27s
+  kube-system                 storage-provisioner                 0 (0%)        0 (0%)      0 (0%)           0 (0%)         4m21s
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests    Limits
+  --------           --------    ------
+  cpu                750m (18%)  0 (0%)
+  memory             170Mi (2%)  170Mi (2%)
+  ephemeral-storage  0 (0%)      0 (0%)
+  hugepages-1Gi      0 (0%)      0 (0%)
+  hugepages-2Mi      0 (0%)      0 (0%)
+Events:
+  Type    Reason                   Age                    From        Message
+  ----    ------                   ----                   ----        -------
+  Normal  Starting                 10m                    kubelet     Starting kubelet.
+  Normal  NodeHasSufficientMemory  10m (x8 over 10m)      kubelet     Node minikube status is now: NodeHasSufficientMemory
+  Normal  NodeHasNoDiskPressure    10m (x8 over 10m)      kubelet     Node minikube status is now: NodeHasNoDiskPressure
+  Normal  NodeHasSufficientPID     10m (x7 over 10m)      kubelet     Node minikube status is now: NodeHasSufficientPID
+  Normal  NodeAllocatableEnforced  10m                    kubelet     Updated Node Allocatable limit across pods
+  Normal  Starting                 7m15s                  kubelet     Starting kubelet.
+  Normal  NodeAllocatableEnforced  7m15s                  kubelet     Updated Node Allocatable limit across pods
+  Normal  NodeHasSufficientMemory  7m14s (x8 over 7m15s)  kubelet     Node minikube status is now: NodeHasSufficientMemory
+  Normal  NodeHasNoDiskPressure    7m14s (x8 over 7m15s)  kubelet     Node minikube status is now: NodeHasNoDiskPressure
+  Normal  NodeHasSufficientPID     7m14s (x7 over 7m15s)  kubelet     Node minikube status is now: NodeHasSufficientPID
+  Normal  Starting                 4m15s                  kube-proxy  Starting kube-proxy.
+
+C:\Users\ameyc>kubectl get daemonSets
+No resources found in default namespace.
+
+C:\Users\ameyc>kubectl get deployments
+No resources found in default namespace.
+
+C:\Users\ameyc>kubectl get deployments --namespace=kube-system kubernetes-dashboard
+Error from server (NotFound): deployments.apps "kubernetes-dashboard" not found
+
+C:\Users\ameyc>kubectl get deployments --namespace=kube-system kubernetes-dashboard
+Error from server (NotFound): deployments.apps "kubernetes-dashboard" not found
+
+C:\Users\ameyc>kubectl get services --namespace=kube-system kubernetes-dashboard
+Error from server (NotFound): services "kubernetes-dashboard" not found
+
+C:\Users\ameyc>
+
+Important terminologies
+
+1) Namespace - similar to directory in our systems just for organisation purpose
+if we don't give --namespace it takes default namespace
+
+for perticular namespace- 
+kubectl get pods --namespace=myspace
+kubectl get pods --all-namespaces
+
+
+2) Contexts
+for more permanent namespaces and orginisation purpose
+
+kubectl config set-context my-context --namespace=myspace
+kubectl config use-context my-context
+
+Everything in Kubernetes comes as RESTFul 
+
+execute for my-pod
+kubectl get pods my-pod -o jsonpath --template={.status.podIp}
+
+
+
+
+
+
+
+
+

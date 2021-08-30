@@ -1,0 +1,79 @@
+Kubernetes
+
+Orchastestor - manager for deploying containerized application.
+
+google gave it
+used for scalable,reliable systems in containers,distributed
+
+reasons why we use Kubernetes
+1. Velocity- quicker dev shipping life cycle
+2. Scalability- adding/removing node plugin and plug out
+3. Abstraction of infrastructure
+4. Efficient- Means better utilisation of CPU/RAM etc because we can configure only the ones we are using.
+
+
+Creating and deploying sample node application using docker and kubernetes
+1. create sample app using package.json
+{
+  "name": "test-app",
+  "description": "A sample application for dockerfile demo for kubernetes.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "author": "",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
+
+2. create server.js file
+var express = require('express');
+
+var app = express();
+app.get('/',function(req,res){
+    res.send("hello world!!!!!!!");
+})
+
+app.listen(3000,function(){
+    console.log("Listening to port 3000");
+    console.log("http://localhost:3000");
+})
+
+3. if you have npm execute below other download node, it will generate required node_modules directory
+npm install --save
+
+4. Runn the application
+node server.js
+
+5. create two files
+--------> .dockerignore
+--------> Dockerfile
+
+6. .dockerignore
+node_modules
+
+7. Dockerfile
+FROM node:14
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+CMD ["npm" , "start"]
+
+8. build image
+docker build -t test-app .
+
+9. run it
+docker image ls
+docker run --rm -p 3000:3000 test-app
+
+10. open browser for it should pring hello world
+http://localhost:3000/
+
+

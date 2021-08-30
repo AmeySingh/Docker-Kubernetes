@@ -1,0 +1,6 @@
+Docker Stacks - helps us to manage state, rolling update, sclaing operations,health checks
+etc
+
+1. stack file
+2. deploying the app using stack
+3. managing app

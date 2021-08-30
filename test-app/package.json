@@ -1,0 +1,13 @@
+{
+  "name": "test-app",
+  "description": "A sample application for dockerfile demo for kubernetes.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "author": "",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
