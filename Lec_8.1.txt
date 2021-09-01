@@ -1,0 +1,80 @@
+Pods
+
+multiple applications into single unit so that we can schedule on single machine
+
+example: below two contaoner and filesystem putting as single unit
+Web serving container + Git Sync container --> shared filesystem
+
+kuberentes pods collection of containers and volumes running in single execution envrionment.
+
+IP address is shared
+same hostname
+
+what should we put into pod?
+wordpress and MySql
+
+network communication
+scaling -- there is never requirement where we need to scale both of them togather
+wordpress is stateless
+
+Pod manifest- text file 
+
+POD creation
+there are many options
+1. simple kubectl run
+kubectl run nginx --image=nginx
+2. with port option
+kubectl run hazelcast --image=hazelcast/hazelcast --port=5701
+3. # Start a hazelcast pod and set environment variables "DNS_DOMAIN=cluster" and "POD_NAMESPACE=default" in the container.
+  kubectl run hazelcast --image=hazelcast/hazelcast --env="DNS_DOMAIN=cluster" --env="POD_NAMESPACE=default"
+
+4. # Start a hazelcast pod and set labels "app=hazelcast" and "env=prod" in the container.
+  kubectl run hazelcast --image=hazelcast/hazelcast --labels="app=hazelcast,env=prod"
+
+5. kubectl get pods
+6. deleting pod
+kubectl delete pods/nginx
+
+
+Create pod using menifest
+kuard-pod.yaml
+
+kubectl apply -f kuard-pod.yaml
+
+
+example:
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-kuard1
+spec:
+  containers:
+    - name: ct-kuard
+      image: gcr.io/kuar-demo/kuard-amd64:blue
+      ports:
+        - name: web
+          containerPort: 8060
+          protocol: TCP
+
+Describe pod information
+kubectl describe pods kuard
+
+deleting using menifest
+$ kubectl delete pods/kuard
+pod "kuard" deleted
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl delete -f kuard-pod.yaml
+pod "test-kuard1" deleted
+
+checking kubectl logs
+kubectl logs <pod-name>
+
+copy to and from pod
+kubectl cp test.py test-kuard:/
+
+
+
+
+
+

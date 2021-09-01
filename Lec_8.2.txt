@@ -1,0 +1,1378 @@
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run kuard --generator=run-pod/v1 --image=gcr.io/kuar-demo-amd64:blue
+Error: unknown flag: --generator
+See 'kubectl run --help' for usage.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl
+kubectl controls the Kubernetes cluster manager.
+
+ Find more information at: https://kubernetes.io/docs/reference/kubectl/overview/
+
+Basic Commands (Beginner):
+  create        Create a resource from a file or from stdin.
+  expose        Take a replication controller, service, deployment or pod and expose it as a new Kubernetes Service
+  run           Run a particular image on the cluster
+  set           Set specific features on objects
+
+Basic Commands (Intermediate):
+  explain       Documentation of resources
+  get           Display one or many resources
+  edit          Edit a resource on the server
+  delete        Delete resources by filenames, stdin, resources and names, or by resources and label selector
+
+Deploy Commands:
+  rollout       Manage the rollout of a resource
+  scale         Set a new size for a Deployment, ReplicaSet or Replication Controller
+  autoscale     Auto-scale a Deployment, ReplicaSet, StatefulSet, or ReplicationController
+
+Cluster Management Commands:
+  certificate   Modify certificate resources.
+  cluster-info  Display cluster info
+  top           Display Resource (CPU/Memory) usage.
+  cordon        Mark node as unschedulable
+  uncordon      Mark node as schedulable
+  drain         Drain node in preparation for maintenance
+  taint         Update the taints on one or more nodes
+
+Troubleshooting and Debugging Commands:
+  describe      Show details of a specific resource or group of resources
+  logs          Print the logs for a container in a pod
+  attach        Attach to a running container
+  exec          Execute a command in a container
+  port-forward  Forward one or more local ports to a pod
+  proxy         Run a proxy to the Kubernetes API server
+  cp            Copy files and directories to and from containers.
+  auth          Inspect authorization
+  debug         Create debugging sessions for troubleshooting workloads and nodes
+
+Advanced Commands:
+  diff          Diff live version against would-be applied version
+  apply         Apply a configuration to a resource by filename or stdin
+  patch         Update field(s) of a resource
+  replace       Replace a resource by filename or stdin
+  wait          Experimental: Wait for a specific condition on one or many resources.
+  kustomize     Build a kustomization target from a directory or URL.
+
+Settings Commands:
+  label         Update the labels on a resource
+  annotate      Update the annotations on a resource
+  completion    Output shell completion code for the specified shell (bash or zsh)
+
+Other Commands:
+  api-resources Print the supported API resources on the server
+  api-versions  Print the supported API versions on the server, in the form of "group/version"
+  config        Modify kubeconfig files
+  plugin        Provides utilities for interacting with plugins.
+  version       Print the client and server version information
+
+Usage:
+  kubectl [flags] [options]
+
+Use "kubectl <command> --help" for more information about a given command.
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run kuard --generator=run-pod/v1 --image=gcr.io/kuar-demo-amd64:blue
+Error: unknown flag: --generator
+See 'kubectl run --help' for usage.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run --help
+Create and run a particular image in a pod.
+
+Examples:
+  # Start a nginx pod.
+  kubectl run nginx --image=nginx
+
+  # Start a hazelcast pod and let the container expose port 5701.
+  kubectl run hazelcast --image=hazelcast/hazelcast --port=5701
+
+  # Start a hazelcast pod and set environment variables "DNS_DOMAIN=cluster" and "POD_NAMESPACE=default" in the container.
+  kubectl run hazelcast --image=hazelcast/hazelcast --env="DNS_DOMAIN=cluster" --env="POD_NAMESPACE=default"
+
+  # Start a hazelcast pod and set labels "app=hazelcast" and "env=prod" in the container.
+  kubectl run hazelcast --image=hazelcast/hazelcast --labels="app=hazelcast,env=prod"
+
+  # Dry run. Print the corresponding API objects without creating them.
+  kubectl run nginx --image=nginx --dry-run=client
+
+  # Start a nginx pod, but overload the spec with a partial set of values parsed from JSON.
+  kubectl run nginx --image=nginx --overrides='{ "apiVersion": "v1", "spec": { ... } }'
+
+  # Start a busybox pod and keep it in the foreground, don't restart it if it exits.
+  kubectl run -i -t busybox --image=busybox --restart=Never
+
+  # Start the nginx pod using the default command, but use custom arguments (arg1 .. argN) for that command.
+  kubectl run nginx --image=nginx -- <arg1> <arg2> ... <argN>
+
+  # Start the nginx pod using a different command and custom arguments.
+  kubectl run nginx --image=nginx --command -- <cmd> <arg1> ... <argN>
+
+Options:
+      --allow-missing-template-keys=true: If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
+      --annotations=[]: Annotations to apply to the pod.
+      --attach=false: If true, wait for the Pod to start running, and then attach to the Pod as if 'kubectl attach ...' were called.  Default false, unless '-i/--stdin' is set, in which case the default is true. With '--restart=Never' the exit code of the container process is returned.
+      --cascade='background': Must be "background", "orphan", or "foreground". Selects the deletion cascading strategy for the dependents (e.g. Pods created by a ReplicationController). Defaults to background.
+      --command=false: If true and extra arguments are present, use them as the 'command' field in the container, rather than the 'args' field which is the default.
+      --dry-run='none': Must be "none", "server", or "client". If client strategy, only print the object that would be sent, without sending it. If server strategy, submit server-side request without persisting the resource.
+      --env=[]: Environment variables to set in the container.
+      --expose=false: If true, service is created for the container(s) which are run
+      --field-manager='kubectl-run': Name of the manager used to track field ownership.
+  -f, --filename=[]: to use to replace the resource.
+      --force=false: If true, immediately remove resources from API and bypass graceful deletion. Note that immediate deletion of some resources may result in inconsistency or data loss and requires confirmation.
+      --grace-period=-1: Period of time in seconds given to the resource to terminate gracefully. Ignored if negative. Set to 1 for immediate shutdown. Can only be set to 0 when --force is true (force deletion).
+      --image='': The image for the container to run.
+      --image-pull-policy='': The image pull policy for the container. If left empty, this value will not be specified by the client and defaulted by the server
+  -k, --kustomize='': Process a kustomization directory. This flag can't be used together with -f or -R.
+  -l, --labels='': Comma separated labels to apply to the pod(s). Will override previous values.
+      --leave-stdin-open=false: If the pod is started in interactive mode or with stdin, leave stdin open after the first attach completes. By default, stdin will be closed after the first attach completes.
+  -o, --output='': Output format. One of: json|yaml|name|go-template|go-template-file|template|templatefile|jsonpath|jsonpath-as-json|jsonpath-file.
+      --overrides='': An inline JSON override for the generated object. If this is non-empty, it is used to override the generated object. Requires that the object supply a valid apiVersion field.
+      --pod-running-timeout=1m0s: The length of time (like 5s, 2m, or 3h, higher than zero) to wait until at least one pod is running
+      --port='': The port that this container exposes.
+      --privileged=false: If true, run the container in privileged mode.
+  -q, --quiet=false: If true, suppress prompt messages.
+      --record=false: Record current kubectl command in the resource annotation. If set to false, do not record the command. If set to true, record the command. If not set, default to updating the existing annotation value only if one already exists.
+  -R, --recursive=false: Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests organized within the same directory.
+      --restart='Always': The restart policy for this Pod.  Legal values [Always, OnFailure, Never].
+      --rm=false: If true, delete resources created in this command for attached containers.
+      --save-config=false: If true, the configuration of current object will be saved in its annotation. Otherwise, the annotation will be unchanged. This flag is useful when you want to perform kubectl apply on this object in the future.
+      --show-managed-fields=false: If true, keep the managedFields when printing objects in JSON or YAML format.
+  -i, --stdin=false: Keep stdin open on the container(s) in the pod, even if nothing is attached.
+      --template='': Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
+      --timeout=0s: The length of time to wait before giving up on a delete, zero means determine a timeout from the size of the object
+  -t, --tty=false: Allocated a TTY for each container in the pod.
+      --wait=false: If true, wait for resources to be gone before returning. This waits for finalizers.
+
+Usage:
+  kubectl run NAME --image=image [--env="key=value"] [--port=port] [--dry-run=server|client] [--overrides=inline-json] [--command] -- [COMMAND] [args...] [options]
+
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run nginx --image=nginx
+error: You must be logged in to the server (the server has asked for the client to provide credentials)
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ minikube start
+* minikube v1.22.0 on Microsoft Windows 10 Pro 10.0.19042 Build 19042
+* Using the docker driver based on existing profile
+* Starting control plane node minikube in cluster minikube
+* Pulling base image ...
+* Restarting existing docker container for "minikube" ...
+* Preparing Kubernetes v1.21.2 on Docker 20.10.7 ...
+* Verifying Kubernetes components...
+  - Using image gcr.io/k8s-minikube/storage-provisioner:v5
+* Enabled addons: storage-provisioner, default-storageclass
+* Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run nginx --image=nginx
+pod/nginx created
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME    READY   STATUS              RESTARTS   AGE
+nginx   0/1     ContainerCreating   0          45s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$   kubectl run hazelcast --image=hazelcast/hazelcast --port=5701
+
+Unable to connect to the server: net/http: TLS handshake timeout
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$   kubectl run hazelcast --image=hazelcast/hazelcast --port=5701
+pod/hazelcast created
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME        READY   STATUS              RESTARTS   AGE
+hazelcast   0/1     Pending             0          20s
+nginx       0/1     ContainerCreating   0          2m45s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME        READY   STATUS             RESTARTS   AGE
+hazelcast   0/1     ImagePullBackOff   0          4m40s
+nginx       1/1     Running            0          7m5s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl delete pods/nginx
+pod "nginx" deleted
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+hazelcast   1/1     Running   0          5m33s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run kuard --image=gcr.io/kuar-demo-amd64:blue                     pod/kuard created
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME        READY   STATUS              RESTARTS   AGE
+hazelcast   1/1     Running             0          7m18s
+kuard       0/1     ContainerCreating   0          7s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME        READY   STATUS         RESTARTS   AGE
+hazelcast   1/1     Running        0          8m7s
+kuard       0/1     ErrImagePull   0          56s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run kuard --image=gcr.io/kuar-demo/kuard-amd64:blue
+Error from server (AlreadyExists): pods "kuard" already exists
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl delete pods/kuard
+pod "kuard" deleted
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run kuard --image=gcr.io/kuar-demo/kuard-amd64:blue
+pod/kuard created
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME        READY   STATUS              RESTARTS   AGE
+hazelcast   1/1     Running             0          10m
+kuard       0/1     ContainerCreating   0          20s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+hazelcast   1/1     Running   0          10m
+kuard       1/1     Running   0          53s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker run -d --name kuard --publish 8080:8080 gcr.io/kuar-demo/kuard-amd64:blue
+Unable to find image 'gcr.io/kuar-demo/kuard-amd64:blue' locally
+blue: Pulling from kuar-demo/kuard-amd64
+8e402f1a9c57: Pulling fs layer
+8df70f469ef0: Pulling fs layer
+8e402f1a9c57: Verifying Checksum
+8e402f1a9c57: Download complete
+8e402f1a9c57: Pull complete
+8df70f469ef0: Verifying Checksum
+8df70f469ef0: Download complete
+8df70f469ef0: Pull complete
+Digest: sha256:1ecc9fb2c871302fdb57a25e0c076311b7b352b0a9246d442940ca8fb4efe229
+Status: Downloaded newer image for gcr.io/kuar-demo/kuard-amd64:blue
+0727ab6381145c6cb9690df42b7caa28ff4f94bc50c4887899753b984e30a36b
+docker: Error response from daemon: Ports are not available: listen tcp 0.0.0.0:8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker run -d --name kuard --publish 8090:8080 gcr.io/kuar-demo/kuard-amd64:blue
+docker: Error response from daemon: Conflict. The container name "/kuard" is already in use by container "0727ab6381145c6cb9690df42b7caa28ff4f94bc50c4887899753b984e30a36b". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker run -d --name kuard --publish 8050:8080 gcr.io/kuar-demo/kuard-amd64:blue
+docker: Error response from daemon: Conflict. The container name "/kuard" is already in use by container "0727ab6381145c6cb9690df42b7caa28ff4f94bc50c4887899753b984e30a36b". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker run -d --name kuard1 --publish 8050:8080 gcr.io/kuar-demo/kuard-amd64:blue
+c584059fcf8f030e3a137265dd1f2d9b7ba20f6691e84ccb05d2a3db058eabc9
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+hazelcast   1/1     Running   0          17m
+kuard       1/1     Running   0          7m10s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker image ls
+REPOSITORY                     TAG        IMAGE ID       CREATED         SIZE
+test-app                       latest     48dfe66c32a4   2 days ago      946MB
+apache/airflow                 2.1.3      ad938b996f01   4 days ago      933MB
+counter-app_web-fe             latest     8fd8eb2318dd   6 days ago      53.7MB
+multi                          stage      442feedeef24   6 days ago      211MB
+web                            latest     03ef5fb15270   7 days ago      79.6MB
+test                           arm-v7     ce73ac92d4d6   7 days ago      71.2MB
+test                           latest     0945eb7d7a5b   8 days ago      79.6MB
+<none>                         <none>     52b72f8d1035   8 days ago      79.6MB
+mcr.microsoft.com/powershell   latest     6eee80913d43   12 days ago     327MB
+golang                         latest     8735189b1527   13 days ago     941MB
+python                         latest     1e76b28bfd4e   2 weeks ago     911MB
+redis                          latest     ddcca4b8a6f0   2 weeks ago     105MB
+postgres                       13         29dd0a82ea20   2 weeks ago     315MB
+python                         3.8-slim   9118f94eabf5   2 weeks ago     122MB
+redis                          alpine     814803e951a7   3 weeks ago     32.3MB
+alpine                         latest     021b3423115f   3 weeks ago     5.6MB
+mongo                          latest     269b735e72cb   3 weeks ago     682MB
+ubuntu                         latest     1318b700e415   5 weeks ago     72.8MB
+gcr.io/k8s-minikube/kicbase    v0.0.25    8768eddc4356   2 months ago    1.1GB
+mongo                          4.2.6      3f3daf863757   16 months ago   388MB
+gcr.io/kuar-demo/kuard-amd64   blue       1db936caa6ac   2 years ago     23MB
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker container ls
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED              STATUS                PORTS                                                                                                                                  NAMES
+c584059fcf8f   gcr.io/kuar-demo/kuard-amd64:blue     "/kuard"                 About a minute ago   Up About a minute     0.0.0.0:8050->8080/tcp, :::8050->8080/tcp                                                                                              kuard1
+e91c0e26d2e9   gcr.io/k8s-minikube/kicbase:v0.0.25   "/usr/local/bin/entr…"   47 hours ago         Up 22 minutes         127.0.0.1:51232->22/tcp, 127.0.0.1:51233->2376/tcp, 127.0.0.1:51235->5000/tcp, 127.0.0.1:51236->8443/tcp, 127.0.0.1:51234->32443/tcp   minikube
+adb7b9abfe2e   test-app                              "docker-entrypoint.s…"   2 days ago           Up 2 days             0.0.0.0:3000->3000/tcp, :::3000->3000/tcp                                                                                              modest_hypatia
+a916e286020c   redis:latest                          "docker-entrypoint.s…"   2 days ago           Up 2 days (healthy)   0.0.0.0:6379->6379/tcp, :::6379->6379/tcp                                                                                              airflow-docker_redis_1
+3cb1da66b244   postgres:13                           "docker-entrypoint.s…"   2 days ago           Up 2 days (healthy)   5432/tcp                                                                                                                               airflow-docker_postgres_1
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ docker container ls
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED       RTS                                                                                                        NAMES
+c584059fcf8f   gcr.io/kuar-demo/kuard-amd64:blue     "/kuard"                 2 minutes ago 0.0.0:8050->8080/tcp, :::8050->8080/tcp                                                                    kuard1
+e91c0e26d2e9   gcr.io/k8s-minikube/kicbase:v0.0.25   "/usr/local/bin/entr…"   47 hours ago  7.0.0.1:51232->22/tcp, 127.0.0.1:51233->2376/tcp, 127.0.0.1:51235->5000/tcp, 127.0.0.1:512364->32443/tcp   minikube
+adb7b9abfe2e   test-app                              "docker-entrypoint.s…"   2 days ago    0.0.0:3000->3000/tcp, :::3000->3000/tcp                                                                    modest_hypatia
+a916e286020c   redis:latest                          "docker-entrypoint.s…"   2 days ago    0.0.0:6379->6379/tcp, :::6379->6379/tcp                                                                    airflow-docker_redis_1
+3cb1da66b244   postgres:13                           "docker-entrypoint.s…"   2 days ago    32/tcp                                                                                                     airflow-docker_postgres_1
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ ls
+Lec_1.1.txt  Lec_2.3.txt  Lec_3.2.txt  Lec_3.5.txt  Lec_5.1.txt  Lec_7.1.txt  atsea-sample-s
+Lec_2.1.txt  Lec_2.4.txt  Lec_3.3.txt  Lec_4.1.txt  Lec_5.2.txt  Lec_7.2.txt  counter-app/
+Lec_2.2.txt  Lec_3.1.txt  Lec_3.4.txt  Lec_4.2.txt  Lec_6.1.txt  Lec_8.1.txt  psweb/
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ cd test-kuard/
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ ls
+kuard-pod.yaml
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl apply -f kuard-pod.yaml
+error: error validating "kuard-pod.yaml": error validating data: [ValidationError(Pod): unkn.k8s.api.core.v1.Pod, ValidationError(Pod.spec.containers): invalid type for io.k8s.api.coret "map", expected "array"]; if you choose to ignore these errors, turn validation off with -
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl apply -f kuard-pod.yaml
+Unable to connect to the server: net/http: TLS handshake timeout
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl apply -f kuard-pod.yaml
+error: error parsing kuard-pod.yaml: error converting YAML to JSON: yaml: line 14: could not
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl apply -f kuard-pod.yaml
+pod/test-kuard created
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl get pods
+NAME         READY   STATUS    RESTARTS   AGE
+hazelcast    1/1     Running   0          31m
+kuard        1/1     Running   0          21m
+test-kuard   1/1     Running   0          12s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ docker container ls
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED       ORTS                                                                                                        NAMES
+c584059fcf8f   gcr.io/kuar-demo/kuard-amd64:blue     "/kuard"                 15 minutes ago.0.0.0:8050->8080/tcp, :::8050->8080/tcp                                                                    kuard1
+e91c0e26d2e9   gcr.io/k8s-minikube/kicbase:v0.0.25   "/usr/local/bin/entr…"   47 hours ago  27.0.0.1:51232->22/tcp, 127.0.0.1:51233->2376/tcp, 127.0.0.1:51235->5000/tcp, 127.0.0.1:512334->32443/tcp   minikube
+adb7b9abfe2e   test-app                              "docker-entrypoint.s…"   2 days ago    .0.0.0:3000->3000/tcp, :::3000->3000/tcp                                                                    modest_hypatia
+a916e286020c   redis:latest                          "docker-entrypoint.s…"   2 days ago    .0.0.0:6379->6379/tcp, :::6379->6379/tcp                                                                    airflow-docker_redis_1
+3cb1da66b244   postgres:13                           "docker-entrypoint.s…"   2 days ago    432/tcp                                                                                                     airflow-docker_postgres_1
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ docker container ls
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED       ORTS                                                                                                        NAMES
+c584059fcf8f   gcr.io/kuar-demo/kuard-amd64:blue     "/kuard"                 16 minutes ago.0.0.0:8050->8080/tcp, :::8050->8080/tcp                                                                    kuard1
+e91c0e26d2e9   gcr.io/k8s-minikube/kicbase:v0.0.25   "/usr/local/bin/entr…"   47 hours ago  27.0.0.1:51232->22/tcp, 127.0.0.1:51233->2376/tcp, 127.0.0.1:51235->5000/tcp, 127.0.0.1:512334->32443/tcp   minikube
+adb7b9abfe2e   test-app                              "docker-entrypoint.s…"   2 days ago    .0.0.0:3000->3000/tcp, :::3000->3000/tcp                                                                    modest_hypatia
+a916e286020c   redis:latest                          "docker-entrypoint.s…"   2 days ago    .0.0.0:6379->6379/tcp, :::6379->6379/tcp                                                                    airflow-docker_redis_1
+3cb1da66b244   postgres:13                           "docker-entrypoint.s…"   2 days ago    432/tcp                                                                                                     airflow-docker_postgres_1
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ docker container ls
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED       ORTS                                                                                                        NAMES
+c584059fcf8f   gcr.io/kuar-demo/kuard-amd64:blue     "/kuard"                 17 minutes ago.0.0.0:8050->8080/tcp, :::8050->8080/tcp                                                                    kuard1
+e91c0e26d2e9   gcr.io/k8s-minikube/kicbase:v0.0.25   "/usr/local/bin/entr…"   47 hours ago  27.0.0.1:51232->22/tcp, 127.0.0.1:51233->2376/tcp, 127.0.0.1:51235->5000/tcp, 127.0.0.1:512334->32443/tcp   minikube
+adb7b9abfe2e   test-app                              "docker-entrypoint.s…"   2 days ago    .0.0.0:3000->3000/tcp, :::3000->3000/tcp                                                                    modest_hypatia
+a916e286020c   redis:latest                          "docker-entrypoint.s…"   2 days ago    .0.0.0:6379->6379/tcp, :::6379->6379/tcp                                                                    airflow-docker_redis_1
+3cb1da66b244   postgres:13                           "docker-entrypoint.s…"   2 days ago    432/tcp                                                                                                     airflow-docker_postgres_1
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl get pods
+NAME         READY   STATUS    RESTARTS   AGE
+hazelcast    1/1     Running   0          35m
+kuard        1/1     Running   0          25m
+test-kuard   1/1     Running   0          4m14s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl apply -f kuard-pod.yaml
+pod/test-kuard1 created
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl get pods
+NAME          READY   STATUS    RESTARTS   AGE
+hazelcast     1/1     Running   0          35m
+kuard         1/1     Running   0          25m
+test-kuard    1/1     Running   0          4m55s
+test-kuard1   0/1     Pending   0          24s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl get pods
+NAME          READY   STATUS    RESTARTS   AGE
+hazelcast     1/1     Running   0          36m
+kuard         1/1     Running   0          26m
+test-kuard    1/1     Running   0          6m
+test-kuard1   0/1     Pending   0          89s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl get pods
+Unable to connect to the server: net/http: TLS handshake timeout
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl describe pods kuard
+Name:         kuard
+Namespace:    default
+Priority:     0
+Node:         minikube/192.168.49.2
+Start Time:   Wed, 01 Sep 2021 10:47:00 +0530
+Labels:       run=kuard
+Annotations:  <none>
+Status:       Running
+IP:           172.17.0.3
+IPs:
+  IP:  172.17.0.3
+Containers:
+  kuard:
+    Container ID:   docker://55b72dd2a862b8c067a604b3090b4de28e3379663b85d60ea1fa326a1ea8451
+    Image:          gcr.io/kuar-demo/kuard-amd64:blue
+    Image ID:       docker-pullable://gcr.io/kuar-demo/kuard-amd64@sha256:1ecc9fb2c871302fdb6d442940ca8fb4efe229
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Wed, 01 Sep 2021 10:47:40 +0530
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-c5l4h (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-c5l4h:
+    Type:                    Projected (a volume that contains injected data from multiple s
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason        Age                 From               Message
+  ----     ------        ----                ----               -------
+  Normal   Scheduled     28m                 default-scheduler  Successfully assigned defaul
+  Normal   Pulling       27m                 kubelet            Pulling image "gcr.io/kuar-d
+  Normal   Pulled        27m                 kubelet            Successfully pulled image "g4:blue" in 5.5501544s
+  Normal   Created       27m                 kubelet            Created container kuard
+  Normal   Started       27m                 kubelet            Started container kuard
+  Warning  NodeNotReady  4m9s (x4 over 15m)  node-controller    Node is not ready
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl delete pods/kuard
+pod "kuard" deleted
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl delete -f kuard-pod.yaml
+pod "test-kuard1" deleted
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl get pods
+NAME         READY   STATUS    RESTARTS   AGE
+hazelcast    1/1     Running   0          42m
+test-kuard   1/1     Running   0          12m
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl port-forward test-kuard 8060:8060
+Forwarding from 127.0.0.1:8060 -> 8060
+Forwarding from [::1]:8060 -> 8060
+Handling connection for 8060
+Handling connection for 8060
+E0901 11:22:23.425999    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14656] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+E0901 11:22:23.425999    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14655] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8060
+E0901 11:22:23.482644    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14657] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8060
+Handling connection for 8060
+E0901 11:22:25.010187    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14676] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+E0901 11:22:25.077298    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14677] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8060
+E0901 11:22:25.145610    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14678] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8060
+Handling connection for 8060
+E0901 11:23:00.245452    6820 portforward.go:340] error creating error stream for port 8060
+E0901 11:23:00.245452    6820 portforward.go:340] error creating error stream for port 8060
+Handling connection for 8060
+E0901 11:23:07.985845    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14705] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8060
+Handling connection for 8060
+E0901 11:23:09.682347    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14773] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+E0901 11:23:09.684919    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14772] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8060
+E0901 11:23:09.722779    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14774] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8060
+Handling connection for 8060
+E0901 11:23:22.415503    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14856] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+E0901 11:23:22.440302    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14857] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8060
+E0901 11:23:22.495451    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14858] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8060
+Handling connection for 8060
+E0901 11:23:23.504551    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14867] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+E0901 11:23:23.512111    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14868] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8060
+E0901 11:23:23.537936    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14869] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8060
+Handling connection for 8060
+E0901 11:23:24.671950    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14870] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+E0901 11:23:24.686758    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14871] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8060
+E0901 11:23:24.735817    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14872] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8060
+Handling connection for 8060
+E0901 11:23:25.822586    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14874] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+E0901 11:23:25.827591    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14873] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8060
+E0901 11:23:25.873408    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14875] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8060
+Handling connection for 8060
+E0901 11:23:38.578473    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14884] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+E0901 11:23:54.888117    6820 portforward.go:400] an error occurred forwarding 8060 -> 8060:0 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit statuscat[14882] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8060
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl describe pods test-kuard
+Name:         test-kuard
+Namespace:    default
+Priority:     0
+Node:         minikube/192.168.49.2
+Start Time:   Wed, 01 Sep 2021 11:07:54 +0530
+Labels:       <none>
+Annotations:  <none>
+Status:       Running
+IP:           172.17.0.5
+IPs:
+  IP:  172.17.0.5
+Containers:
+  kuard:
+    Container ID:   docker://8b8c775f517844bdcc58ba7afacce9be6d5158b10d41368cb7852315549b13a
+    Image:          gcr.io/kuar-demo/kuard-amd64:blue
+    Image ID:       docker-pullable://gcr.io/kuar-demo/kuard-amd64@sha256:1ecc9fb2c871302fdb6d442940ca8fb4efe229
+    Port:           8060/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Wed, 01 Sep 2021 11:08:04 +0530
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-l77d7 (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-l77d7:
+    Type:                    Projected (a volume that contains injected data from multiple s
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason        Age                From               Message
+  ----     ------        ----               ----               -------
+  Normal   Scheduled     16m                default-scheduler  Successfully assigned default
+  Normal   Pulled        16m                kubelet            Container image "gcr.io/kuar-eady present on machine
+  Normal   Created       16m                kubelet            Created container kuard
+  Normal   Started       16m                kubelet            Started container kuard
+  Warning  NodeNotReady  77s (x2 over 13m)  node-controller    Node is not ready
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl port-forward test-kuard 8070:8060
+Forwarding from 127.0.0.1:8070 -> 8060
+Forwarding from [::1]:8070 -> 8060
+Handling connection for 8070
+Handling connection for 8070
+E0901 11:26:28.552040    2184 portforward.go:340] error creating error stream for port 8070 -> 8060: Timeout occurred
+E0901 11:26:28.552040    2184 portforward.go:340] error creating error stream for port 8070 -> 8060: Timeout occurred
+Handling connection for 8070
+Handling connection for 8070
+E0901 11:27:09.129527    2184 portforward.go:400] an error occurred forwarding 8070 -> 8060: error forwarding port 8060 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit status 1: 2021/09/01 05:57:09 socat[15238] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+E0901 11:27:09.129527    2184 portforward.go:400] an error occurred forwarding 8070 -> 8060: error forwarding port 8060 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit status 1: 2021/09/01 05:57:09 socat[15240] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8070
+E0901 11:27:09.394696    2184 portforward.go:400] an error occurred forwarding 8070 -> 8060: error forwarding port 8060 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit status 1: 2021/09/01 05:57:09 socat[15253] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8070
+Handling connection for 8070
+E0901 11:27:12.770738    2184 portforward.go:400] an error occurred forwarding 8070 -> 8060: error forwarding port 8060 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit status 1: 2021/09/01 05:57:12 socat[15401] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+E0901 11:27:14.399509    2184 portforward.go:400] an error occurred forwarding 8070 -> 8060: error forwarding port 8060 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit status 1: 2021/09/01 05:57:12 socat[15402] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8070
+E0901 11:27:14.714625    2184 portforward.go:400] an error occurred forwarding 8070 -> 8060: error forwarding port 8060 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit status 1: 2021/09/01 05:57:14 socat[15403] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8070
+Handling connection for 8070
+E0901 11:27:19.992451    2184 portforward.go:400] an error occurred forwarding 8070 -> 8060: error forwarding port 8060 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit status 1: 2021/09/01 05:57:19 socat[15428] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+E0901 11:27:20.001677    2184 portforward.go:400] an error occurred forwarding 8070 -> 8060: error forwarding port 8060 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit status 1: 2021/09/01 05:57:19 socat[15429] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8070
+E0901 11:27:20.042481    2184 portforward.go:400] an error occurred forwarding 8070 -> 8060: error forwarding port 8060 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit status 1: 2021/09/01 05:57:20 socat[15436] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8070
+Handling connection for 8070
+E0901 11:28:20.517842    2184 portforward.go:340] error creating error stream for port 8070 -> 8060: Timeout occurred
+E0901 11:28:20.517842    2184 portforward.go:340] error creating error stream for port 8070 -> 8060: Timeout occurred
+Handling connection for 8070
+E0901 11:28:20.593535    2184 portforward.go:400] an error occurred forwarding 8070 -> 8060: error forwarding port 8060 to pod 585ae05a2a5175cabc094d8dddcec9bb5a62ed6b38a88923bec416b2d3478f58, uid : exit status 1: 2021/09/01 05:58:20 socat[15766] E connect(5, AF=2 127.0.0.1:8060, 16): Connection refused
+Handling connection for 8070
+Handling connection for 8070
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl get pods
+NAME         READY   STATUS    RESTARTS   AGE
+hazelcast    1/1     Running   0          52m
+test-kuard   1/1     Running   0          21m
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl describe pods hazelcast
+Name:         hazelcast
+Namespace:    default
+Priority:     0
+Node:         minikube/192.168.49.2
+Start Time:   Wed, 01 Sep 2021 10:37:52 +0530
+Labels:       run=hazelcast
+Annotations:  <none>
+Status:       Running
+IP:           172.17.0.4
+IPs:
+  IP:  172.17.0.4
+Containers:
+  hazelcast:
+    Container ID:   docker://79da358fde8888225a403c3762634fc5cd5f5a882cd2a3e55e54daa9f3eded69
+    Image:          hazelcast/hazelcast
+    Image ID:       docker-pullable://hazelcast/hazelcast@sha256:0cb42b060fdd5a3b0577c65702914d9f50e6200feefdc1065b162ed0c55ecb9a
+    Port:           5701/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Wed, 01 Sep 2021 10:41:52 +0530
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-hqpbm (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-hqpbm:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age                  From               Message
+  ----     ------            ----                 ----               -------
+  Warning  FailedScheduling  52m                  default-scheduler  0/1 nodes are available: 1 node(s) had taint {node.kubernetes.io/unreachable: }, that the pod didn't tolerate.
+  Warning  FailedScheduling  52m                  default-scheduler  0/1 nodes are available: 1 node(s) had taint {node.kubernetes.io/unreachable: }, that the pod didn't tolerate.
+  Normal   Scheduled         51m                  default-scheduler  Successfully assigned default/hazelcast to minikube
+  Warning  Failed            51m                  kubelet            Failed to pull image "hazelcast/hazelcast": rpc error: code = Unknown desc = Error response from daemon: Get https://registry-1.docker.io/v2/: net/http: request canceled (Client.Timeout exceeded while awaiting headers)
+  Warning  Failed            51m                  kubelet            Error: ErrImagePull
+  Normal   BackOff           51m                  kubelet            Back-off pulling image "hazelcast/hazelcast"
+  Warning  Failed            51m                  kubelet            Error: ImagePullBackOff
+  Normal   Pulling           50m (x2 over 51m)    kubelet            Pulling image "hazelcast/hazelcast"
+  Normal   Pulled            47m                  kubelet            Successfully pulled image "hazelcast/hazelcast" in 2m41.3833415s
+  Normal   Created           47m                  kubelet            Created container hazelcast
+  Normal   Started           47m                  kubelet            Started container hazelcast
+  Warning  NodeNotReady      6m29s (x5 over 30m)  node-controller    Node is not ready
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl port-forward hazelcast 8070:5701
+Forwarding from 127.0.0.1:8070 -> 5701
+Forwarding from [::1]:8070 -> 5701
+Handling connection for 8070
+Handling connection for 8070
+Handling connection for 8070
+Handling connection for 8070
+Handling connection for 8070
+Handling connection for 8070
+Handling connection for 8070
+Handling connection for 8070
+Handling connection for 8070
+Handling connection for 8070
+Handling connection for 8070
+Handling connection for 8070
+Handling connection for 8070
+Handling connection for 8070
+Handling connection for 8070
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl logs hazelcast
+########################################
+# JAVA_OPTS=-Djava.net.preferIPv4Stack=true -Dhazelcast.logging.type=log4j2 -Dlog4j.configurationFile=/opt/hazelcast/log4j2.properties -XX:MaxRAMPercentage=80.0 -XX:MaxGCPauseMillis=5 --add-modules java.se --add-exports java.base/jdk.internal.ref=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.management/sun.management=ALL-UNNAMED --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED
+# CLASSPATH=/opt/hazelcast/*:/opt/hazelcast/lib/*
+# starting now....
+########################################
++ exec java -server -Djava.net.preferIPv4Stack=true -Dhazelcast.logging.type=log4j2 -Dlog4j.configurationFile=/opt/hazelcast/log4j2.properties -XX:MaxRAMPercentage=80.0 -XX:MaxGCPauseMillis=5 --add-modules java.se --add-exports java.base/jdk.internal.ref=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.management/sun.management=ALL-UNNAMED --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED com.hazelcast.core.server.HazelcastMemberStarter
+2021-09-01 05:11:54,308 [ INFO] [main] [c.h.i.c.AbstractConfigLocator]: Loading 'hazelcast-default.xml' from the classpath.
+2021-09-01 05:11:57,876 [ INFO] [main] [c.h.system]: [172.17.0.4]:5701 [dev] [4.2.2] Hazelcast 4.2.2 (20210811 - c38011e) starting at [172.17.0.4]:5701
+2021-09-01 05:11:59,538 [ INFO] [main] [c.h.s.d.i.DiscoveryService]: [172.17.0.4]:5701 [dev] [4.2.2] Auto-detection selected discovery strategy: class com.hazelcast.kubernetes.HazelcastKubernetesDiscoveryStrategyFactory
+2021-09-01 05:11:59,545 [ INFO] [main] [c.h.s.d.i.DiscoveryService]: [172.17.0.4]:5701 [dev] [4.2.2] Kubernetes Discovery properties: { service-dns: null, service-dns-timeout: 5, service-name: null, service-port: 0, service-label: null, service-label-value: true, namespace: default, pod-label: null, pod-label-value: null, resolve-not-ready-addresses: true, use-node-name-as-external-address: false, kubernetes-api-retries: 3, kubernetes-master: https://kubernetes.default.svc}
+2021-09-01 05:11:59,548 [ INFO] [main] [c.h.s.d.i.DiscoveryService]: [172.17.0.4]:5701 [dev] [4.2.2] Kubernetes Discovery activated with mode: KUBERNETES_API
+2021-09-01 05:12:00,877 [ INFO] [main] [c.h.i.i.Node]: [172.17.0.4]:5701 [dev] [4.2.2] Using Discovery SPI
+2021-09-01 05:12:00,887 [ WARN] [main] [c.h.c.CPSubsystem]: [172.17.0.4]:5701 [dev] [4.2.2] CP Subsystem is not enabled. CP data structures will operate in UNSAFE mode! Please note that UNSAFE mode will not provide strong consistency guarantees.
+2021-09-01 05:12:01,861 [ INFO] [main] [c.h.i.d.Diagnostics]: [172.17.0.4]:5701 [dev] [4.2.2] Diagnostics disabled. To enable add -Dhazelcast.diagnostics.enabled=true to the JVM arguments.
+2021-09-01 05:12:01,917 [ INFO] [main] [c.h.c.LifecycleService]: [172.17.0.4]:5701 [dev] [4.2.2] [172.17.0.4]:5701 is STARTING
+2021-09-01 05:12:03,312 [ INFO] [main] [c.h.s.d.i.DiscoveryService]: [172.17.0.4]:5701 [dev] [4.2.2] Cannot fetch the current zone, ZONE_AWARE feature is disabled
+2021-09-01 05:12:03,388 [ WARN] [main] [c.h.s.d.i.DiscoveryService]: [172.17.0.4]:5701 [dev] [4.2.2] Cannot fetch name of the node, NODE_AWARE feature is disabled
+2021-09-01 05:12:03,474 [ WARN] [main] [c.h.k.KubernetesClient]: Kubernetes API access is forbidden! Starting standalone. To use Hazelcast Kubernetes discovery, configure the required RBAC. For 'default' service account in 'default' namespace execute: `kubectl apply -f https://raw.githubusercontent.com/hazelcast/hazelcast-kubernetes/master/rbac.yaml`
+2021-09-01 05:12:12,874 [ INFO] [main] [c.h.i.c.ClusterService]: [172.17.0.4]:5701 [dev] [4.2.2]
+
+Members {size:1, ver:1} [
+        Member [172.17.0.4]:5701 - cf86b212-7612-4da9-bc9d-25acbeaa7c79 this
+]
+
+2021-09-01 05:12:12,896 [ INFO] [main] [c.h.c.LifecycleService]: [172.17.0.4]:5701 [dev] [4.2.2] [172.17.0.4]:5701 is STARTED
+2021-09-01 05:12:37,593 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 12615 ms
+2021-09-01 05:13:25,492 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 26714 ms
+2021-09-01 05:13:25,492 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 22897 ms
+2021-09-01 05:13:51,877 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 14099 ms
+2021-09-01 05:14:14,568 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 11790 ms
+2021-09-01 05:14:36,647 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=24.6M, heap.memory.free=10.4M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=69.22%, heap.memory.used/max=1.42%, minor.gc.count=27, minor.gc.time=1159ms, major.gc.count=2, major.gc.time=152ms, load.process=0.52%, load.system=100.00%, load.systemAverage=2.01, thread.count=42, thread.peakCount=43, cluster.timeDiff=0, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 05:14:59,286 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=17.7M, heap.memory.free=17.2M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=49.73%, heap.memory.used/max=1.02%, minor.gc.count=28, minor.gc.time=1163ms, major.gc.count=2, major.gc.time=152ms, load.process=0.44%, load.system=100.00%, load.systemAverage=2.37, thread.count=42, thread.peakCount=43, cluster.timeDiff=0, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 05:15:45,780 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=22.0M, heap.memory.free=12.9M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=61.62%, heap.memory.used/max=1.27%, minor.gc.count=28, minor.gc.time=1163ms, major.gc.count=2, major.gc.time=152ms, load.process=0.00%, load.system=0.00%, load.systemAverage=9.48, thread.count=43, thread.peakCount=43, cluster.timeDiff=0, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 05:16:10,472 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 10694 ms
+2021-09-01 05:17:19,602 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=24.6M, heap.memory.free=10.3M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=69.51%, heap.memory.used/max=1.43%, minor.gc.count=29, minor.gc.time=1353ms, major.gc.count=2, major.gc.time=152ms, load.process=0.00%, load.system=0.00%, load.systemAverage=6.51, thread.count=42, thread.peakCount=43, cluster.timeDiff=0, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 05:22:06,975 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 23197 ms
+2021-09-01 05:22:06,976 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 19500 ms
+2021-09-01 05:26:20,895 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 14996 ms
+2021-09-01 05:27:02,987 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=19.4M, heap.memory.free=15.6M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=54.40%, heap.memory.used/max=1.12%, minor.gc.count=37, minor.gc.time=1386ms, major.gc.count=2, major.gc.time=152ms, load.process=0.00%, load.system=100.00%, load.systemAverage=2.77, thread.count=46, thread.peakCount=49, cluster.timeDiff=0, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 05:29:25,399 [ INFO] [hz.reverent_liskov.cached.thread-1] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] System clock apparently jumped from 2021-09-01 05:27:02.862 to 2021-09-01 05:29:24.993 since last heartbeat (+137131 ms)
+2021-09-01 05:29:25,470 [ WARN] [hz.reverent_liskov.cached.thread-1] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] Resetting heartbeat timestamps because of huge system clock jump! Clock-Jump: 137131 ms, Heartbeat-Timeout: 60000 ms
+2021-09-01 05:29:30,676 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 162896 ms
+2021-09-01 05:29:30,678 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 148898 ms
+2021-09-01 05:31:31,986 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 41208 ms
+2021-09-01 05:31:31,986 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 30206 ms
+2021-09-01 05:31:39,601 [ WARN] [hz.reverent_liskov.cached.thread-14] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] Resetting heartbeat timestamps because of huge system clock jump! Clock-Jump: 47856 ms, Heartbeat-Timeout: 60000 ms
+2021-09-01 05:32:25,998 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 21220 ms
+2021-09-01 05:33:34,675 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 45897 ms
+2021-09-01 05:33:34,675 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 32895 ms
+2021-09-01 05:33:36,173 [ WARN] [hz.reverent_liskov.cached.thread-4] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] Resetting heartbeat timestamps because of huge system clock jump! Clock-Jump: 44428 ms, Heartbeat-Timeout: 60000 ms
+2021-09-01 05:34:38,172 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 13301 ms
+2021-09-01 05:35:02,979 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 12087 ms
+2021-09-01 05:36:24,343 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 16511 ms
+2021-09-01 05:36:41,297 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 15824 ms
+2021-09-01 05:36:42,399 [ WARN] [hz.reverent_liskov.cached.thread-14] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] Resetting heartbeat timestamps because of huge system clock jump! Clock-Jump: 30654 ms, Heartbeat-Timeout: 60000 ms
+2021-09-01 05:37:17,426 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 29646 ms
+2021-09-01 05:37:17,427 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 15647 ms
+2021-09-01 05:40:36,692 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 34914 ms
+2021-09-01 05:40:36,692 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 34912 ms
+2021-09-01 05:40:36,776 [ WARN] [hz.reverent_liskov.cached.thread-11] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] Resetting heartbeat timestamps because of huge system clock jump! Clock-Jump: 40031 ms, Heartbeat-Timeout: 60000 ms
+2021-09-01 05:41:00,010 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 10148 ms
+2021-09-01 05:42:01,467 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=17.9M, heap.memory.free=17.1M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=50.09%, heap.memory.used/max=1.03%, minor.gc.count=45, minor.gc.time=10415ms, major.gc.count=2, major.gc.time=152ms, load.process=92.31%, load.system=81.82%, load.systemAverage=4.30, thread.count=43, thread.peakCount=54, cluster.timeDiff=-137131, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 05:43:17,696 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 31628 ms
+2021-09-01 05:43:17,697 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 26371 ms
+2021-09-01 05:43:26,094 [ WARN] [hz.reverent_liskov.cached.thread-10] [c.h.k.RetryUtils]: Couldn't discover Hazelcast members using Kubernetes API, [1] retrying in 1 seconds...
+2021-09-01 05:43:27,596 [ WARN] [hz.reverent_liskov.cached.thread-10] [c.h.k.RetryUtils]: Couldn't discover Hazelcast members using Kubernetes API, [2] retrying in 2 seconds...
+2021-09-01 05:43:29,851 [ WARN] [hz.reverent_liskov.cached.thread-10] [c.h.k.RetryUtils]: Couldn't discover Hazelcast members using Kubernetes API, [3] retrying in 3 seconds...
+2021-09-01 05:43:49,878 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 12100 ms
+2021-09-01 05:43:50,312 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=24.4M, heap.memory.free=10.6M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=68.69%, heap.memory.used/max=1.41%, minor.gc.count=45, minor.gc.time=10415ms, major.gc.count=2, major.gc.time=152ms, load.process=4.35%, load.system=100.00%, load.systemAverage=9.36, thread.count=41, thread.peakCount=54, cluster.timeDiff=-137131, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 05:43:33,228 [ERROR] [hz.reverent_liskov.cached.thread-10] [c.h.i.c.i.DiscoveryJoiner]: [172.17.0.4]:5701 [dev] [4.2.2] Failure in executing REST call
+com.hazelcast.kubernetes.RestClientException: Failure in executing REST call
+        at com.hazelcast.kubernetes.RestClient.call(RestClient.java:115) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.RestClient.get(RestClient.java:80) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.KubernetesClient$1.call(KubernetesClient.java:508) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.KubernetesClient$1.call(KubernetesClient.java:502) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.RetryUtils.retry(RetryUtils.java:52) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.KubernetesClient.callGet(KubernetesClient.java:502) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.KubernetesClient.endpoints(KubernetesClient.java:81) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.KubernetesApiEndpointResolver.resolve(KubernetesApiEndpointResolver.java:70) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.HazelcastKubernetesDiscoveryStrategy.discoverNodes(HazelcastKubernetesDiscoveryStrategy.java:135) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.spi.discovery.impl.DefaultDiscoveryService.discoverNodes(DefaultDiscoveryService.java:72) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.cluster.impl.DiscoveryJoiner.getPossibleAddresses(DiscoveryJoiner.java:71) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.cluster.impl.TcpIpJoiner.searchForOtherClusters(TcpIpJoiner.java:424) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.cluster.impl.SplitBrainHandler.searchForOtherClusters(SplitBrainHandler.java:75) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.cluster.impl.SplitBrainHandler.run(SplitBrainHandler.java:42) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.spi.impl.executionservice.impl.DelegateAndSkipOnConcurrentExecutionDecorator$DelegateDecorator.run(DelegateAndSkipOnConcurrentExecutionDecorator.java:77) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.CachedExecutorServiceDelegate$Worker.run(CachedExecutorServiceDelegate.java:217) [hazelcast-all-4.2.2.jar:4.2.2]
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) [?:?]
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) [?:?]
+        at java.lang.Thread.run(Thread.java:829) [?:?]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.executeRun(HazelcastManagedThread.java:76) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+Caused by: java.net.UnknownHostException: kubernetes.default.svc
+        at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:220) ~[?:?]
+        at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[?:?]
+        at java.net.Socket.connect(Socket.java:609) ~[?:?]
+        at sun.security.ssl.SSLSocketImpl.connect(SSLSocketImpl.java:289) ~[?:?]
+        at sun.security.ssl.BaseSSLSocketImpl.connect(BaseSSLSocketImpl.java:173) ~[?:?]
+        at sun.net.NetworkClient.doConnect(NetworkClient.java:182) ~[?:?]
+        at sun.net.www.http.HttpClient.openServer(HttpClient.java:474) ~[?:?]
+        at sun.net.www.http.HttpClient.openServer(HttpClient.java:569) ~[?:?]
+        at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:265) ~[?:?]
+        at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:372) ~[?:?]
+        at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:203) ~[?:?]
+        at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1187) ~[?:?]
+        at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1081) ~[?:?]
+        at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:189) ~[?:?]
+        at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1592) ~[?:?]
+        at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1520) ~[?:?]
+        at java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:527) ~[?:?]
+        at sun.net.www.protocol.https.HttpsURLConnectionImpl.getResponseCode(HttpsURLConnectionImpl.java:334) ~[?:?]
+        at com.hazelcast.kubernetes.RestClient.checkHttpOk(RestClient.java:132) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.RestClient.call(RestClient.java:112) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        ... 20 more
+2021-09-01 05:44:15,798 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=17.8M, heap.memory.free=17.2M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=49.84%, heap.memory.used/max=1.02%, minor.gc.count=46, minor.gc.time=10426ms, major.gc.count=2, major.gc.time=152ms, load.process=0.00%, load.system=0.00%, load.systemAverage=9.21, thread.count=44, thread.peakCount=54, cluster.timeDiff=-137131, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 05:44:54,004 [ WARN] [hz.reverent_liskov.cached.thread-11] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] Resetting heartbeat timestamps because of huge system clock jump! Clock-Jump: 33332 ms, Heartbeat-Timeout: 60000 ms
+2021-09-01 05:44:50,370 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 33569 ms
+2021-09-01 05:44:55,470 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 38438 ms
+2021-09-01 05:45:53,145 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 10252 ms
+2021-09-01 05:46:12,969 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 11140 ms
+2021-09-01 05:52:22,925 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 16147 ms
+2021-09-01 05:52:43,123 [ WARN] [hz.reverent_liskov.cached.thread-14] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] Resetting heartbeat timestamps because of huge system clock jump! Clock-Jump: 36378 ms, Heartbeat-Timeout: 60000 ms
+2021-09-01 05:54:25,687 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 23909 ms
+2021-09-01 05:54:25,777 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 23995 ms
+2021-09-01 05:55:17,068 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 22290 ms
+2021-09-01 05:55:17,068 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 13616 ms
+2021-09-01 05:55:29,956 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 10888 ms
+2021-09-01 05:56:33,420 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 50642 ms
+2021-09-01 05:56:33,421 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 42646 ms
+2021-09-01 05:56:35,801 [ WARN] [hz.reverent_liskov.cached.thread-3] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] Resetting heartbeat timestamps because of huge system clock jump! Clock-Jump: 49055 ms, Heartbeat-Timeout: 60000 ms
+2021-09-01 05:56:54,977 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=20.6M, heap.memory.free=14.3M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=57.92%, heap.memory.used/max=1.19%, minor.gc.count=54, minor.gc.time=10462ms, major.gc.count=2, major.gc.time=152ms, load.process=0.00%, load.system=0.00%, load.systemAverage=21.24, thread.count=44, thread.peakCount=54, cluster.timeDiff=-137131, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 06:01:00,187 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 11409 ms
+2021-09-01 06:01:07,316 [ INFO] [hz.reverent_liskov.IO.thread-in-0] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=1, /127.0.0.1:5701->/127.0.0.1:36844, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Connection closed by the other side
+2021-09-01 06:01:07,316 [ WARN] [hz.reverent_liskov.IO.thread-in-1] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=2, /127.0.0.1:5701->/127.0.0.1:36846, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=2, /127.0.0.1:5701->/127.0.0.1:36846, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-1
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioPipeline.lambda$start$0(NioPipeline.java:127) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processTaskQueue(NioThread.java:355) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:290) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:07,837 [ WARN] [hz.reverent_liskov.IO.thread-in-2] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=3, /127.0.0.1:5701->/127.0.0.1:36850, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=3, /127.0.0.1:5701->/127.0.0.1:36850, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-2
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:09,594 [ WARN] [hz.reverent_liskov.IO.thread-in-1] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=5, /127.0.0.1:5701->/127.0.0.1:36870, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=5, /127.0.0.1:5701->/127.0.0.1:36870, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-1
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:10,103 [ WARN] [hz.reverent_liskov.IO.thread-in-0] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=4, /127.0.0.1:5701->/127.0.0.1:36868, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=4, /127.0.0.1:5701->/127.0.0.1:36868, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-0
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:10,637 [ WARN] [hz.reverent_liskov.IO.thread-in-2] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=6, /127.0.0.1:5701->/127.0.0.1:36878, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=6, /127.0.0.1:5701->/127.0.0.1:36878, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-2
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:16,286 [ WARN] [hz.reverent_liskov.IO.thread-in-0] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=7, /127.0.0.1:5701->/127.0.0.1:36912, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=7, /127.0.0.1:5701->/127.0.0.1:36912, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-0
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:16,796 [ WARN] [hz.reverent_liskov.IO.thread-in-1] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=8, /127.0.0.1:5701->/127.0.0.1:36914, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=8, /127.0.0.1:5701->/127.0.0.1:36914, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-1
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:17,359 [ WARN] [hz.reverent_liskov.IO.thread-in-2] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=9, /127.0.0.1:5701->/127.0.0.1:36928, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=9, /127.0.0.1:5701->/127.0.0.1:36928, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-2
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:21,468 [ WARN] [hz.reverent_liskov.IO.thread-in-1] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=11, /127.0.0.1:5701->/127.0.0.1:36964, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=11, /127.0.0.1:5701->/127.0.0.1:36964, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-1
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:21,977 [ WARN] [hz.reverent_liskov.IO.thread-in-0] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=10, /127.0.0.1:5701->/127.0.0.1:36962, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=10, /127.0.0.1:5701->/127.0.0.1:36962, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-0
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:22,502 [ WARN] [hz.reverent_liskov.IO.thread-in-2] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=12, /127.0.0.1:5701->/127.0.0.1:36970, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=12, /127.0.0.1:5701->/127.0.0.1:36970, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-2
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:53,117 [ WARN] [hz.reverent_liskov.IO.thread-in-1] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=14, /127.0.0.1:5701->/127.0.0.1:37148, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=14, /127.0.0.1:5701->/127.0.0.1:37148, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-1
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:53,623 [ WARN] [hz.reverent_liskov.IO.thread-in-0] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=13, /127.0.0.1:5701->/127.0.0.1:37150, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=13, /127.0.0.1:5701->/127.0.0.1:37150, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-0
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:54,190 [ WARN] [hz.reverent_liskov.IO.thread-in-2] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=15, /127.0.0.1:5701->/127.0.0.1:37160, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=15, /127.0.0.1:5701->/127.0.0.1:37160, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-2
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioPipeline.lambda$start$0(NioPipeline.java:127) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processTaskQueue(NioThread.java:355) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:290) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl logs hazelcast
+########################################
+# JAVA_OPTS=-Djava.net.preferIPv4Stack=true -Dhazelcast.logging.type=log4j2 -Dlog4j.configurationFile=/opt/hazelcast/log4j2.properties -XX:MaxRAMPercentage=80.0 -XX:MaxGCPauseMillis=5 --add-modules java.se --add-exports java.base/jdk.internal.ref=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.management/sun.management=ALL-UNNAMED --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED
+# CLASSPATH=/opt/hazelcast/*:/opt/hazelcast/lib/*
+# starting now....
+########################################
++ exec java -server -Djava.net.preferIPv4Stack=true -Dhazelcast.logging.type=log4j2 -Dlog4j.configurationFile=/opt/hazelcast/log4j2.properties -XX:MaxRAMPercentage=80.0 -XX:MaxGCPauseMillis=5 --add-modules java.se --add-exports java.base/jdk.internal.ref=ALL-UNNAMED --add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.management/sun.management=ALL-UNNAMED --add-opens jdk.management/com.sun.management.internal=ALL-UNNAMED com.hazelcast.core.server.HazelcastMemberStarter
+2021-09-01 05:11:54,308 [ INFO] [main] [c.h.i.c.AbstractConfigLocator]: Loading 'hazelcast-default.xml' from the classpath.
+2021-09-01 05:11:57,876 [ INFO] [main] [c.h.system]: [172.17.0.4]:5701 [dev] [4.2.2] Hazelcast 4.2.2 (20210811 - c38011e) starting at [172.17.0.4]:5701
+2021-09-01 05:11:59,538 [ INFO] [main] [c.h.s.d.i.DiscoveryService]: [172.17.0.4]:5701 [dev] [4.2.2] Auto-detection selected discovery strategy: class com.hazelcast.kubernetes.HazelcastKubernetesDiscoveryStrategyFactory
+2021-09-01 05:11:59,545 [ INFO] [main] [c.h.s.d.i.DiscoveryService]: [172.17.0.4]:5701 [dev] [4.2.2] Kubernetes Discovery properties: { service-dns: null, service-dns-timeout: 5, service-name: null, service-port: 0, service-label: null, service-label-value: true, namespace: default, pod-label: null, pod-label-value: null, resolve-not-ready-addresses: true, use-node-name-as-external-address: false, kubernetes-api-retries: 3, kubernetes-master: https://kubernetes.default.svc}
+2021-09-01 05:11:59,548 [ INFO] [main] [c.h.s.d.i.DiscoveryService]: [172.17.0.4]:5701 [dev] [4.2.2] Kubernetes Discovery activated with mode: KUBERNETES_API
+2021-09-01 05:12:00,877 [ INFO] [main] [c.h.i.i.Node]: [172.17.0.4]:5701 [dev] [4.2.2] Using Discovery SPI
+2021-09-01 05:12:00,887 [ WARN] [main] [c.h.c.CPSubsystem]: [172.17.0.4]:5701 [dev] [4.2.2] CP Subsystem is not enabled. CP data structures will operate in UNSAFE mode! Please note that UNSAFE mode will not provide strong consistency guarantees.
+2021-09-01 05:12:01,861 [ INFO] [main] [c.h.i.d.Diagnostics]: [172.17.0.4]:5701 [dev] [4.2.2] Diagnostics disabled. To enable add -Dhazelcast.diagnostics.enabled=true to the JVM arguments.
+2021-09-01 05:12:01,917 [ INFO] [main] [c.h.c.LifecycleService]: [172.17.0.4]:5701 [dev] [4.2.2] [172.17.0.4]:5701 is STARTING
+2021-09-01 05:12:03,312 [ INFO] [main] [c.h.s.d.i.DiscoveryService]: [172.17.0.4]:5701 [dev] [4.2.2] Cannot fetch the current zone, ZONE_AWARE feature is disabled
+2021-09-01 05:12:03,388 [ WARN] [main] [c.h.s.d.i.DiscoveryService]: [172.17.0.4]:5701 [dev] [4.2.2] Cannot fetch name of the node, NODE_AWARE feature is disabled
+2021-09-01 05:12:03,474 [ WARN] [main] [c.h.k.KubernetesClient]: Kubernetes API access is forbidden! Starting standalone. To use Hazelcast Kubernetes discovery, configure the required RBAC. For 'default' service account in 'default' namespace execute: `kubectl apply -f https://raw.githubusercontent.com/hazelcast/hazelcast-kubernetes/master/rbac.yaml`
+2021-09-01 05:12:12,874 [ INFO] [main] [c.h.i.c.ClusterService]: [172.17.0.4]:5701 [dev] [4.2.2]
+
+Members {size:1, ver:1} [
+        Member [172.17.0.4]:5701 - cf86b212-7612-4da9-bc9d-25acbeaa7c79 this
+]
+
+2021-09-01 05:12:12,896 [ INFO] [main] [c.h.c.LifecycleService]: [172.17.0.4]:5701 [dev] [4.2.2] [172.17.0.4]:5701 is STARTED
+2021-09-01 05:12:37,593 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 12615 ms
+2021-09-01 05:13:25,492 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 26714 ms
+2021-09-01 05:13:25,492 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 22897 ms
+2021-09-01 05:13:51,877 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 14099 ms
+2021-09-01 05:14:14,568 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 11790 ms
+2021-09-01 05:14:36,647 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=24.6M, heap.memory.free=10.4M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=69.22%, heap.memory.used/max=1.42%, minor.gc.count=27, minor.gc.time=1159ms, major.gc.count=2, major.gc.time=152ms, load.process=0.52%, load.system=100.00%, load.systemAverage=2.01, thread.count=42, thread.peakCount=43, cluster.timeDiff=0, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 05:14:59,286 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=17.7M, heap.memory.free=17.2M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=49.73%, heap.memory.used/max=1.02%, minor.gc.count=28, minor.gc.time=1163ms, major.gc.count=2, major.gc.time=152ms, load.process=0.44%, load.system=100.00%, load.systemAverage=2.37, thread.count=42, thread.peakCount=43, cluster.timeDiff=0, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 05:15:45,780 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=22.0M, heap.memory.free=12.9M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=61.62%, heap.memory.used/max=1.27%, minor.gc.count=28, minor.gc.time=1163ms, major.gc.count=2, major.gc.time=152ms, load.process=0.00%, load.system=0.00%, load.systemAverage=9.48, thread.count=43, thread.peakCount=43, cluster.timeDiff=0, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 05:16:10,472 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 10694 ms
+2021-09-01 05:17:19,602 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=24.6M, heap.memory.free=10.3M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=69.51%, heap.memory.used/max=1.43%, minor.gc.count=29, minor.gc.time=1353ms, major.gc.count=2, major.gc.time=152ms, load.process=0.00%, load.system=0.00%, load.systemAverage=6.51, thread.count=42, thread.peakCount=43, cluster.timeDiff=0, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 05:22:06,975 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 23197 ms
+2021-09-01 05:22:06,976 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 19500 ms
+2021-09-01 05:26:20,895 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 14996 ms
+2021-09-01 05:27:02,987 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=19.4M, heap.memory.free=15.6M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=54.40%, heap.memory.used/max=1.12%, minor.gc.count=37, minor.gc.time=1386ms, major.gc.count=2, major.gc.time=152ms, load.process=0.00%, load.system=100.00%, load.systemAverage=2.77, thread.count=46, thread.peakCount=49, cluster.timeDiff=0, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 05:29:25,399 [ INFO] [hz.reverent_liskov.cached.thread-1] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] System clock apparently jumped from 2021-09-01 05:27:02.862 to 2021-09-01 05:29:24.993 since last heartbeat (+137131 ms)
+2021-09-01 05:29:25,470 [ WARN] [hz.reverent_liskov.cached.thread-1] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] Resetting heartbeat timestamps because of huge system clock jump! Clock-Jump: 137131 ms, Heartbeat-Timeout: 60000 ms
+2021-09-01 05:29:30,676 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 162896 ms
+2021-09-01 05:29:30,678 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 148898 ms
+2021-09-01 05:31:31,986 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 41208 ms
+2021-09-01 05:31:31,986 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 30206 ms
+2021-09-01 05:31:39,601 [ WARN] [hz.reverent_liskov.cached.thread-14] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] Resetting heartbeat timestamps because of huge system clock jump! Clock-Jump: 47856 ms, Heartbeat-Timeout: 60000 ms
+2021-09-01 05:32:25,998 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 21220 ms
+2021-09-01 05:33:34,675 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 45897 ms
+2021-09-01 05:33:34,675 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 32895 ms
+2021-09-01 05:33:36,173 [ WARN] [hz.reverent_liskov.cached.thread-4] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] Resetting heartbeat timestamps because of huge system clock jump! Clock-Jump: 44428 ms, Heartbeat-Timeout: 60000 ms
+2021-09-01 05:34:38,172 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 13301 ms
+2021-09-01 05:35:02,979 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 12087 ms
+2021-09-01 05:36:24,343 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 16511 ms
+2021-09-01 05:36:41,297 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 15824 ms
+2021-09-01 05:36:42,399 [ WARN] [hz.reverent_liskov.cached.thread-14] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] Resetting heartbeat timestamps because of huge system clock jump! Clock-Jump: 30654 ms, Heartbeat-Timeout: 60000 ms
+2021-09-01 05:37:17,426 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 29646 ms
+2021-09-01 05:37:17,427 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 15647 ms
+2021-09-01 05:40:36,692 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 34914 ms
+2021-09-01 05:40:36,692 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 34912 ms
+2021-09-01 05:40:36,776 [ WARN] [hz.reverent_liskov.cached.thread-11] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] Resetting heartbeat timestamps because of huge system clock jump! Clock-Jump: 40031 ms, Heartbeat-Timeout: 60000 ms
+2021-09-01 05:41:00,010 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 10148 ms
+2021-09-01 05:42:01,467 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=17.9M, heap.memory.free=17.1M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=50.09%, heap.memory.used/max=1.03%, minor.gc.count=45, minor.gc.time=10415ms, major.gc.count=2, major.gc.time=152ms, load.process=92.31%, load.system=81.82%, load.systemAverage=4.30, thread.count=43, thread.peakCount=54, cluster.timeDiff=-137131, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 05:43:17,696 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 31628 ms
+2021-09-01 05:43:17,697 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 26371 ms
+2021-09-01 05:43:26,094 [ WARN] [hz.reverent_liskov.cached.thread-10] [c.h.k.RetryUtils]: Couldn't discover Hazelcast members using Kubernetes API, [1] retrying in 1 seconds...
+2021-09-01 05:43:27,596 [ WARN] [hz.reverent_liskov.cached.thread-10] [c.h.k.RetryUtils]: Couldn't discover Hazelcast members using Kubernetes API, [2] retrying in 2 seconds...
+2021-09-01 05:43:29,851 [ WARN] [hz.reverent_liskov.cached.thread-10] [c.h.k.RetryUtils]: Couldn't discover Hazelcast members using Kubernetes API, [3] retrying in 3 seconds...
+2021-09-01 05:43:49,878 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 12100 ms
+2021-09-01 05:43:50,312 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=24.4M, heap.memory.free=10.6M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=68.69%, heap.memory.used/max=1.41%, minor.gc.count=45, minor.gc.time=10415ms, major.gc.count=2, major.gc.time=152ms, load.process=4.35%, load.system=100.00%, load.systemAverage=9.36, thread.count=41, thread.peakCount=54, cluster.timeDiff=-137131, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 05:43:33,228 [ERROR] [hz.reverent_liskov.cached.thread-10] [c.h.i.c.i.DiscoveryJoiner]: [172.17.0.4]:5701 [dev] [4.2.2] Failure in executing REST call
+com.hazelcast.kubernetes.RestClientException: Failure in executing REST call
+        at com.hazelcast.kubernetes.RestClient.call(RestClient.java:115) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.RestClient.get(RestClient.java:80) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.KubernetesClient$1.call(KubernetesClient.java:508) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.KubernetesClient$1.call(KubernetesClient.java:502) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.RetryUtils.retry(RetryUtils.java:52) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.KubernetesClient.callGet(KubernetesClient.java:502) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.KubernetesClient.endpoints(KubernetesClient.java:81) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.KubernetesApiEndpointResolver.resolve(KubernetesApiEndpointResolver.java:70) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.HazelcastKubernetesDiscoveryStrategy.discoverNodes(HazelcastKubernetesDiscoveryStrategy.java:135) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.spi.discovery.impl.DefaultDiscoveryService.discoverNodes(DefaultDiscoveryService.java:72) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.cluster.impl.DiscoveryJoiner.getPossibleAddresses(DiscoveryJoiner.java:71) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.cluster.impl.TcpIpJoiner.searchForOtherClusters(TcpIpJoiner.java:424) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.cluster.impl.SplitBrainHandler.searchForOtherClusters(SplitBrainHandler.java:75) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.cluster.impl.SplitBrainHandler.run(SplitBrainHandler.java:42) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.spi.impl.executionservice.impl.DelegateAndSkipOnConcurrentExecutionDecorator$DelegateDecorator.run(DelegateAndSkipOnConcurrentExecutionDecorator.java:77) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.CachedExecutorServiceDelegate$Worker.run(CachedExecutorServiceDelegate.java:217) [hazelcast-all-4.2.2.jar:4.2.2]
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128) [?:?]
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628) [?:?]
+        at java.lang.Thread.run(Thread.java:829) [?:?]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.executeRun(HazelcastManagedThread.java:76) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+Caused by: java.net.UnknownHostException: kubernetes.default.svc
+        at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:220) ~[?:?]
+        at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[?:?]
+        at java.net.Socket.connect(Socket.java:609) ~[?:?]
+        at sun.security.ssl.SSLSocketImpl.connect(SSLSocketImpl.java:289) ~[?:?]
+        at sun.security.ssl.BaseSSLSocketImpl.connect(BaseSSLSocketImpl.java:173) ~[?:?]
+        at sun.net.NetworkClient.doConnect(NetworkClient.java:182) ~[?:?]
+        at sun.net.www.http.HttpClient.openServer(HttpClient.java:474) ~[?:?]
+        at sun.net.www.http.HttpClient.openServer(HttpClient.java:569) ~[?:?]
+        at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:265) ~[?:?]
+        at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:372) ~[?:?]
+        at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:203) ~[?:?]
+        at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1187) ~[?:?]
+        at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1081) ~[?:?]
+        at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:189) ~[?:?]
+        at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1592) ~[?:?]
+        at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1520) ~[?:?]
+        at java.net.HttpURLConnection.getResponseCode(HttpURLConnection.java:527) ~[?:?]
+        at sun.net.www.protocol.https.HttpsURLConnectionImpl.getResponseCode(HttpsURLConnectionImpl.java:334) ~[?:?]
+        at com.hazelcast.kubernetes.RestClient.checkHttpOk(RestClient.java:132) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.kubernetes.RestClient.call(RestClient.java:112) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        ... 20 more
+2021-09-01 05:44:15,798 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=17.8M, heap.memory.free=17.2M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=49.84%, heap.memory.used/max=1.02%, minor.gc.count=46, minor.gc.time=10426ms, major.gc.count=2, major.gc.time=152ms, load.process=0.00%, load.system=0.00%, load.systemAverage=9.21, thread.count=44, thread.peakCount=54, cluster.timeDiff=-137131, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 05:44:54,004 [ WARN] [hz.reverent_liskov.cached.thread-11] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] Resetting heartbeat timestamps because of huge system clock jump! Clock-Jump: 33332 ms, Heartbeat-Timeout: 60000 ms
+2021-09-01 05:44:50,370 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 33569 ms
+2021-09-01 05:44:55,470 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 38438 ms
+2021-09-01 05:45:53,145 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 10252 ms
+2021-09-01 05:46:12,969 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 11140 ms
+2021-09-01 05:52:22,925 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 16147 ms
+2021-09-01 05:52:43,123 [ WARN] [hz.reverent_liskov.cached.thread-14] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] Resetting heartbeat timestamps because of huge system clock jump! Clock-Jump: 36378 ms, Heartbeat-Timeout: 60000 ms
+2021-09-01 05:54:25,687 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 23909 ms
+2021-09-01 05:54:25,777 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 23995 ms
+2021-09-01 05:55:17,068 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 22290 ms
+2021-09-01 05:55:17,068 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 13616 ms
+2021-09-01 05:55:29,956 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 10888 ms
+2021-09-01 05:56:33,420 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 50642 ms
+2021-09-01 05:56:33,421 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] BroadcastOperationControlTask delayed 42646 ms
+2021-09-01 05:56:35,801 [ WARN] [hz.reverent_liskov.cached.thread-3] [c.h.i.c.i.ClusterHeartbeatManager]: [172.17.0.4]:5701 [dev] [4.2.2] Resetting heartbeat timestamps because of huge system clock jump! Clock-Jump: 49055 ms, Heartbeat-Timeout: 60000 ms
+2021-09-01 05:56:54,977 [ INFO] [hz.reverent_liskov.HealthMonitor] [c.h.i.d.HealthMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] processors=1, physical.memory.total=2.1G, physical.memory.free=2.0G, swap.space.total=0, swap.space.free=0, heap.memory.used=20.6M, heap.memory.free=14.3M, heap.memory.total=34.9M, heap.memory.max=1.7G, heap.memory.used/total=57.92%, heap.memory.used/max=1.19%, minor.gc.count=54, minor.gc.time=10462ms, major.gc.count=2, major.gc.time=152ms, load.process=0.00%, load.system=0.00%, load.systemAverage=21.24, thread.count=44, thread.peakCount=54, cluster.timeDiff=-137131, event.q.size=0, executor.q.async.size=0, executor.q.client.size=0, executor.q.client.query.size=0, executor.q.client.blocking.size=0, executor.q.query.size=0, executor.q.scheduled.size=0, executor.q.io.size=0, executor.q.system.size=0, executor.q.operations.size=0, executor.q.priorityOperation.size=0, operations.completed.count=1, executor.q.mapLoad.size=0, executor.q.mapLoadAllKeys.size=0, executor.q.cluster.size=0, executor.q.response.size=0, operations.running.count=0, operations.pending.invocations.percentage=0.00%, operations.pending.invocations.count=0, proxy.count=0, clientEndpoint.count=0, connection.active.count=0, client.connection.count=0, connection.count=0
+2021-09-01 06:01:00,187 [ WARN] [hz.reverent_liskov.InvocationMonitorThread] [c.h.s.i.o.i.InvocationMonitor]: [172.17.0.4]:5701 [dev] [4.2.2] MonitorInvocationsTask delayed 11409 ms
+2021-09-01 06:01:07,316 [ INFO] [hz.reverent_liskov.IO.thread-in-0] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=1, /127.0.0.1:5701->/127.0.0.1:36844, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Connection closed by the other side
+2021-09-01 06:01:07,316 [ WARN] [hz.reverent_liskov.IO.thread-in-1] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=2, /127.0.0.1:5701->/127.0.0.1:36846, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=2, /127.0.0.1:5701->/127.0.0.1:36846, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-1
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioPipeline.lambda$start$0(NioPipeline.java:127) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processTaskQueue(NioThread.java:355) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:290) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:07,837 [ WARN] [hz.reverent_liskov.IO.thread-in-2] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=3, /127.0.0.1:5701->/127.0.0.1:36850, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=3, /127.0.0.1:5701->/127.0.0.1:36850, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-2
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:09,594 [ WARN] [hz.reverent_liskov.IO.thread-in-1] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=5, /127.0.0.1:5701->/127.0.0.1:36870, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=5, /127.0.0.1:5701->/127.0.0.1:36870, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-1
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:10,103 [ WARN] [hz.reverent_liskov.IO.thread-in-0] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=4, /127.0.0.1:5701->/127.0.0.1:36868, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=4, /127.0.0.1:5701->/127.0.0.1:36868, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-0
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:10,637 [ WARN] [hz.reverent_liskov.IO.thread-in-2] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=6, /127.0.0.1:5701->/127.0.0.1:36878, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=6, /127.0.0.1:5701->/127.0.0.1:36878, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-2
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:16,286 [ WARN] [hz.reverent_liskov.IO.thread-in-0] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=7, /127.0.0.1:5701->/127.0.0.1:36912, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=7, /127.0.0.1:5701->/127.0.0.1:36912, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-0
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:16,796 [ WARN] [hz.reverent_liskov.IO.thread-in-1] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=8, /127.0.0.1:5701->/127.0.0.1:36914, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=8, /127.0.0.1:5701->/127.0.0.1:36914, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-1
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:17,359 [ WARN] [hz.reverent_liskov.IO.thread-in-2] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=9, /127.0.0.1:5701->/127.0.0.1:36928, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=9, /127.0.0.1:5701->/127.0.0.1:36928, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-2
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:21,468 [ WARN] [hz.reverent_liskov.IO.thread-in-1] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=11, /127.0.0.1:5701->/127.0.0.1:36964, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=11, /127.0.0.1:5701->/127.0.0.1:36964, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-1
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:21,977 [ WARN] [hz.reverent_liskov.IO.thread-in-0] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=10, /127.0.0.1:5701->/127.0.0.1:36962, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=10, /127.0.0.1:5701->/127.0.0.1:36962, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-0
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:22,502 [ WARN] [hz.reverent_liskov.IO.thread-in-2] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=12, /127.0.0.1:5701->/127.0.0.1:36970, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=12, /127.0.0.1:5701->/127.0.0.1:36970, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-2
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:53,117 [ WARN] [hz.reverent_liskov.IO.thread-in-1] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=14, /127.0.0.1:5701->/127.0.0.1:37148, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=14, /127.0.0.1:5701->/127.0.0.1:37148, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-1
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:53,623 [ WARN] [hz.reverent_liskov.IO.thread-in-0] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=13, /127.0.0.1:5701->/127.0.0.1:37150, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=13, /127.0.0.1:5701->/127.0.0.1:37150, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-0
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKey(NioThread.java:383) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processSelectionKeys(NioThread.java:368) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:294) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+2021-09-01 06:01:54,190 [ WARN] [hz.reverent_liskov.IO.thread-in-2] [c.h.i.s.t.TcpServerConnection]: [172.17.0.4]:5701 [dev] [4.2.2] Connection[id=15, /127.0.0.1:5701->/127.0.0.1:37160, qualifier=null, endpoint=null, alive=false, connectionType=NONE, planeIndex=-1] closed. Reason: Exception in Connection[id=15, /127.0.0.1:5701->/127.0.0.1:37160, qualifier=null, endpoint=null, alive=true, connectionType=NONE, planeIndex=-1], thread=hz.reverent_liskov.IO.thread-in-2
+java.lang.IllegalStateException: REST API is not enabled.
+        at com.hazelcast.internal.server.tcp.UnifiedProtocolDecoder.onRead(UnifiedProtocolDecoder.java:106) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioInboundPipeline.process(NioInboundPipeline.java:137) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioPipeline.lambda$start$0(NioPipeline.java:127) ~[hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.processTaskQueue(NioThread.java:355) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.selectLoop(NioThread.java:290) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.networking.nio.NioThread.executeRun(NioThread.java:249) [hazelcast-all-4.2.2.jar:4.2.2]
+        at com.hazelcast.internal.util.executor.HazelcastManagedThread.run(HazelcastManagedThread.java:102) [hazelcast-all-4.2.2.jar:4.2.2]
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl logs test-kuard
+2021/09/01 05:38:04 Starting kuard version: v0.10.0-blue
+2021/09/01 05:38:04 **********************************************************************
+2021/09/01 05:38:04 * WARNING: This server may expose sensitive
+2021/09/01 05:38:04 * and secret information. Be careful.
+2021/09/01 05:38:04 **********************************************************************
+2021/09/01 05:38:04 Config:
+{
+  "address": ":8080",
+  "debug": false,
+  "debug-sitedata-dir": "./sitedata",
+  "keygen": {
+    "enable": false,
+    "exit-code": 0,
+    "exit-on-complete": false,
+    "memq-queue": "",
+    "memq-server": "",
+    "num-to-gen": 0,
+    "time-to-run": 0
+  },
+  "liveness": {
+    "fail-next": 0
+  },
+  "readiness": {
+    "fail-next": 0
+  },
+  "tls-address": ":8443",
+  "tls-dir": "/tls"
+}
+2021/09/01 05:38:04 Could not find certificates to serve TLS
+2021/09/01 05:38:04 Serving on HTTP on :8080
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl exec test-kuard date
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+Wed Sep  1 06:07:08 UTC 2021
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl exec test-kuard --date
+Error: unknown flag: --date
+See 'kubectl exec --help' for usage.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl exec --help
+Execute a command in a container.
+
+Examples:
+  # Get output from running 'date' command from pod mypod, using the first container by default
+  kubectl exec mypod -- date
+
+  # Get output from running 'date' command in ruby-container from pod mypod
+  kubectl exec mypod -c ruby-container -- date
+
+  # Switch to raw terminal mode, sends stdin to 'bash' in ruby-container from pod mypod
+  # and sends stdout/stderr from 'bash' back to the client
+  kubectl exec mypod -c ruby-container -i -t -- bash -il
+
+  # List contents of /usr from the first container of pod mypod and sort by modification time.
+  # If the command you want to execute in the pod has any flags in common (e.g. -i),
+  # you must use two dashes (--) to separate your command's flags/arguments.
+  # Also note, do not surround your command and its flags/arguments with quotes
+  # unless that is how you would execute it normally (i.e., do ls -t /usr, not "ls -t /usr").
+  kubectl exec mypod -i -t -- ls -t /usr
+
+  # Get output from running 'date' command from the first pod of the deployment mydeployment, using the first container by default
+  kubectl exec deploy/mydeployment -- date
+
+  # Get output from running 'date' command from the first pod of the service myservice, using the first container by default
+  kubectl exec svc/myservice -- date
+
+Options:
+  -c, --container='': Container name. If omitted, use the kubectl.kubernetes.io/default-container annotation for selecting the container to be attached or the first container in the pod will be chosen
+  -f, --filename=[]: to use to exec into the resource
+      --pod-running-timeout=1m0s: The length of time (like 5s, 2m, or 3h, higher than zero) to wait until at least one pod is running
+  -q, --quiet=false: Only print output from the remote session
+  -i, --stdin=false: Pass stdin to the container
+  -t, --tty=false: Stdin is a TTY
+
+Usage:
+  kubectl exec (POD | TYPE/NAME) [-c CONTAINER] [flags] -- COMMAND [args...] [options]
+
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl exec test-kuard -- date
+Wed Sep  1 06:07:58 UTC 2021
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl exec -it test-kuard ash
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+Unable to use a TTY - input is not a terminal or the right kind of file
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl exec -it test-kuard -- ash
+Unable to use a TTY - input is not a terminal or the right kind of file
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl exec -it test-kuard -- bash
+Unable to use a TTY - input is not a terminal or the right kind of file
+OCI runtime exec failed: exec failed: container_linux.go:380: starting container process caused: exec: "bash": executable file not found in $PATH: unknown
+command terminated with exit code 126
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl exec -it test-kuard -- ash
+Unable to use a TTY - input is not a terminal or the right kind of file
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl exec -it hazelcast -- ash
+Unable to use a TTY - input is not a terminal or the right kind of file
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ kubectl exec -it test-kuard ash
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+Unable to use a TTY - input is not a terminal or the right kind of file
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$ ^C
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes/test-kuard (main)
+$
