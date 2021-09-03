@@ -6,7 +6,25 @@ spec:
   containers:
     - name: ct-kuard
       image: gcr.io/kuar-demo/kuard-amd64:blue
+      livenessprobe:
+        httpGet:
+          path:/healthy
+          port: 50702
       ports:
         - name: web
           containerPort: 8060
           protocol: TCP
+      resources:
+        request:
+          cpu: "500m"
+          memory: "128"
+        limits:
+          cpu: "1000m"
+          memory: "256"
+      volumesMount:
+        - mountPath: "/data"
+          name: "test-kuard-data"
+      readinessProbe:
+        httpGet:
+          path: "/ready"
+          port: 8090

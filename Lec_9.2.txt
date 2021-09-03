@@ -1,0 +1,764 @@
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+Unable to connect to the server: dial tcp 127.0.0.1:51236: connectex: No conion could be made because the target machine actively refused it.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ minikube start
+* minikube v1.22.0 on Microsoft Windows 10 Pro 10.0.19042 Build 19042
+* Using the docker driver based on existing profile
+* Starting control plane node minikube in cluster minikube
+* Pulling base image ...
+! Executing "docker container inspect minikube --format={{.State.Status}}" tan unusually long time: 5.8126635s
+* Restarting the docker service may improve performance.
+* Restarting existing docker container for "minikube" ...
+* Preparing Kubernetes v1.21.2 on Docker 20.10.7 ...
+* Verifying Kubernetes components...
+  - Using image gcr.io/k8s-minikube/storage-provisioner:v5
+* Enabled addons: storage-provisioner, default-storageclass
+* Done! kubectl is now configured to use "minikube" cluster and "default" naace by default
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME         READY   STATUS    RESTARTS   AGE
+hazelcast    1/1     Running   1          24h
+test-kuard   1/1     Running   1          23h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get services -o wide
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE     SELECT
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   2d22h   <none>
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run alpaca-prod --image=gcr.in/kuar-demo/kuard-amd64:blue --replicas=3 --port=8040 --labels="ver=1,app=alpaca,env=prod"
+Error: unknown flag: --replicas
+See 'kubectl run --help' for usage.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run alpaca-prod --image=gcr.in/kuar-demo/kuard-amd64:blue --replica=3 --port=8040 --labels="ver=1,app=alpaca,env=prod"
+Error: unknown flag: --replica
+See 'kubectl run --help' for usage.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run --help
+Create and run a particular image in a pod.
+
+Examples:
+  # Start a nginx pod.
+  kubectl run nginx --image=nginx
+
+  # Start a hazelcast pod and let the container expose port 5701.
+  kubectl run hazelcast --image=hazelcast/hazelcast --port=5701
+
+  # Start a hazelcast pod and set environment variables "DNS_DOMAIN=cluster" and "POD_NAMESPACE=default" in the container.
+  kubectl run hazelcast --image=hazelcast/hazelcast --env="DNS_DOMAIN=cluster" --env="POD_NAMESPACE=default"
+
+  # Start a hazelcast pod and set labels "app=hazelcast" and "env=prod" in the container.
+  kubectl run hazelcast --image=hazelcast/hazelcast --labels="app=hazelcast,env=prod"
+
+  # Dry run. Print the corresponding API objects without creating them.
+  kubectl run nginx --image=nginx --dry-run=client
+
+  # Start a nginx pod, but overload the spec with a partial set of values parsed from JSON.
+  kubectl run nginx --image=nginx --overrides='{ "apiVersion": "v1", "spec": { ... } }'
+
+  # Start a busybox pod and keep it in the foreground, don't restart it if it exits.
+  kubectl run -i -t busybox --image=busybox --restart=Never
+
+  # Start the nginx pod using the default command, but use custom arguments (arg1 .. argN) for that command.
+  kubectl run nginx --image=nginx -- <arg1> <arg2> ... <argN>
+
+  # Start the nginx pod using a different command and custom arguments.
+  kubectl run nginx --image=nginx --command -- <cmd> <arg1> ... <argN>
+
+Options:
+      --allow-missing-template-keys=true: If true, ignore any errors in templates when a field or map key is missing in the template. Only applies to golang and jsonpath output formats.
+      --annotations=[]: Annotations to apply to the pod.
+      --attach=false: If true, wait for the Pod to start running, and then attach to the Pod as if 'kubectl attach ...' were called.  Default false, unless '-i/--stdin' is set, in which case the default is true. With '--restart=Never' the exit code of the container process is returned.
+      --cascade='background': Must be "background", "orphan", or "foreground". Selects the deletion cascading strategy for the dependents (e.g. Pods created by a ReplicationController). Defaults to background.
+      --command=false: If true and extra arguments are present, use them as the 'command' field in the container, rather than the 'args' field which is the default.
+      --dry-run='none': Must be "none", "server", or "client". If client strategy, only print the object that would be sent, without sending it. If server strategy, submit server-side request without persisting the resource.
+      --env=[]: Environment variables to set in the container.
+      --expose=false: If true, service is created for the container(s) which are run
+      --field-manager='kubectl-run': Name of the manager used to track field ownership.
+  -f, --filename=[]: to use to replace the resource.
+      --force=false: If true, immediately remove resources from API and bypass graceful deletion. Note that immediate deletion of some resources may result in inconsistency or data loss and requires confirmation.
+      --grace-period=-1: Period of time in seconds given to the resource to terminate gracefully. Ignored if negative. Set to 1 for immediate shutdown. Can only be set to 0 when --force is true (force deletion).
+      --image='': The image for the container to run.
+      --image-pull-policy='': The image pull policy for the container. If left empty, this value will not be specified by the client and defaulted by the server
+  -k, --kustomize='': Process a kustomization directory. This flag can't be used together with -f or -R.
+  -l, --labels='': Comma separated labels to apply to the pod(s). Will override previous values.
+      --leave-stdin-open=false: If the pod is started in interactive mode or with stdin, leave stdin open after the first attach completes. By default, stdin will be closed after the first attach completes.
+  -o, --output='': Output format. One of: json|yaml|name|go-template|go-template-file|template|templatefile|jsonpath|jsonpath-as-json|jsonpath-file.
+      --overrides='': An inline JSON override for the generated object. If this is non-empty, it is used to override the generated object. Requires that the object supply a valid apiVersion field.
+      --pod-running-timeout=1m0s: The length of time (like 5s, 2m, or 3h, higher than zero) to wait until at least one pod is running
+      --port='': The port that this container exposes.
+      --privileged=false: If true, run the container in privileged mode.
+  -q, --quiet=false: If true, suppress prompt messages.
+      --record=false: Record current kubectl command in the resource annotation. If set to false, do not record the command. If set to true, record the command. If not set, default to updating the existing annotation value only if one already exists.
+  -R, --recursive=false: Process the directory used in -f, --filename recursively. Useful when you want to manage related manifests organized within the same directory.
+      --restart='Always': The restart policy for this Pod.  Legal values [Always, OnFailure, Never].
+      --rm=false: If true, delete resources created in this command for attached containers.
+      --save-config=false: If true, the configuration of current object will be saved in its annotation. Otherwise, the annotation will be unchanged. This flag is useful when you want to perform kubectl apply on this object in the future.
+      --show-managed-fields=false: If true, keep the managedFields when printing objects in JSON or YAML format.
+  -i, --stdin=false: Keep stdin open on the container(s) in the pod, even if nothing is attached.
+      --template='': Template string or path to template file to use when -o=go-template, -o=go-template-file. The template format is golang templates [http://golang.org/pkg/text/template/#pkg-overview].
+      --timeout=0s: The length of time to wait before giving up on a delete, zero means determine a timeout from the size of the object
+  -t, --tty=false: Allocated a TTY for each container in the pod.
+      --wait=false: If true, wait for resources to be gone before returning. This waits for finalizers.
+
+Usage:
+  kubectl run NAME --image=image [--env="key=value"] [--port=port] [--dry-run=server|client] [--overrides=inline-json] [--command] -- [COMMAND] [args...] [options]
+
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run alpaca-prod --image=gcr.in/kuar-demo/kuard-amd64:blue --port=8040 --labels="ver=1,app=alpaca,env=prod"
+pod/alpaca-prod created
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME          READY   STATUS              RESTARTS   AGE
+alpaca-prod   0/1     ContainerCreating   0          9s
+hazelcast     1/1     Running             1          24h
+test-kuard    1/1     Running             1          23h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME          READY   STATUS             RESTARTS   AGE
+alpaca-prod   0/1     ImagePullBackOff   0          30s
+hazelcast     1/1     Running            1          24h
+test-kuard    1/1     Running            1          23h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME          READY   STATUS         RESTARTS   AGE
+alpaca-prod   0/1     ErrImagePull   0          52s
+hazelcast     1/1     Running        1          24h
+test-kuard    1/1     Running        1          23h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run alpaca-prod --image=gcr.io/kuar-demo/kuard-amd64:blue --replicas=3 --port=8040 --labels="ver=1,app=alpaca,env=prod"
+Error: unknown flag: --replicas
+See 'kubectl run --help' for usage.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run alpaca-prod --image=gcr.io/kuar-demo/kuard-amd64:blue --port=8040 --labels="ver=1,app=alpaca,env=prod"
+Error from server (AlreadyExists): pods "alpaca-prod" already exists
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run alpaca-prod1 --image=gcr.io/kuar-demo/kuard-amd64:blue --port=8040 --labels="ver=1,app=alpaca,env=prod"
+pod/alpaca-prod1 created
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME           READY   STATUS             RESTARTS   AGE
+alpaca-prod    0/1     ImagePullBackOff   0          3m49s
+alpaca-prod1   1/1     Running            0          5s
+hazelcast      1/1     Running            1          24h
+test-kuard     1/1     Running            1          23h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl expose deployment alpaca-prod1
+Error from server (NotFound): deployments.apps "alpaca-prod1" not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME           READY   STATUS             RESTARTS   AGE
+alpaca-prod    0/1     ImagePullBackOff   0          6m11s
+alpaca-prod1   1/1     Running            0          2m27s
+hazelcast      1/1     Running            1          24h
+test-kuard     1/1     Running            1          23h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl expose deployment alpaca-prod1
+Error from server (NotFound): deployments.apps "alpaca-prod1" not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get services -o wide
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE     SELECTOR
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   2d22h   <none>
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl expose deployment alpaca-prod
+Error from server (NotFound): deployments.apps "alpaca-prod" not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run alpaca-prod2 --image=gcr.io/kuar-demo/kuard-amd64:blue --port=8040 --labels="ver=1,app=alpaca,env=prod2"
+pod/alpaca-prod2 created
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME           READY   STATUS             RESTARTS   AGE
+alpaca-prod    0/1     ImagePullBackOff   0          8m21s
+alpaca-prod1   1/1     Running            0          4m37s
+alpaca-prod2   1/1     Running            0          8s
+hazelcast      1/1     Running            1          24h
+test-kuard     1/1     Running            1          23h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl expose deployment alpaca-prod2                                Error from server (NotFound): deployments.apps "alpaca-prod2" not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl expose deployment alpaca
+Error from server (NotFound): deployments.apps "alpaca" not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl expose deployment alpaca prod2
+Error from server (NotFound): deployments.apps "alpaca" not found
+Error from server (NotFound): deployments.apps "prod2" not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   2d22h
+kube-node-lease   Active   2d22h
+kube-public       Active   2d22h
+kube-system       Active   2d22h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get deployments
+No resources found in default namespace.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get deployments --all-namespaces
+NAMESPACE     NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   coredns   1/1     1            1           2d22h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME           READY   STATUS             RESTARTS   AGE
+alpaca-prod    0/1     ImagePullBackOff   0          17m
+alpaca-prod1   1/1     Running            0          13m
+alpaca-prod2   1/1     Running            0          8m54s
+hazelcast      1/1     Running            1          24h
+test-kuard     1/1     Running            1          24h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl delete pod alpaca-prod --now
+pod "alpaca-prod" deleted
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl delete pod alpaca-prod1 --now
+pod "alpaca-prod1" deleted
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl delete pod alpaca-prod2 --now
+pod "alpaca-prod2" deleted
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME         READY   STATUS    RESTARTS   AGE
+hazelcast    1/1     Running   1          24h
+test-kuard   1/1     Running   1          24h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run alpaca-prod --image=gcr.io/kuar-demo/kuard-amd64:blue --port=8040 --labels="ver=1,app=alpaca,env=prod" -n test
+Error from server (NotFound): namespaces "test" not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl create namespaces test
+Error: must specify one of -f and -k
+
+error: unknown command "namespaces test"
+See 'kubectl create -h' for help and examples
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl create namespace test
+namespace/test created
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run alpaca-prod --image=gcr.io/kuar-demo/kuard-amd64:blue --port=8040 --labels="ver=1,app=alpaca,env=prod" -n test
+pod/alpaca-prod created
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME         READY   STATUS    RESTARTS   AGE
+hazelcast    1/1     Running   1          24h
+test-kuard   1/1     Running   1          24h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods -n test
+NAME          READY   STATUS    RESTARTS   AGE
+alpaca-prod   1/1     Running   0          30s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get deployments --all-namespaces
+NAMESPACE     NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   coredns   1/1     1            1           2d22h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get deployments -n test
+No resources found in test namespace.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods -n test
+NAME          READY   STATUS    RESTARTS   AGE
+alpaca-prod   1/1     Running   0          7m2s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get deployments -n test
+No resources found in test namespace.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get nameapaces
+error: the server doesn't have a resource type "nameapaces"
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   2d23h
+kube-node-lease   Active   2d23h
+kube-public       Active   2d23h
+kube-system       Active   2d23h
+test              Active   8m32s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get deployments -n test
+No resources found in test namespace.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get deployments --all-namespaces
+NAMESPACE     NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   coredns   1/1     1            1           2d23h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get nameapaces
+error: the server doesn't have a resource type "nameapaces"
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   2d23h
+kube-node-lease   Active   2d23h
+kube-public       Active   2d23h
+kube-system       Active   2d23h
+test              Active   10m
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME         READY   STATUS    RESTARTS   AGE
+hazelcast    1/1     Running   1          24h
+test-kuard   1/1     Running   1          24h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                               READY   STATUS    RESTARTS   AGE
+default       hazelcast                          1/1     Running   1          24h
+default       test-kuard                         1/1     Running   1          24h
+kube-system   coredns-558bd4d5db-gsdgk           1/1     Running   3          2d23h
+kube-system   etcd-minikube                      1/1     Running   4          2d23h
+kube-system   kube-apiserver-minikube            1/1     Running   4          2d23h
+kube-system   kube-controller-manager-minikube   1/1     Running   7          2d23h
+kube-system   kube-proxy-rr9kg                   1/1     Running   3          2d23h
+kube-system   kube-scheduler-minikube            1/1     Running   4          2d23h
+kube-system   storage-provisioner                1/1     Running   19         2d23h
+test          alpaca-prod                        1/1     Running   0          10m
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods -n test
+NAME          READY   STATUS    RESTARTS   AGE
+alpaca-prod   1/1     Running   0          10m
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl expose deployment alpaca-prod -n test
+Error from server (NotFound): deployments.apps "alpaca-prod" not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME         READY   STATUS    RESTARTS   AGE
+hazelcast    1/1     Running   1          24h
+test-kuard   1/1     Running   1          24h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods -n test
+NAME          READY   STATUS    RESTARTS   AGE
+alpaca-prod   1/1     Running   0          13m
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl create deployment alpaca-prod --image=gcr.io/kuar-demo/kuard-amd64:blue --port=8040 --labels="ver=1,app=alpaca,env=prod" -n test
+Error: unknown flag: --labels
+See 'kubectl create deployment --help' for usage.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl create deployment alpaca-prod --image=gcr.io/kuar-demo/kuard-amd64:blue --port=8040  -n test
+deployment.apps/alpaca-prod created
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl expose deployment alpaca-prod -n test
+service/alpaca-prod exposed
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get services -o wide                                              NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE     SELECTOR
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   2d23h   <none>
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get services -o wide
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE     SELECTOR
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   2d23h   <none>
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get deployments --all-namespaces
+NAMESPACE     NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+kube-system   coredns       1/1     1            1           2d23h
+test          alpaca-prod   1/1     1            1           68s
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get services -o wide -n test
+NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE   SELECTOR
+alpaca-prod   ClusterIP   10.108.65.255   <none>        8040/TCP   76s   app=alpaca-prod
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl edit deployment/alpaca-prod
+Error from server (NotFound): deployments.apps "alpaca-prod" not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get services -o wide -n test
+NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE   SELECTOR
+alpaca-prod   ClusterIP   10.108.65.255   <none>        8040/TCP   42m   app=alpaca-prod
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl edit deployment/alpaca-prod -n test
+Edit cancelled, no changes made.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl edit deployment/alpaca-prod -n test
+error: deployments.apps "alpaca-prod" is invalid
+A copy of your changes has been stored to "C:\\Users\\ameyc\\AppData\\Local\\Temp\\kubectl.exe-edit-neb1t.yaml"
+error: Edit cancelled, no valid changes were saved.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl edit deployment/alpaca-prod -n test
+deployment.apps/alpaca-prod edited
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get services -o wide                                              NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE   SELECTOR
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   3d    <none>
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get services -o wide -n test
+NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE   SELECTOR
+alpaca-prod   ClusterIP   10.108.65.255   <none>        8040/TCP   50m   app=alpaca-prod
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get endpoints alpaca-prod --watch
+Error from server (NotFound): endpoints "alpaca-prod" not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get endpoints alpaca-prod --watch -n test
+NAME          ENDPOINTS         AGE
+alpaca-prod   172.17.0.6:8040   51m
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl describe service alpaca-prod
+Error from server (NotFound): services "alpaca-prod" not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl describe service alpaca-prod -n test
+Name:              alpaca-prod
+Namespace:         test
+Labels:            app=alpaca-prod
+Annotations:       <none>
+Selector:          app=alpaca-prod
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                10.108.65.255
+IPs:               10.108.65.255
+Port:              <unset>  8040/TCP
+TargetPort:        8040/TCP
+Endpoints:         172.17.0.6:8040
+Session Affinity:  None
+Events:            <none>
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ appname = $(kubectl get pods -l app=alpaca -o jsonpath='{.items.metadat.name}'
+> )
+bash: appname: command not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ $(kubectl get pods -l app=alpaca -o jsonpath='{.items.metadat.name}'      )
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ $(kubectl get pods -l app=alpaca -o jsonpath='{.items.metadat.name}')
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ echo $(kubectl get pods -l app=alpaca -o jsonpath='{.items.metadat.name}')
+
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods -l app=alpaca -o jsonpath='{.items.metadat.name}'
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME         READY   STATUS    RESTARTS   AGE
+hazelcast    1/1     Running   1          25h
+test-kuard   1/1     Running   1          25h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods -n test -l app=alpaca -o jsonpath='{.items.metadat.name}'
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods -n test -o jsonpath='{.items.metadat.name}'              
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods -n test
+NAME                           READY   STATUS    RESTARTS   AGE
+alpaca-prod                    1/1     Running   0          76m
+alpaca-prod-797799fb84-26h55   1/1     Running   0          62m
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods -n test -l app=alpaca-prod -o jsonpath='{.items.metadat.name}'
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl port-forward alpaca-prod 48858:8040
+Error from server (NotFound): pods "alpaca-prod" not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl port-forward alpaca-prod 48858:8040 -n test
+Forwarding from 127.0.0.1:48858 -> 8040
+Forwarding from [::1]:48858 -> 8040
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:30:46.108078   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:00:46 socat[49864] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+E0902 12:30:46.108078   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:00:46 socat[49863] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+E0902 12:30:46.146373   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:00:46 socat[49865] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:30:47.345232   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:00:47 socat[49867] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+E0902 12:30:47.345232   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:00:47 socat[49866] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+E0902 12:30:47.376089   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:00:47 socat[49868] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:30:49.384712   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:00:49 socat[49901] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+E0902 12:30:49.384712   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:00:49 socat[49900] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+E0902 12:30:49.488567   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:00:49 socat[49902] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:30:56.682745   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:00:56 socat[49929] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+E0902 12:30:56.682745   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:00:56 socat[49930] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+E0902 12:30:56.829628   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:00:56 socat[49931] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:31:06.611085   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:01:06 socat[50004] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+E0902 12:31:06.611085   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:01:06 socat[50005] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+E0902 12:31:06.705505   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:01:06 socat[50006] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:31:36.854766   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:01:36 socat[50181] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+E0902 12:31:36.855767   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:01:36 socat[50182] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+E0902 12:31:36.914806   15516 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:01:36 socat[50183] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get endpoints alpaca-prod --watch -n test
+NAME          ENDPOINTS         AGE
+alpaca-prod   172.17.0.6:8040   64m
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl port-forward alpaca-prod 48858:80 -n test
+Forwarding from 127.0.0.1:48858 -> 80
+Forwarding from [::1]:48858 -> 80
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:32:13.771749   17824 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:13 socat[50395] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+E0902 12:32:13.816762   17824 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:13 socat[50396] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+E0902 12:32:13.919950   17824 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:13 socat[50415] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:32:20.626920   17824 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:20 socat[50455] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+E0902 12:32:20.626920   17824 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:20 socat[50456] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+E0902 12:32:20.692413   17824 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:20 socat[50457] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:32:21.812391   17824 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:21 socat[50458] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+E0902 12:32:21.812391   17824 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:21 socat[50459] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+E0902 12:32:21.881673   17824 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:21 socat[50460] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get endpoints alpaca-prod --watch -n test
+NAME          ENDPOINTS         AGE
+alpaca-prod   172.17.0.6:8040   65m
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ ^C
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl port-forward alpaca-prod 48858:80 -n test
+Forwarding from 127.0.0.1:48858 -> 80
+Forwarding from [::1]:48858 -> 80
+Handling connection for 48858
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:32:42.528241   16712 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:42 socat[50581] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+E0902 12:32:42.693388   16712 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:42 socat[50582] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+E0902 12:32:42.693914   16712 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:42 socat[50583] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:32:43.716506   16712 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:43 socat[50584] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+E0902 12:32:43.716506   16712 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:43 socat[50585] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+E0902 12:32:43.856456   16712 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:43 socat[50586] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:32:48.959780   16712 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:48 socat[50613] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+E0902 12:32:49.008966   16712 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:48 socat[50612] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+E0902 12:32:49.087562   16712 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 49ba1508dccc70463f5ff8d80ecfee4e222ae35b42437759d1171007e9cdbb1c, uid : exit status 1: 2021/09/02 07:02:49 socat[50614] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl edit deployment/alpaca-prod -n test
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods -n test
+NAME                           READY   STATUS    RESTARTS   AGE
+alpaca-prod                    1/1     Running   0          82m
+alpaca-prod-797799fb84-26h55   1/1     Running   0          67m
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl port-forward alpaca-prod-797799fb84-26h55 48858:80 -n test
+Forwarding from 127.0.0.1:48858 -> 80
+Forwarding from [::1]:48858 -> 80
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:34:50.848200   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:04:50 socat[51335] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+E0902 12:34:50.862885   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:04:50 socat[51336] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+E0902 12:34:50.915560   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:04:50 socat[51337] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:34:52.098412   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:04:52 socat[51363] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+E0902 12:34:52.098412   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:04:52 socat[51362] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+E0902 12:34:52.193014   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:04:52 socat[51364] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:34:55.632812   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:04:55 socat[51373] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+E0902 12:34:55.633425   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:04:55 socat[51374] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+E0902 12:34:55.754955   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:04:55 socat[51375] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:34:56.880103   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:04:56 socat[51395] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+E0902 12:34:56.880103   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:04:56 socat[51394] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+E0902 12:34:56.978322   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:04:56 socat[51396] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:34:57.977505   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:04:57 socat[51397] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+E0902 12:34:57.977505   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:04:57 socat[51398] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+E0902 12:34:58.030552   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:04:58 socat[51399] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:35:03.185102   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:05:03 socat[51438] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+E0902 12:35:03.197110   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:05:03 socat[51437] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+E0902 12:35:03.268577   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:05:03 socat[51439] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:35:27.306741   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:05:27 socat[51586] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+E0902 12:35:27.306741   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:05:27 socat[51585] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+Handling connection for 48858
+E0902 12:35:27.366837   11276 portforward.go:400] an error occurred forwarding 48858 -> 80: error forwarding port 80 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:05:27 socat[51587] E connect(5, AF=2 127.0.0.1:80, 16): Connection refused
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl port-forward alpaca-prod-797799fb84-26h55 48858:8040 -n test
+Forwarding from 127.0.0.1:48858 -> 8040
+Forwarding from [::1]:48858 -> 8040
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:35:43.725884    9940 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:05:43 socat[51677] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+E0902 12:35:43.742749    9940 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:05:43 socat[51678] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+E0902 12:35:43.812410    9940 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:05:43 socat[51679] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:35:45.028266    9940 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:05:45 socat[51680] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+E0902 12:35:45.029264    9940 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:05:45 socat[51681] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+E0902 12:35:45.060321    9940 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:05:45 socat[51682] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:35:59.851646    9940 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:05:59 socat[51765] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+E0902 12:35:59.851646    9940 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:05:59 socat[51766] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+E0902 12:35:59.924551    9940 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:05:59 socat[51767] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:36:01.022547    9940 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:06:01 socat[51784] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+E0902 12:36:01.023092    9940 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:06:01 socat[51783] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+E0902 12:36:01.127053    9940 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:06:01 socat[51785] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+Handling connection for 48858
+E0902 12:36:02.317859    9940 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:06:02 socat[51789] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+E0902 12:36:02.322831    9940 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:06:02 socat[51788] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 48858
+E0902 12:36:02.399297    9940 portforward.go:400] an error occurred forwarding 48858 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:06:02 socat[51790] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl port-forward alpaca-prod-797799fb84-26h55 40058:8040 -n test
+Forwarding from 127.0.0.1:40058 -> 8040
+Forwarding from [::1]:40058 -> 8040
+Handling connection for 40058
+Handling connection for 40058
+E0902 12:36:19.822575   13688 portforward.go:400] an error occurred forwarding 40058 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:06:19 socat[51901] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+E0902 12:36:19.822575   13688 portforward.go:400] an error occurred forwarding 40058 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:06:19 socat[51902] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 40058
+E0902 12:36:19.890158   13688 portforward.go:400] an error occurred forwarding 40058 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:06:19 socat[51903] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 40058
+Handling connection for 40058
+E0902 12:36:21.033627   13688 portforward.go:400] an error occurred forwarding 40058 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:06:21 socat[51913] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+E0902 12:36:21.033627   13688 portforward.go:400] an error occurred forwarding 40058 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:06:21 socat[51912] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 40058
+E0902 12:36:21.096382   13688 portforward.go:400] an error occurred forwarding 40058 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:06:21 socat[51914] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 40058
+Handling connection for 40058
+E0902 12:36:26.210025   13688 portforward.go:400] an error occurred forwarding 40058 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:06:26 socat[51947] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+E0902 12:36:26.210025   13688 portforward.go:400] an error occurred forwarding 40058 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:06:26 socat[51946] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+Handling connection for 40058
+E0902 12:36:26.309023   13688 portforward.go:400] an error occurred forwarding 40058 -> 8040: error forwarding port 8040 to pod 34308a811f6a825ef7bf4899accb9c39a49d5fdd58fcac034cd6d9c7f61d2a17, uid : exit status 1: 2021/09/02 07:06:26 socat[51948] E connect(5, AF=2 127.0.0.1:8040, 16): Connection refused
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl edit deployment/alpaca-prod -n test
+
+
+
+Edit cancelled, no changes made.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl edit deployment/alpaca-prod -n test
+Edit cancelled, no changes made.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get deployments -n test
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+alpaca-prod   1/1     1            1           73m
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl delete deployment alpaca-prod -n test
+deployment.apps "alpaca-prod" deleted
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get deployments -n test
+No resources found in test namespace.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$

@@ -73,6 +73,12 @@ kubectl logs <pod-name>
 copy to and from pod
 kubectl cp test.py test-kuard:/
 
+We have multiple options available in containers ,can mention yaml file
+1. Resource Limit
+2. Health check
+3. Data persistance of volume - cache and disk -- nf etc
+4. Readiness of containers --httpGet
+
 
 
 

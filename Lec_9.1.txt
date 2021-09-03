@@ -1,0 +1,29 @@
+Service Discovery
+kubernestes are dynamic 
+when things are dynamic we need to search which processes are running ans other information
+- ability to discover process and services quickly and relaibly.
+
+$ kubectl get services -o wide
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE     SELECTOR
+kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   2d22h   <none>
+
+service discovery example steps
+1. run container using below image in test namespace 
+kubectl run alpaca-prod1 --image=gcr.io/kuar-demo/kuard-amd64:blue --port=8040 --labels="ver=1,app=alpaca,env=prod"
+pod/alpaca-prod1 created -n test
+
+2. kubectl expose deployment alpaca-prod1
+kubectl create deployment alpaca-prod --image=gcr.io/kuar-demo/kuard-amd64:blue --port=8040  -n test
+deployment.apps/alpaca-prod created
+
+3.  kubectl expose deployment alpaca-prod -n test
+4. kubectl get services -o wide -n test
+NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE   SELECTOR
+alpaca-prod   ClusterIP   10.108.65.255   <none>        8040/TCP   76s   app=alpaca-prod
+
+5. Edit 
+ kubectl edit deployment/alpaca-prod -n test
+Edit cancelled, no changes made.
+
+
+
