@@ -1,0 +1,38 @@
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernete
+$ minikube status
+! Executing "docker container inspect minikube --format={{.State.Status}}" took an unusually long time: 3.0373811s
+* Restarting the docker service may improve performance.
+minikube
+type: Control Plane
+host: Running
+kubelet: Running
+apiserver: Running
+kubeconfig: Configured
+
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ minikube docker-env
+export DOCKER_TLS_VERIFY="1"
+export DOCKER_HOST="tcp://127.0.0.1:58700"
+export DOCKER_CERT_PATH="C:\Users\ameyc\.minikube\certs"
+export MINIKUBE_ACTIVE_DOCKERD="minikube"
+
+# To point your shell to minikube's docker-daemon, run:
+# eval $(minikube -p minikube docker-env)
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ eval $(minikube docker-env)
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ minikube dashboard
+* Enabling dashboard ...
+  - Using image kubernetesui/dashboard:v2.1.0
+  - Using image kubernetesui/metrics-scraper:v1.0.4
+* Verifying dashboard health ...
+* Launching proxy ...
+* Verifying proxy health ...
+* Opening http://127.0.0.1:63046/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/ in your default browser...
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$

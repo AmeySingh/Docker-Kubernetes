@@ -1,0 +1,373 @@
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm init
+Error: unknown command "init" for "helm"
+
+Did you mean this?
+        lint
+
+Run 'helm --help' for usage.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm --help
+The Kubernetes package manager
+
+Common actions for Helm:
+
+- helm search:    search for charts
+- helm pull:      download a chart to your local directory to view
+- helm install:   upload the chart to Kubernetes
+- helm list:      list releases of charts
+
+Environment variables:
+
+| Name                               | Description                                                                       |
+|------------------------------------|-----------------------------------------------------------------------------------|
+| $HELM_CACHE_HOME                   | set an alternative location for storing cached files.                             |
+| $HELM_CONFIG_HOME                  | set an alternative location for storing Helm configuration.                       |
+| $HELM_DATA_HOME                    | set an alternative location for storing Helm data.                                |
+| $HELM_DEBUG                        | indicate whether or not Helm is running in Debug mode                             |
+| $HELM_DRIVER                       | set the backend storage driver. Values are: configmap, secret, memory, postgres   |
+| $HELM_DRIVER_SQL_CONNECTION_STRING | set the connection string the SQL storage driver should use.                      |
+| $HELM_MAX_HISTORY                  | set the maximum number of helm release history.                                   |
+| $HELM_NAMESPACE                    | set the namespace used for the helm operations.                                   |
+| $HELM_NO_PLUGINS                   | disable plugins. Set HELM_NO_PLUGINS=1 to disable plugins.                        |
+| $HELM_PLUGINS                      | set the path to the plugins directory                                             |
+| $HELM_REGISTRY_CONFIG              | set the path to the registry config file.                                         |
+| $HELM_REPOSITORY_CACHE             | set the path to the repository cache directory                                    |
+| $HELM_REPOSITORY_CONFIG            | set the path to the repositories file.                                            |
+| $KUBECONFIG                        | set an alternative Kubernetes configuration file (default "~/.kube/config")       |
+| $HELM_KUBEAPISERVER                | set the Kubernetes API Server Endpoint for authentication                         |
+| $HELM_KUBECAFILE                   | set the Kubernetes certificate authority file.                                    |
+| $HELM_KUBEASGROUPS                 | set the Groups to use for impersonation using a comma-separated list.             |
+| $HELM_KUBEASUSER                   | set the Username to impersonate for the operation.                                |
+| $HELM_KUBECONTEXT                  | set the name of the kubeconfig context.                                           |
+| $HELM_KUBETOKEN                    | set the Bearer KubeToken used for authentication.                                 |
+
+Helm stores cache, configuration, and data based on the following configuration order:
+
+- If a HELM_*_HOME environment variable is set, it will be used
+- Otherwise, on systems supporting the XDG base directory specification, the XDG variables will be used
+- When no other location is set a default location will be used based on the operating system
+
+By default, the default directories depend on the Operating System. The defaults are listed below:
+
+| Operating System | Cache Path                | Configuration Path             | Data Path               |
+|------------------|---------------------------|--------------------------------|-------------------------|
+| Linux            | $HOME/.cache/helm         | $HOME/.config/helm             | $HOME/.local/share/helm |
+| macOS            | $HOME/Library/Caches/helm | $HOME/Library/Preferences/helm | $HOME/Library/helm      |
+| Windows          | %TEMP%\helm               | %APPDATA%\helm                 | %APPDATA%\helm          |
+
+Usage:
+  helm [command]
+
+Available Commands:
+  completion  generate autocompletion scripts for the specified shell
+  create      create a new chart with the given name
+  dependency  manage a chart's dependencies
+  env         helm client environment information
+  get         download extended information of a named release
+  help        Help about any command
+  history     fetch release history
+  install     install a chart
+  lint        examine a chart for possible issues
+  list        list releases
+  package     package a chart directory into a chart archive
+  plugin      install, list, or uninstall Helm plugins
+  pull        download a chart from a repository and (optionally) unpack it in local directory
+  repo        add, list, remove, update, and index chart repositories
+  rollback    roll back a release to a previous revision
+  search      search for a keyword in charts
+  show        show information of a chart
+  status      display the status of the named release
+  template    locally render templates
+  test        run tests for a release
+  uninstall   uninstall a release
+  upgrade     upgrade a release
+  verify      verify that a chart at the given path has been signed and is valid
+  version     print the client version information
+
+Flags:
+      --debug                       enable verbose output
+  -h, --help                        help for helm
+      --kube-apiserver string       the address and the port for the Kubernetes API server
+      --kube-as-group stringArray   group to impersonate for the operation, this flag can be repeated to specify multiple groups.
+      --kube-as-user string         username to impersonate for the operation
+      --kube-ca-file string         the certificate authority file for the Kubernetes API server connection
+      --kube-context string         name of the kubeconfig context to use
+      --kube-token string           bearer token used for authentication
+      --kubeconfig string           path to the kubeconfig file
+  -n, --namespace string            namespace scope for this request
+      --registry-config string      path to the registry config file (default "C:\\Users\\ameyc\\AppData\\Roaming\\helm\\registry.json")
+      --repository-cache string     path to the file containing cached repository indexes (default "C:\\Users\\ameyc\\AppData\\Local\\Temp\\helm\\repository")
+      --repository-config string    path to the file containing repository names and URLs (default "C:\\Users\\ameyc\\AppData\\Roaming\\helm\\repositories.yaml")
+
+Use "helm [command] --help" for more information about a command.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm status
+Error: "helm status" requires 1 argument
+
+Usage:  helm status RELEASE_NAME [flags]
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm init
+Error: unknown command "init" for "helm"
+
+Did you mean this?
+        lint
+
+Run 'helm --help' for usage.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm init
+Error: unknown command "init" for "helm"
+
+Did you mean this?
+        lint
+
+Run 'helm --help' for usage.
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm version
+version.BuildInfo{Version:"v3.6.3", GitCommit:"d506314abfb5d21419df8c7e7e68012379db2354", GitTreeState:"clean", GoVersion:"go1.16.5"}
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm repo add bitnami https://charts.bitnami.com/bitnami
+"bitnami" has been added to your repositories
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm repo update
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "bitnami" chart repository
+Update Complete. ⎈Happy Helming!⎈
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm install bitnami/mysql --generate-name
+NAME: mysql-1630647077
+LAST DEPLOYED: Fri Sep  3 11:01:24 2021
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+** Please be patient while the chart is being deployed **
+
+Tip:
+
+  Watch the deployment status using the command: kubectl get pods -w --namespace default
+
+Services:
+
+  echo Primary: mysql-1630647077.default.svc.cluster.local:3306
+
+Administrator credentials:
+
+  echo Username: root
+  echo Password : $(kubectl get secret --namespace default mysql-1630647077 -o jsonpath="{.data.mysql-root-password}" | base64 --decode)
+
+To connect to your database:
+
+  1. Run a pod that you can use as a client:
+
+      kubectl run mysql-1630647077-client --rm --tty -i --restart='Never' --image  docker.io/bitnami/mysql:8.0.26-debian-10-r31 --namespace default --command -- bash
+
+  2. To connect to primary service (read/write):
+
+      mysql -h mysql-1630647077.default.svc.cluster.local -uroot -p my_database
+
+
+
+To upgrade this helm chart:
+
+  1. Obtain the password as described on the 'Administrator credentials' section and set the 'root.password' parameter as shown below:
+
+      ROOT_PASSWORD=$(kubectl get secret --namespace default mysql-1630647077 -o jsonpath="{.data.mysql-root-password}" | base64 --decode)
+      helm upgrade --namespace default mysql-1630647077 bitnami/mysql --set auth.rootPassword=$ROOT_PASSWORD
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm list
+NAME                    NAMESPACE       REVISION        UPDATED                                    STATUS          CHART           APP VERSION
+mysql-1630647077        default         1               2021-09-03 11:01:24.1723094 +0530 IST      deployed        mysql-8.8.6     8.0.26
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm list
+NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS     CHART           APP VERSION
+mysql-1630647077        default         1               2021-09-03 11:01:24.1723094 +0530 IST   deployed   mysql-8.8.6     8.0.26
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm status mysql-1630647077
+NAME: mysql-1630647077
+LAST DEPLOYED: Fri Sep  3 11:01:24 2021
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+** Please be patient while the chart is being deployed **
+
+Tip:
+
+  Watch the deployment status using the command: kubectl get pods -w --namespace default
+
+Services:
+
+  echo Primary: mysql-1630647077.default.svc.cluster.local:3306
+
+Administrator credentials:
+
+  echo Username: root
+  echo Password : $(kubectl get secret --namespace default mysql-1630647077 -o jsonpath="{.data.mysql-root-password}" | base64 --decode)
+
+To connect to your database:
+
+  1. Run a pod that you can use as a client:
+
+      kubectl run mysql-1630647077-client --rm --tty -i --restart='Never' --image  docker.io/bitnami/mysql:8.0.26-debian-10-r31 --namespace default --command -- bash
+
+  2. To connect to primary service (read/write):
+
+      mysql -h mysql-1630647077.default.svc.cluster.local -uroot -p my_database
+
+
+
+To upgrade this helm chart:
+
+  1. Obtain the password as described on the 'Administrator credentials' section and set the 'root.password' parameter as shown below:
+
+      ROOT_PASSWORD=$(kubectl get secret --namespace default mysql-1630647077 -o jsonpath="{.data.mysql-root-password}" | base64 --decode)
+      helm upgrade --namespace default mysql-1630647077 bitnami/mysql --set auth.rootPassword=$ROOT_PASSWORD
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run mysql-1630647077-client --rm --tty -i --restart='Never' --image  docker.io/bitnami/mysql:8.0.26-debian-10-r31 --namespace default --command -- bash
+Unable to use a TTY - input is not a terminal or the right kind of file
+If you don't see a command prompt, try pressing enter.
+Error attaching, falling back to logs:
+
+pod "mysql-1630647077-client" deleted
+error: timed out waiting for the condition
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME                 READY   STATUS    RESTARTS   AGE
+hazelcast            1/1     Running   1          2d
+mysql-1630647077-0   1/1     Running   0          5m36s
+test-kuard           1/1     Running   1          47h
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ mysql -h mysql-1630647077.default.svc.cluster.local -u root -p my_database
+bash: mysql: command not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ mysql -h mysql-1630647077.default.svc.cluster.local -uroot -p my_database
+bash: mysql: command not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ mysql -u root -p
+bash: mysql: command not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ =$(kubectl get secret --namespace default mysql-1630647077 -o jsonpath="{.data.mysql-root-password}" | base64 --decode)
+bash: =1sHYSntnlP: command not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl get pods
+NAME                 READY   STATUS    RESTARTS   AGE
+hazelcast            1/1     Running   1          2d
+mysql-1630647077-0   1/1     Running   0          18m
+test-kuard           1/1     Running   1          2d
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm status mysql-1630647077
+NAME: mysql-1630647077
+LAST DEPLOYED: Fri Sep  3 11:01:24 2021
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+** Please be patient while the chart is being deployed **
+
+Tip:
+
+  Watch the deployment status using the command: kubectl get pods -w --namespace default
+
+Services:
+
+  echo Primary: mysql-1630647077.default.svc.cluster.local:3306
+
+Administrator credentials:
+
+  echo Username: root
+  echo Password : $(kubectl get secret --namespace default mysql-1630647077 -o jsonpath="{.data.mysql-root-password}" | base64 --decode)
+
+To connect to your database:
+
+  1. Run a pod that you can use as a client:
+
+      kubectl run mysql-1630647077-client --rm --tty -i --restart='Never' --image  docker.io/bitnami/mysql:8.0.26-debian-10-r31 --namespace default --command -- bash
+
+  2. To connect to primary service (read/write):
+
+      mysql -h mysql-1630647077.default.svc.cluster.local -uroot -p my_database
+
+
+
+To upgrade this helm chart:
+
+  1. Obtain the password as described on the 'Administrator credentials' section and set the 'root.password' parameter as shown below:
+
+      ROOT_PASSWORD=$(kubectl get secret --namespace default mysql-1630647077 -o jsonpath="{.data.mysql-root-password}" | base64 --decode)
+      helm upgrade --namespace default mysql-1630647077 bitnami/mysql --set auth.rootPassword=$ROOT_PASSWORD
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ kubectl run mysql-1630647077-client --rm --tty -i --restart='Never' --image  docker.io/bitnami/mysql:8.0.26-debian-10-r31 --namespace default --command -- bash
+Unable to use a TTY - input is not a terminal or the right kind of file
+If you don't see a command prompt, try pressing enter.
+Error attaching, falling back to logs:
+pod "mysql-1630647077-client" deleted
+error: timed out waiting for the condition
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ $(kubectl get secret --namespace default mysql-1630647077 -o jsonpath="{.data.mysql-root-password}" | base64 --decode)
+bash: 1sHYSntnlP: command not found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm repo add fantastic-charts https://fantastic-charts.storage.googleapis.com
+Error: looks like "https://fantastic-charts.storage.googleapis.com" is not a valid chart repository or cannot be reached: failed to fetch https://fantastic-charts.storage.googleapis.com/index.yaml : 404 Not Found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm repo list
+helm repo updateNAME    URL
+bitnami https://charts.bitnami.com/bitnami
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm repo add "stable" "https://charts.helm.sh/stable"
+
+"stable" has been added to your repositories
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm repo add "common" https://charts.helm.sh/incubator
+"common" has been added to your repositories
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm repo update
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "common" chart repository
+...Successfully got an update from the "stable" chart repository
+...Successfully got an update from the "bitnami" chart repository
+Update Complete. ⎈Happy Helming!⎈
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm repo add fantastic-charts https://fantastic-charts.storage.googleapis.com
+Error: looks like "https://fantastic-charts.storage.googleapis.com" is not a valid chart repository or cannot be reached: failed to fetch https://fantastic-charts.storage.googleapis.com/index.yaml : 404 Not Found
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ helm repo add fantastic-charts https://charts.helm.sh/stable
+"fantastic-charts" has been added to your repositories
+
+ameyc@DESKTOP-F3MVEBO MINGW64 ~/OneDrive/Desktop/Docker&Kubernetes (main)
+$ 

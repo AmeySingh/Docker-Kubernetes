@@ -1,0 +1,165 @@
+Helm charts - Kubernestes
+
+package manager for deploying our application
+combination of YAML menifests into single package --> kubernetes cluster
+
+helm -- package manager
+helm deploys charts - our packaged application 
+
+why do we use helm charts?
+ - improves productivity
+ - complexity with microservices deployment
+ - adaptation of cloud native application
+ - creats package using different yaml menifest
+
+Helm itself is client/server
+
+Install Helm in windows 10
+1. Install chocolately using run as admin cmd and following below
+https://community.chocolatey.org/courses/installation/installing?method=installing-chocolatey
+
+2. Run as admin cmd using below
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+
+3. Using chocolately we can install helm
+choco install kubernetes-helm
+
+4. verify heml command
+helm status
+
+Note: helm init is not available in helm 3 onwards directly create
+
+
+steps for chart and mysql login
+1. $ helm repo add bitnami https://charts.bitnami.com/bitnami
+"bitnami" has been added to your repositories
+
+2.$ helm repo update
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "bitnami" chart repository
+Update Complete. ⎈Happy Helming!⎈
+
+3.$ helm install bitnami/mysql --generate-name
+NAME: mysql-1630647077
+LAST DEPLOYED: Fri Sep  3 11:01:24 2021
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+** Please be patient while the chart is being deployed **
+
+Tip:
+
+  Watch the deployment status using the command: kubectl get pods -w --namespace default
+
+Services:
+
+  echo Primary: mysql-1630647077.default.svc.cluster.local:3306
+
+Administrator credentials:
+
+  echo Username: root
+  echo Password : $(kubectl get secret --namespace default mysql-1630647077 -o jsonpath="{.data.mysql-root-password}" | base64 --decode)
+
+To connect to your database:
+
+  1. Run a pod that you can use as a client:
+
+      kubectl run mysql-1630647077-client --rm --tty -i --restart='Never' --image  docker.io/bitnami/mysql:8.0.26-debian-10-r31 --namespace default --command -- bash
+
+  2. To connect to primary service (read/write):
+
+      mysql -h mysql-1630647077.default.svc.cluster.local -uroot -p my_database
+
+
+
+To upgrade this helm chart:
+
+  1. Obtain the password as described on the 'Administrator credentials' section and set the 'root.password' parameter as shown below:
+
+      ROOT_PASSWORD=$(kubectl get secret --namespace default mysql-1630647077 -o jsonpath="{.data.mysql-root-password}" | base64 --decode)
+      helm upgrade --namespace default mysql-1630647077 bitnami/mysql --set auth.rootPassword=$ROOT_PASSWORD
+
+
+5. $ helm list
+NAME                    NAMESPACE       REVISION        UPDATED                                 STATUS     CHART           APP VERSION
+mysql-1630647077        default         1               2021-09-03 11:01:24.1723094 +0530 IST   deployed   mysql-8.8.6     8.0.26
+
+
+6.$ helm status mysql-1630647077
+
+7.Note: don't use gitbash command line for below, use normal windows cmd
+
+kubectl run mysql-1630647077-client --rm --tty -i --image  docker.io/bitnami/mysql:8.0.26-debian-10-r31 --namespace default --command -- bash
+
+8.Now you are inside pod command line, execute below for connecting to mysql inside pod
+
+mysql -h mysql-1630647077.default.svc.cluster.local -u root -p my_
+database
+
+9. It will prompt you for password, use below command to generate passord
+$ $(kubectl get secret --namespace default mysql-1630647077 -o jsonpath="{.data.mysql-root-password}" | base64 --decode)
+bash: 1sHYSntnlP: command not found
+
+10. your are logged into mysql inside pod create using helm.
+
+Microsoft Windows [Version 10.0.19042.1165]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin> mysql -h mysql-1630647077.default.svc.cluster.local -u root -p my_database
+Enter password: **********
+ERROR 2005 (HY000): Unknown MySQL server host 'mysql-1630647077.default.svc.cluster.local' (0)
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>kubectl run mysql-1630647077-client --rm --tty -i --restart='Never' --image  docker.io/bitnami/mysql:8.0.26-debian-10-r31 --namespace default --command -- bash
+error: invalid restart policy: 'Never'
+See 'kubectl run -h' for help and examples
+
+C:\Program Files\MySQL\MySQL Server 8.0\bin>kubectl run mysql-1630647077-client --rm --tty -i --image  docker.io/bitnami/mysql:8.0.26-debian-10-r31 --namespace default --command -- bash
+If you don't see a command prompt, try pressing enter.
+I have no name!@mysql-1630647077-client:/$ show databases;
+bash: show: command not found
+I have no name!@mysql-1630647077-client:/$ ls
+bin      boot  docker-entrypoint-initdb.d  home  lib64  mnt  proc  run   srv  tmp  var
+bitnami  dev   etc                         lib   media  opt  root  sbin  sys  usr
+I have no name!@mysql-1630647077-client:/$  mysql -h mysql-1630647077.default.svc.cluster.local -u root -p my_
+database
+Enter password:
+ERROR 1045 (28000): Access denied for user 'root'@'172.17.0.1' (using password: YES)
+I have no name!@mysql-1630647077-client:/$  mysql -h mysql-1630647077.default.svc.cluster.local -u root -p my_database
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 250
+Server version: 8.0.26 Source distribution
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| my_database        |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use mysql;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> S
+
+
+
+
+
