@@ -1,0 +1,43 @@
+Helm Chart Demo
+
+1. create image
+2. docker image ls
+3. create charts folder then get templates
+helm create example-chart
+4. create repository at hub after login
+docker login
+
+if you have alreay created image with different tag, retag it
+docker tag test-helm ameysingh21/test-repo-helm
+
+it will create another image localy
+
+5. push it to hub
+docker push ameysingh21/test-repo-helm
+
+6. should refresh and check image on hub
+
+7. updated our values.yaml
+image:
+  repository: ameysingh21/test-repo-helm
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+check helm install dry run for debuging and to verify or values
+helm install --dry-run --debug example-chart .\charts\example-chart\
+
+8. helm install to get pod
+helm install example-chart .\charts\example-chart\
+
+9. helm ls
+to see all helm available
+
+10. kubectl get pods
+to see all running pods in kubernetes cluster
+
+11. Port forwarding to access application
+kubectl port-forward example-chart1-5cb6cbd966-cdwp2 3000:30
+
+
+
