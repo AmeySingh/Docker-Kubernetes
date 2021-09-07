@@ -7,3 +7,7 @@ https://docs.aws.amazon.com/step-functions/latest/dg/getting-started.html
 
 2)AWS EMR
 https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-gs.html
+EMR cluster and s3 bucket should be in same region
+
+3) AWS SQS or SNS
+https://docs.aws.amazon.com/sns/latest/dg/sns-getting-started.html
