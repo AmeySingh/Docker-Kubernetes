@@ -1,0 +1,8 @@
+1) AWS step function demo
+Console link
+https://console.aws.amazon.com/states/home?region=us-east-1#/statemachines/create
+
+Getting started- tutorial link
+https://docs.aws.amazon.com/step-functions/latest/dg/getting-started.html
+
+2)
