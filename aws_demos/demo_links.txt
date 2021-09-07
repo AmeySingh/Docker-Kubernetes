@@ -5,4 +5,5 @@ https://console.aws.amazon.com/states/home?region=us-east-1#/statemachines/creat
 Getting started- tutorial link
 https://docs.aws.amazon.com/step-functions/latest/dg/getting-started.html
 
-2)
+2)AWS EMR
+https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-gs.html
